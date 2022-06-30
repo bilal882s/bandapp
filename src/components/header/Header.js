@@ -16,7 +16,7 @@ export default function Header() {
                                 <a class="nav-link active" aria-current="page" href="#">Personal  </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link active" href="#">Smart Bussiness</a>
+                                 <a class="nav-link active" href="#">Smart Bussiness</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link active" href="#">Commercial</a>
