@@ -1,0 +1,15 @@
+.topbar {
+    height: 2rem;
+    width: 100%;
+    text-align: center;
+}
+
+.bg-header {
+    background: #4949db;
+}
+
+.topbar-link {
+    display: flex;
+    flex-direction: column;
+    float: right;
+}
