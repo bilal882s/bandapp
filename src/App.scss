@@ -1,12 +1,13 @@
 @import "../src/scss/bootsrap";
 @import "./scss/header";
+@import "./scss/landing";
 
 .ico {
     background-color: rgb(17, 255, 0);
     position: absolute;
     top: 6rem;
     text-align: center;
-    height: 2rem; 
+    height: 2rem;
     width: 2rem;
     margin-left: 50%;
     border-radius: 2rem;
