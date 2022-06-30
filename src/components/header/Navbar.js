@@ -1,8 +1,11 @@
-import React from 'react'
+import React from 'react';
+import { Link } from "react-router-dom";
+import Header from './Header';
 
 export default function Navbar() {
     return (
-        <div> 
+        <>
+            <Header />
             <nav class="navbar navbar-expand-lg navbar-dark bg-header">
                 <div class="container">
                     <a class="navbar-brand" href="#">My Bank</a>
@@ -12,19 +15,19 @@ export default function Navbar() {
                     <div class="collapse navbar-collapse" style={{ flexGrow: 0 }} id="navbarNav">
                         <ul class="navbar-nav">
                             <li class="nav-item">
-                                <a class="nav-link active" aria-current="page" href="#">Home</a>
+                                <Link class="nav-link active" to="/">Home</Link>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link active" href="#">Dashboard</a>
+                                <Link class="nav-link active" to="/dashboard">Dashboard</Link>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link active" href="#">Transactions</a>
+                                <Link class="nav-link active" to="/transactions">Transactions</Link>
                             </li>
                             <button className="btn btn-info mx-2">Sign Up</button>
                         </ul>
                     </div>
                 </div>
             </nav>
-        </div>
+        </>
     )
 }

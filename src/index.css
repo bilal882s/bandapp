@@ -1,8 +1,9 @@
 @media (min-width:0px) and (max-width: 550px) {
+    .icons {
+        display: none;
+    }
+
     .topbar {
-        height: 3rem;
-        display: flex;
-        flex-direction: column;
-        /* position: fixed; */
+        text-align: center;
     }
 }

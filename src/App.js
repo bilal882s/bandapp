@@ -1,14 +1,15 @@
 import './App.scss';
 import "../node_modules/bootstrap/dist/js/bootstrap.bundle";
-import LandingPage from './pages/LandingPage/LandingPage';
-import Header from './components/header/Header';
+import Routing from './components/Routing/Routing';
 
 function App() {
   return (
-    <div>
-      <Header />
-      <LandingPage />
-    </div>
+    <>
+      <Routing />
+      {/* <Dashboard /> */}
+      {/* <Header />
+      <LandingPage /> */}
+    </>
   );
 }
 
