@@ -5,8 +5,8 @@ import Dashboard from './Dashboard';
 export default function index() {
     return (
         <>
-            <DashboardMenu className="position-fixed"/>
-            {/* <Dashboard /> */}
+            {/* <DashboardMenu /> */}
+            <Dashboard />
         </>
     )
 }
