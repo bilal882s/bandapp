@@ -15,6 +15,18 @@
     border: 1px solid rgba(60, 60, 60, 0.249);
 }
 
-.bg-dprimary {
-    background-color: rgb(4, 4, 187);
+.bg-custom {
+    background-color: rgba(7, 7, 255, 0.614);
+    margin-top: 13rem;
+    width: 25rem;
+}
+
+.card-bg {
+    background-color: rgb(0, 0, 155);
+}
+
+@media (min-width:0px) and (max-width: 530px) {
+    .card {
+        margin-top: 10rem;
+    }
 }
