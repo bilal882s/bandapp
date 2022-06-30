@@ -7,7 +7,6 @@ import { BsLinkedin } from "react-icons/bs";
 import { BsGithub } from "react-icons/bs";
 
 export default function Header() {
-
     return (
         <>
             <div className="topbar bg-white text-white">
