@@ -1,17 +1,24 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
+
 import { BsFacebook } from "react-icons/bs";
 import { BsWhatsapp } from "react-icons/bs";
 import { BsInstagram } from "react-icons/bs";
 import { BsLinkedin } from "react-icons/bs";
 import { BsGithub } from "react-icons/bs";
+import dayjs from 'dayjs';
 
 export default function Header() {
+    const [time, setTime] = useState("")
+
+    setInterval(() => {
+        setTime(dayjs().format("DD/MM/YYYY, hh:mm:ss A"))
+    })
     return (
         <>
             <div className="topbar bg-white text-white">
                 <div className="row mx-3">
                     <div className="col">
-                        <div className="topbar text-dark">Date and Time
+                        <div className="topbar text-dark">{time}
                             <div className="icons float-end mx-5">
                                 <BsFacebook style={{ color: "#1877f2", marginLeft: "2rem", cursor: "pointer" }} />
                                 <BsWhatsapp style={{ color: "#25d366", marginLeft: "2rem", cursor: "pointer" }} />
