@@ -1,0 +1,17 @@
+@import "../src/scss/bootsrap";
+
+.ico {
+    background-color: rgb(17, 255, 0);
+    position: absolute;
+    top: 6rem;
+    text-align: center;
+    height: 2rem;
+    width: 2rem;
+    margin-left: 50%;
+    border-radius: 2rem;
+    border: 1px solid rgba(60, 60, 60, 0.249);
+}
+
+.bg-dprimary {
+    background-color: rgb(1, 1, 145);
+}
