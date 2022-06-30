@@ -6,11 +6,10 @@ export default function Header() {
     return (
         <>
             <div className="topbar bg-dprimary text-white">
-                <div className="container">
-                    <div className="row">
-                        <div className="col">
-                            <div className="topbar text-white navbar-brand">Date and Time
-                            </div>
+                <div className="row mx-3">
+                    <div className="col">
+                        <div className="topbar text-white">Date and Time
+                            <div className="float-end">HI</div>
                         </div>
                     </div>
                 </div>

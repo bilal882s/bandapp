@@ -1,7 +1,7 @@
 .bg-image {
-    background: url("https://image.shutterstock.com/image-vector/3d-bank-building-falling-coins-600w-2126672921.jpg") fixed no-repeat center;
-    // background: cover;
-    background-size: cover;
-    height: 80vh;
+    background: #009FFF;
+    background: -webkit-linear-gradient(to right, #ec2F4B, #009FFF);
+    background: linear-gradient(to right, #ec2F4B, #009FFF);
+    height: 86vh;
     width: 100%;
 }
