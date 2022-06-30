@@ -23,10 +23,11 @@ export default function Signup() {
     }
     const submitHandler = (e) => {
         e.preventDefault();
-        const { email, password, name } = state;
-        createUserWithEmailAndPassword(auth, email, password, name)
+        const { email, password } = state;
+        createUserWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
                 const user = userCredential.user;
+                // setUsers(user)
                 // toast.success('You are logged in', {
                 //     position: "bottom-left",
                 //     autoClose: 5000,
@@ -40,6 +41,7 @@ export default function Signup() {
             .catch((error) => {
                 console.error(error);
             })
+     
     }
 
     const handleLogout = () => {
