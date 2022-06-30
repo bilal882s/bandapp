@@ -2,7 +2,7 @@ import React from 'react'
 
 export default function Navbar() {
     return (
-        <div>
+        <div> 
             <nav class="navbar navbar-expand-lg navbar-dark bg-header">
                 <div class="container">
                     <a class="navbar-brand" href="#">My Bank</a>
@@ -18,7 +18,7 @@ export default function Navbar() {
                                 <a class="nav-link active" href="#">Dashboard</a>
                             </li>
                             <li class="nav-item">
-                            <a class="nav-link active" href="#">Transactions</a>
+                                <a class="nav-link active" href="#">Transactions</a>
                             </li>
                             <button className="btn btn-info mx-2">Sign Up</button>
                         </ul>
