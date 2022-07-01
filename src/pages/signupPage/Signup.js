@@ -1,9 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { getAuth, createUserWithEmailAndPassword, onAuthStateChanged, signOut, deleteUser } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from '../../config/firebase';
-import {Link } from "react-router-dom"
-// import { ToastContainer, toast } from 'react-toastify';
-// import 'react-toastify/dist/ReactToastify.css';
+import { Link } from "react-router-dom"
 
 export default function Signup() {
     const initialData = { email: "", password: "" };
@@ -17,7 +15,6 @@ export default function Signup() {
         onAuthStateChanged(auth, (user) => {
             if (user) {
                 setUsers(user)
-                // console.log(user);
             } else {
             }
         });
@@ -30,16 +27,6 @@ export default function Signup() {
         createUserWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
                 const user = userCredential.user;
-                // setUsers(user)
-                // toast.success('You are logged in', {
-                //     position: "bottom-left",
-                //     autoClose: 5000,
-                //     hideProgressBar: false,
-                //     closeOnClick: true,
-                //     pauseOnHover: true,
-                //     draggable: true,
-                //     progress: undefined,
-                // });
             })
             .catch((error) => {
             })
@@ -47,31 +34,20 @@ export default function Signup() {
     }
     const handleLogout = () => {
         signOut(auth).then(() => {
-            // deleteUser(auth).then(()=>{})
             setUsers({});
-            // toast.success('You are logged out', {
-            //     position: "bottom-left",
-            //     autoClose: 5000,
-            //     hideProgressBar: false,
-            //     closeOnClick: true,
-            //     pauseOnHover: true,
-            //     draggable: true,
-            //     progress: undefined,
-            // });
         }).catch((error) => {
             console.error(error);
         });
     }
     return (
         <div className='d-flex p-3'>
-            {/* <ToastContainer /> */}
             <div className="container">
                 {
                     users.email ?
-                        <div className="row text-center">
-                            <div className="col-12 col-md-6 offset-md-3 col-lg-8 offset-lg-2">
-                                <h2>You are Logged In and Your Email is : {users.email} </h2><br /><br />
-                                <button onClick={handleLogout} className="btn btn-danger text-center">Logout</button>
+                        <div className="card border border-1 border-black">
+                            <div className="row text-center p-3">
+                                <h2>You are Logged In : {users.email} </h2><br /><br />
+                                <button onClick={handleLogout} style={{ marginLeft: '35%' }} className="btn text-center btn-danger  w-25">Logout</button>
                             </div>
                         </div>
                         :
@@ -90,7 +66,7 @@ export default function Signup() {
                                     <h3 className='or'>OR</h3>
 
                                     <div className="text-center">
-                                        <Link className='btn btn-success' to="/login">Login</Link>
+                                        <Link to="/login">Login</Link>
                                     </div>
                                 </div>
                             </div>
