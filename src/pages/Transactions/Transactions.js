@@ -1,7 +1,20 @@
 import React from 'react'
+import { Link } from 'react-router-dom'
 
 export default function Transactions() {
   return (
-    <div>Transactions</div>
+    <div className="container">
+      <div className="row">
+        <div className="col-12 col-md-10 offset-md-1 col-lg-8 offset-lg-2">
+          <div className="card border border-1 border-black text-center">
+            <Link to="/dashboard" className='Link'>Back to Dashboard</Link>
+            <h3 class="card-title"><i class="fa-solid icon fa-money-bill-1"></i>Transactions</h3>
+            <hr />
+            <h1>You didn't make a transaction yet</h1>
+            <hr />
+          </div>
+        </div>
+      </div>
+    </div>
   )
 }
