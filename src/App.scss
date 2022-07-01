@@ -16,7 +16,7 @@
 }
 
 .bg-custom {
-    background-color: rgba(7, 7, 255, 0.614);
+    background-color: rgba(7, 7, 255, 0.703);
     margin-top: 13rem;
     width: 25rem;
 }
@@ -26,7 +26,9 @@
 }
 
 @media (min-width:0px) and (max-width: 530px) {
-    .card {
-        margin-top: 10rem;
+    .card{
+        margin-top: 1rem;
+        width: 100%;
+        margin: 0%;
     }
 }
