@@ -2,10 +2,10 @@ import React from 'react'
 
 export default function LandingPage() {
     return (
-        <div className='bg-image'>
+        <div className='bg-image text-white shadow-lg'>
             <div className="container w-50 mt-0 mx-5">
                 <div className="row">
-                    <div className="col">
+                    <div className="col-12 col-md-12">
                         <div className="card bg-custom">
                             <div className="card-body">
                                 <h1>Get a $400 bouns then make it better.</h1>
