@@ -24,7 +24,10 @@ export default function Navbar() {
                                 <Link class="nav-link active" to="/transactions">Transactions</Link>
                             </li>
                             <li class="nav-item">
-                                <Link class="btn btn-info mx-2" to="/signup">Sign Up</Link>
+                                <Link class="nav-link active" to="/signup">Sign Up</Link>
+                            </li>
+                            <li class="nav-item">
+                                <Link class="nav-link active" to="/login">Login</Link>
                             </li>
                         </ul>
                     </div>
