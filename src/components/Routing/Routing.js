@@ -6,6 +6,7 @@ import Transactions from "../../pages/Transactions/Transactions";
 import Navbar from '../header/Navbar';
 import Signup from '../../pages/signupPage/Signup';
 import Login from '../../pages/signupPage/Login';
+import Nopage from '../../pages/Nopage/Nopage';
 
 export default function Routing() {
     return (
@@ -17,6 +18,7 @@ export default function Routing() {
                 <Route path='/transactions' element={<Transactions />} />
                 <Route path='/signup' element={<Signup />} />
                 <Route path='/login' element={<Login />} />
+                <Route path='*' element={<Nopage />} />
             </Routes>
         </BrowserRouter>
     )
