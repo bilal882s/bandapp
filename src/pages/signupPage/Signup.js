@@ -50,7 +50,17 @@ export default function Signup() {
                 });
             })
             .catch((error) => {
+                toast.error('Something else here.', {
+                    position: "bottom-left",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                });
             })
+
 
     }
     const handleLogout = () => {
@@ -78,20 +88,23 @@ export default function Signup() {
         });
     }
     return (
-        <div className='d-flex p-3'>
+        <div className='center'>
             <ToastContainer />
             <div className="container">
                 {
                     users.email ?
-                        <div className="card border border-1 border-black">
+                        <>
+                            {/* <div className="card border border-1 border-black">
                             <div className="row text-center p-3">
-                                <h2>You are Logged In : {users.email} </h2><br /><br />
-                                <button onClick={handleLogout} style={{ marginLeft: '35%' }} className="btn text-center btn-danger  w-25">Logout</button>
                             </div>
-                        </div>
+                        </div> */}
+                            <h2>You are Logged In : {users.email} </h2><br /><br />
+                            <Link to="/dashboard" className='btn btn-success'>Go To Dashboard</Link><br /><br />
+                            <button onClick={handleLogout} className="btn btn-danger w-25">Logout</button>
+                        </>
                         :
                         <div className="row m-5 text-center">
-                            <div className="col-12 col-md-6 offset-md-3 col-lg-8 offset-lg-2">
+                            <div className="col-12 col-md-8 offset-md-2 col-lg-10 offset-lg-1">
                                 <div className="card p-3">
                                     <form onSubmit={submitHandler}>
                                         <h2 className='text-center my-2'>Sign Up</h2>
