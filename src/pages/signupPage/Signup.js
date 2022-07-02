@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { getAuth, createUserWithEmailAndPassword, onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from '../../config/firebase';
-import { Link } from "react-router-dom"
+import { Link } from "react-router-dom";
+import { ToastContainer, toast } from 'react-toastify';
 
 export default function Signup() {
     const initialData = { email: "", password: "" };
@@ -23,10 +24,30 @@ export default function Signup() {
 
     const submitHandler = (e) => {
         e.preventDefault();
+        if (state.password.length < 8) {
+            toast.error('Password should be have 8 characters.', {
+                position: "bottom-left",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
+        }
         const { email, password } = state;
         createUserWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
                 const user = userCredential.user;
+                toast.success('You are sign up and Login also.', {
+                    position: "bottom-left",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                });
             })
             .catch((error) => {
             })
@@ -35,12 +56,30 @@ export default function Signup() {
     const handleLogout = () => {
         signOut(auth).then(() => {
             setUsers({});
+            toast.success('You are Logged out.', {
+                position: "bottom-left",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
         }).catch((error) => {
-            console.error(error);
+            toast.error('Somethin else here.', {
+                position: "bottom-left",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
         });
     }
     return (
         <div className='d-flex p-3'>
+            <ToastContainer />
             <div className="container">
                 {
                     users.email ?
