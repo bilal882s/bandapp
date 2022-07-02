@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { onAuthStateChanged, signOut, signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from '../../config/firebase';
-import { Link } from "react-router-dom"
+import { Link } from "react-router-dom";
+import { ToastContainer, toast } from 'react-toastify';
 
 export default function Register() {
     const initialData = { email: "", password: "" };
@@ -18,7 +19,6 @@ export default function Register() {
             } else {
             }
         });
-
     }, [])
     const submitHandler = (e) => {
         e.preventDefault();
@@ -29,11 +29,19 @@ export default function Register() {
                 console.log(user);
             })
             .catch((error) => {
-                console.log(error);
             });
     }
     const handleLogout = () => {
         signOut(auth).then(() => {
+            toast.success('You are Logged out.', {
+                position: "bottom-left",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
             setUser({});
         }).catch((error) => {
         });
