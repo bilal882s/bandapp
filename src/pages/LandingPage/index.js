@@ -5,10 +5,10 @@ import LandingPage from './LandingPage';
 export default function index() {
     return (
         <>
-            {/* <Navbar /> */}
-            {/* <Routes> */}
+            <Navbar />
+            <Routes>
                 <Route path='/' element={<LandingPage />} />
-            {/* </Routes> */}
+            </Routes>
         </>
     )
 }
