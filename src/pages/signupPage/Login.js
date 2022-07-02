@@ -26,9 +26,26 @@ export default function Register() {
         signInWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
                 const user = userCredential.user;
-                console.log(user);
+                toast.success('You are Logged in.', {
+                    position: "bottom-left",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                });
             })
             .catch((error) => {
+                toast.error('You are not Sign up.', {
+                    position: "bottom-left",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                });
             });
     }
     const handleLogout = () => {
@@ -44,11 +61,21 @@ export default function Register() {
             });
             setUser({});
         }).catch((error) => {
+            toast.error('Something else here.', {
+                position: "bottom-left",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
         });
     }
     return (
         <>
-            <div className="container col-12 col-md-6 offset-md-3 mt-2 col-lg-8 offset-lg-2  text-center">
+            <div className="container center">
+                <ToastContainer />
                 {
                     user.email ?
                         <div className="card border border-1 border-black">
@@ -58,8 +85,8 @@ export default function Register() {
                             </div>
                         </div>
                         :
-                        <div className="row m-2 text-center">
-                            <div className="col-12 col-md-6 offset-md-3 col-lg-8 offset-lg-2">
+                        <div className="row w-100">
+                            <div className="col-12 col-md-8 offset-md-2 col-lg-10 offset-lg-1">
                                 <div className="card p-3">
                                     <form onSubmit={submitHandler}>
                                         <h2 className='my-2'>Login</h2>
@@ -85,7 +112,7 @@ export default function Register() {
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                    <button type="button" class="btn btn-primary">Send Message To Your Email</button>
+                                                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Send Message</button>
                                                 </div>
                                             </div>
                                         </div>
