@@ -10,7 +10,7 @@ export default function Transactions() {
             <Link to="/dashboard" className='Link'>Back to Dashboard</Link>
             <h3 class="card-title"><i class="fa-solid icon fa-money-bill-1"></i>Transactions</h3>
             <hr />
-            <h1>You didn't make a transaction yet</h1>
+            <h3>You didn't make a transaction yet</h3>
             <hr />
           </div>
         </div>
