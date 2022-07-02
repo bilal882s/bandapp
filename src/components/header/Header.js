@@ -11,7 +11,7 @@ export default function Header() {
     const [time, setTime] = useState("")
 
     setInterval(() => {
-        setTime(dayjs().format("DD/MM/YYYY, hh:mm:ss A"))
+        setTime(dayjs().format("DD MMM YYYY /  ddd hh:mm:ss ( a )"))
     })
     return (
         <>
