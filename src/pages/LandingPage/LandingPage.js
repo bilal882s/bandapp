@@ -1,4 +1,5 @@
-import React from 'react'
+import React from 'react';
+import { Link } from "react-router-dom";
 
 export default function LandingPage() {
     return (
@@ -10,7 +11,7 @@ export default function LandingPage() {
                             <div className="card-body">
                                 <h1>Get a $400 bouns then make it better.</h1>
                                 <p>Create an account to save your salery on <b><i>My Bank</i></b></p>
-                                <button className="btn btn-danger">Go to Accounts</button>
+                                <Link to="/dashboard" className="btn btn-danger">Go to Dashboard</Link>
                             </div>
                         </div>
                     </div>
