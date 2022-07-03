@@ -1,12 +1,14 @@
 import React, { useState, useEffect } from 'react';
-import { onAuthStateChanged, signOut, signInWithEmailAndPassword } from "firebase/auth";
+import { getAuth, onAuthStateChanged, signOut, signInWithEmailAndPassword, sendPasswordResetEmail } from "firebase/auth";
 import { auth } from '../../config/firebase';
 import { Link } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
 
 export default function Register() {
+    const initialEmail = { verifyEmail: "" }
     const initialData = { email: "", password: "" };
     const [state, setState] = useState(initialData);
+    const [email, setEmail] = useState(initialEmail);
     const [user, setUser] = useState({});
 
     const handleChange = (e) => {
@@ -72,6 +74,16 @@ export default function Register() {
             });
         });
     }
+    const handleEmail = () => {
+        const { verifyEmail } = email;
+        sendPasswordResetEmail(getAuth, verifyEmail)
+            .then(() => {
+                console.log("Email sent");
+            })
+            .catch((error) => {
+                console.error(error);
+            });
+    }
     return (
         <>
             <div className="container center">
@@ -95,29 +107,9 @@ export default function Register() {
                                             <input type="email" onChange={handleChange} name="email" placeholder="Email" className='form-control my-3' required />
                                             <input type="password" name="password" placeholder="Password" onChange={handleChange} className='form-control my-3' required />
                                             <button className="btn btn-success w-50">Login</button>
+                                            <Link to="/forget" className='nav-link'>Forget Password</Link>
                                         </div>
                                     </form>
-                                    {/* Modal of Forget Password */}
-                                    <a style={{ cursor: "pointer" }} data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                        Forget Password
-                                    </a>
-                                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                        <div class="modal-dialog">
-                                            <div class="modal-content">
-                                                <div class="modal-header">
-                                                    <h5 class="modal-title" id="exampleModalLabel">Forget Password</h5>
-                                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                                                </div>
-                                                <div class="modal-body">
-                                                    <input type="email" placeholder='Email For Forget Password' className='form-control' />
-                                                </div>
-                                                <div class="modal-footer">
-                                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                                    <button type="button" class="btn btn-primary" data-bs-dismiss="modal">Send Message</button>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
                                     <hr />
                                     <h3 className='or'>OR</h3>
                                     <div className="text-center">
