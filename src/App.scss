@@ -16,7 +16,7 @@
 }
 
 .bg-custom {
-    background-color: rgba(7, 7, 255, 0.703);
+    background-color: rgba(0, 0, 240, 0.728);
     margin-top: 13rem;
     width: 25rem;
 }
@@ -26,14 +26,14 @@
 }
 
 @media (min-width:0px) and (max-width: 530px) {
-    .card{
-        margin-top: 1rem;
+    .card {
+        margin-top: 2rem;
         width: 100%;
         margin: 0%;
     }
 }
 
-.Link{
+.Link {
     height: 1.7rem;
     width: 10rem;
     margin: 0.5rem;
@@ -43,6 +43,37 @@
     border-radius: 5px;
 
 }
-.icon{
+
+.icon {
     margin-right: 3px;
+}
+
+// .container {
+//     display: flex;
+//     flex-direction: column;
+//     justify-content: center;
+//     align-items: center;
+// }
+.center {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    // width: 100%;
+}
+
+#root {
+    height: 100vh;
+}
+
+.iconh {
+    height: 3rem;
+    width: 3rem;
+    border-radius: 100%;
+    background: black;
+    color: white;
+    border: none;
+    left: 2rem;
+    top: 0.5rem;
 }
