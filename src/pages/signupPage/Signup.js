@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { getAuth, createUserWithEmailAndPassword, onAuthStateChanged, signOut } from "firebase/auth";
+import { getAuth, createUserWithEmailAndPassword, onAuthStateChanged, signOut, sendPasswordResetEmail } from "firebase/auth";
 import { auth } from '../../config/firebase';
 import { Link } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
@@ -63,6 +63,7 @@ export default function Signup() {
         }
 
     }
+    
     const handleLogout = () => {
         signOut(auth).then(() => {
             setUsers({});
@@ -97,7 +98,7 @@ export default function Signup() {
                         <>
                             <h2>You are Logged In : {users.email} </h2><br /><br />
                             <Link to="/dashboard" className='btn btn-success'>Go To Dashboard</Link><br /><br />
-                            <button onClick={handleLogout} className="btn btn-danger w-25">Logout</button>
+                            <button onClick={handleLogout} className="btn btn-danger w-25">Sign Out</button>
                         </>
                         :
                         <div className="row m-5 text-center">
