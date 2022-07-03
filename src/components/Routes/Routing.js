@@ -7,6 +7,7 @@ import Signup from '../../pages/signupPage/Signup';
 import Login from '../../pages/signupPage/Login';
 import DashboardMenu from '../../pages/Dashboard/DashboardMenu';
 import AddAccount from '../../pages/AddAccount/AddAccount';
+import Forget from '../../pages/signupPage/Forget';
 
 export default function Routing() {
   return (
@@ -18,6 +19,7 @@ export default function Routing() {
         <Route path='/signup' element={<Signup />} />
         <Route path='/transactions' element={<Transactions />} />
         <Route path="/login" element={<Login />} />
+        <Route path="/forget" element={<Forget />} />
       </Routes>
     </BrowserRouter>
   )
