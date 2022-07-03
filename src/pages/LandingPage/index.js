@@ -7,7 +7,9 @@ export default function index() {
         <>
             <Navbar />
             <Routes>
-                <Route path='/' element={<LandingPage />} />
+                <Route path='/'>
+                    <Route index element={<LandingPage />} />
+                </Route>
             </Routes>
         </>
     )
