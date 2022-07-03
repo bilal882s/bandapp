@@ -75,6 +75,7 @@ export default function Register() {
     return (
         <>
             <div className="container center">
+                <Link to="/" className="btn btn-success m-2">Back To Home</Link>
                 <ToastContainer />
                 {
                     user.email ?
