@@ -5,7 +5,7 @@ import Dashboard from './Dashboard';
 export default function index() {
     return (
         <>
-            {/* <DashboardMenu /> */}
+            <DashboardMenu />
             <Dashboard />
         </>
     )
