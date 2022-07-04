@@ -19,7 +19,7 @@ export default function Forget() {
         // const auth = getAuth();
         sendPasswordResetEmail(auth, email)
             .then(() => {
-                toast.success('Email Sent.', {
+                toast.success('Email is Sent.', {
                     position: "bottom-left",
                     autoClose: 5000,
                     hideProgressBar: false,
@@ -43,18 +43,17 @@ export default function Forget() {
     }
 
     return (
-        <div className="row w-100">
-            <ToastContainer />
-            <div className="col-12 col-md-8 offset-md-2 col-lg-10 offset-lg-1">
-                <div className="card p-3">
-                    <form onSubmit={submitHandler}>
-                        <h2 className='my-2'>Login</h2>
-                        <div className="card-body">
+        <div className="container w-100">
+            <div className="row">
+                <div className="col-12 col-md-8 offset-md-2 col-lg-10 offset-lg-1">
+                    <div className="card p-3">
+                        <form onSubmit={submitHandler}>
+                            <h2 className='my-2'>Login</h2>
                             <input type="eamil" name="email" placeholder="Email" onChange={handleChange} className='form-control my-3' required />
-                            <button className="btn btn-success w-50">Sent Password Reset</button>
-                        </div>
-                    </form>
-                    {/* <Link to="/">Sign Up</Link> */}
+                            <button onClick={submitHandler} className="btn btn-success w-50">Sent Password Reset</button>
+                            <ToastContainer />
+                        </form>
+                    </div>
                 </div>
             </div>
         </div>
