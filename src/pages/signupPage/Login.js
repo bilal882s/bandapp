@@ -3,12 +3,10 @@ import { getAuth, onAuthStateChanged, signOut, signInWithEmailAndPassword, sendP
 import { auth } from '../../config/firebase';
 import { Link } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
-// import { AuthContext } from '../../context/Authcontext'
 
 export default function Register() {
     const initialEmail = { verifyEmail: "" }
     const initialData = { email: "", password: "" };
-    // const { setIsAuthenticated } = useContext(AuthContext)
     const [state, setState] = useState(initialData);
     const [email, setEmail] = useState(initialEmail);
     const [isPasswordShow, setIsPasswordShow] = useState(false);
@@ -36,7 +34,6 @@ export default function Register() {
         const { email, password } = state;
         signInWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
-                // setIsAuthenticated(true)
                 const user = userCredential.user;
                 toast.success('You are Logged in.', {
                     position: "bottom-left",
@@ -84,16 +81,6 @@ export default function Register() {
             });
         });
     }
-    const handleEmail = () => {
-        const { verifyEmail } = email;
-        sendPasswordResetEmail(getAuth, verifyEmail)
-            .then(() => {
-                console.log("Email sent");
-            })
-            .catch((error) => {
-                console.error(error);
-            });
-    }
     return (
         <>
             <div className="container center">
@@ -114,7 +101,6 @@ export default function Register() {
                                     <form onSubmit={submitHandler}>
                                         <h2 className='my-2'>Login</h2>
                                         <div className="card-body">
-                                            {/* <input type="email" onChange={handleChange} name="email" placeholder="Email" className='form-control my-3' required /> */}
 
                                             <input type={email} class="form-control" placeholder="Email" name='email' onChange={handleChange} />
                                             <div class="input-group">
