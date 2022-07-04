@@ -8,6 +8,8 @@ export default function Signup() {
     const initialData = { email: "", password: "", confirmpassword: "" };
     const [state, setState] = useState(initialData);
     const [users, setUsers] = useState({});
+    const [isPasswordShow, setIsPasswordShow] = useState(false);
+    const [isConPasswordShow, setIsConPasswordShow] = useState(false);
 
     const handleChange = (e) => {
         setState({ ...state, [e.target.name]: e.target.value })
@@ -51,7 +53,7 @@ export default function Signup() {
                     });
                 })
         } else {
-            toast.error('password not match', {
+            toast.error('Email / Password is incorrect', {
                 position: "bottom-left",
                 autoClose: 5000,
                 hideProgressBar: false,
@@ -63,7 +65,7 @@ export default function Signup() {
         }
 
     }
-    
+
     const handleLogout = () => {
         signOut(auth).then(() => {
             setUsers({});
@@ -101,15 +103,26 @@ export default function Signup() {
                             <button onClick={handleLogout} className="btn btn-danger w-25">Sign Out</button>
                         </>
                         :
-                        <div className="row m-5 text-center">
+                        <div className="row text-center">
                             <div className="col-12 col-md-8 offset-md-2 col-lg-10 offset-lg-1">
                                 <div className="card p-3">
                                     <form onSubmit={submitHandler}>
                                         <h2 className='text-center my-2'>Sign Up</h2>
                                         <div className="card-body">
                                             <input type="email" onChange={handleChange} name="email" placeholder="Email" className='form-control my-3' required />
-                                            <input type="password" name="password" placeholder="Password" onChange={handleChange} className='form-control my-3' required />
-                                            <input type="password" name="confirmpassword" placeholder="Confirm Password" onChange={handleChange} className='form-control my-3' required />
+                                            {/* <input type="password" name="password" placeholder="Password" onChange={handleChange} className='form-control my-3' required />
+                                            <input type="password" name="confirmpassword" placeholder="Confirm Password" onChange={handleChange} className='form-control my-3' required /> */}
+
+                                            <div class="input-group">
+                                                <input type={isPasswordShow ? "text" : "password"} name="password" placeholder="Password" onChange={handleChange} className='form-control my-3' required />
+                                                <span class="input-group-text eye" onClick={() => { setIsPasswordShow(!isPasswordShow) }} id="basic-addon2"><i class={`fa-solid fa-eye${isPasswordShow ? "" : "-slash"}`}></i></span>
+                                            </div>
+                                            <input type="password" value="123456789" className="form-control" disabled />
+
+                                            <div class="input-group">
+                                                <input type={isConPasswordShow ? "text" : "password"} name="confirmpassword" placeholder="Confirm Password" onChange={handleChange} className='form-control my-3' required />
+                                                <span class="input-group-text eye" onClick={() => { setIsConPasswordShow(!isConPasswordShow) }} id="basic-addon2"><i class={`fa-solid fa-eye${isConPasswordShow ? "" : "-slash"}`}></i></span>
+                                            </div>
                                             <button className="btn btn-success w-50">Sign Up</button>
                                         </div>
                                     </form>
