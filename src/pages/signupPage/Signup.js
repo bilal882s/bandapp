@@ -117,7 +117,6 @@ export default function Signup() {
                                                 <input type={isPasswordShow ? "text" : "password"} name="password" placeholder="Password" onChange={handleChange} className='form-control my-3' required />
                                                 <span class="input-group-text eye" onClick={() => { setIsPasswordShow(!isPasswordShow) }} id="basic-addon2"><i class={`fa-solid fa-eye${isPasswordShow ? "" : "-slash"}`}></i></span>
                                             </div>
-                                            <input type="password" value="123456789" className="form-control" disabled />
 
                                             <div class="input-group">
                                                 <input type={isConPasswordShow ? "text" : "password"} name="confirmpassword" placeholder="Confirm Password" onChange={handleChange} className='form-control my-3' required />
