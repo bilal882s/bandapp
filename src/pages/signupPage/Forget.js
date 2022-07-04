@@ -30,7 +30,7 @@ export default function Forget() {
                 });
             })
             .catch((error) => {
-                toast.success('Email sent.', {
+                toast.error('Please refresh and Resend again email.', {
                     position: "bottom-left",
                     autoClose: 5000,
                     hideProgressBar: false,
@@ -43,14 +43,14 @@ export default function Forget() {
     }
 
     return (
-        <div className="container w-100">
-            <div className="row">
+        <div className="container text-center d-flex align-items-center min-vh-100">
+            <div className="row w-100">
                 <div className="col-12 col-md-8 offset-md-2 col-lg-10 offset-lg-1">
                     <div className="card p-3">
                         <form onSubmit={submitHandler}>
                             <h2 className='my-2'>Login</h2>
                             <input type="eamil" name="email" placeholder="Email" onChange={handleChange} className='form-control my-3' required />
-                            <button onClick={submitHandler} className="btn btn-success w-50">Sent Password Reset</button>
+                            <button className="btn btn-success w-50">Sent Password Reset</button>
                             <ToastContainer />
                         </form>
                     </div>
