@@ -1,14 +1,17 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import { getAuth, onAuthStateChanged, signOut, signInWithEmailAndPassword, sendPasswordResetEmail } from "firebase/auth";
 import { auth } from '../../config/firebase';
 import { Link } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
+// import { AuthContext } from '../../context/Authcontext'
 
 export default function Register() {
     const initialEmail = { verifyEmail: "" }
     const initialData = { email: "", password: "" };
+    // const { setIsAuthenticated } = useContext(AuthContext)
     const [state, setState] = useState(initialData);
     const [email, setEmail] = useState(initialEmail);
+    const [isPasswordShow, setIsPasswordShow] = useState(false);
     const [user, setUser] = useState({});
 
     const handleChange = (e) => {
@@ -22,11 +25,18 @@ export default function Register() {
             }
         });
     }, [])
+
+    // Authentication
+
+
+
+
     const submitHandler = (e) => {
         e.preventDefault();
         const { email, password } = state;
         signInWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
+                // setIsAuthenticated(true)
                 const user = userCredential.user;
                 toast.success('You are Logged in.', {
                     position: "bottom-left",
@@ -104,8 +114,14 @@ export default function Register() {
                                     <form onSubmit={submitHandler}>
                                         <h2 className='my-2'>Login</h2>
                                         <div className="card-body">
-                                            <input type="email" onChange={handleChange} name="email" placeholder="Email" className='form-control my-3' required />
-                                            <input type="password" name="password" placeholder="Password" onChange={handleChange} className='form-control my-3' required />
+                                            {/* <input type="email" onChange={handleChange} name="email" placeholder="Email" className='form-control my-3' required /> */}
+
+                                            <input type={email} class="form-control" placeholder="Email" name='email' onChange={handleChange} />
+                                            <div class="input-group">
+                                                <input type={isPasswordShow ? "text" : "password"} name="password" placeholder="Password" onChange={handleChange} className='form-control my-3' required />
+                                                <span class="input-group-text eye" onClick={() => { setIsPasswordShow(!isPasswordShow) }} id="basic-addon2"><i class={`fa-solid fa-eye${isPasswordShow ? "" : "-slash"}`}></i></span>
+                                            </div>
+
                                             <button className="btn btn-success w-50">Login</button>
                                             <Link to="/forget" className='nav-link'>Forget Password</Link>
                                         </div>
@@ -119,7 +135,7 @@ export default function Register() {
                             </div>
                         </div>
                 }
-            </div>
+            </div >
         </>
     )
 }
