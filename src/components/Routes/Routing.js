@@ -9,6 +9,7 @@ import AddAccount from '../../pages/AddAccount/AddAccount';
 import Forget from '../../pages/signupPage/Forget';
 import Accounts from "../../pages/Dashboard/Accounts"
 import DashboardRoute from './DashboardRoute';
+import AllAccounts from '../../pages/Dashboard/AllAccounts';
 
 export default function Routing() {
   return (
@@ -16,7 +17,6 @@ export default function Routing() {
       <Routes>
         <Route path='/*' element={<LandingPage />} />
         {/* <Route path='/dashboard/*' element={<DashboardRoute />} /> */}
-        <Route path='/transactions' element={<Transactions />} />
         <Route path='/dashboard/transactions' element={<Transactions />} />
         <Route path="/dashboard/allaccounts" element={<AllAccounts />} />
         <Route path='/dashboard' element={<DashboardMenu />} />
