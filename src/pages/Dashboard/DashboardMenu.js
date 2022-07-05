@@ -1,4 +1,4 @@
-import  React from 'react';
+import React from 'react';
 import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
 import Button from '@mui/material/Button';
@@ -10,8 +10,27 @@ import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 import InboxIcon from '@mui/icons-material/MoveToInbox';
 import MailIcon from '@mui/icons-material/Mail';
+import MenuIcon from '@mui/icons-material/Menu';
+import { Link } from "react-router-dom"
 
 export default function DashboardMenu() {
+    const links = [
+        {
+            text: "Home",
+            url: "/dashboard",
+            icon: <i class="fa-solid fa-house"></i>
+        },
+        {
+            text: "Accounts",
+            url: "/dashboard/accounts",
+            icon: <i class='fa-solid fa-user'></i>,
+        },
+        {
+            text: "Transactions",
+            url: "/dashboard/transactions",
+            icon: <i class="fa-solid fa-money-bill-1-wave"></i>
+        }
+    ]
     const [state, setState] = React.useState({
         top: false,
         left: false,
@@ -35,15 +54,24 @@ export default function DashboardMenu() {
             onKeyDown={toggleDrawer(anchor, false)}
         >
             <List>
-                {['Home', 'Accounts', 'Transactions'].map((text, index) => (
-                    <ListItem key={text} disablePadding>
-                        <ListItemButton>
-                            <ListItemIcon>
-                                {index % 3 === 0 ? <InboxIcon /> : <MailIcon />}
-                            </ListItemIcon>
-                            <ListItemText primary={text} />
-                        </ListItemButton>
-                    </ListItem>
+                <ListItem>
+                    <ListItemButton>
+                        <h1 className='text-center text-dark'>My Bank</h1>
+                    </ListItemButton>
+                </ListItem>
+                {links.map((text, index) => (
+                    <Link className="nav-link" to={text.url}>
+                        <ListItem key={text.text} disablePadding>
+                            <ListItemButton>
+                                <ListItemIcon>
+                                    {text.icon}
+                                </ListItemIcon>
+                                <ListItemText>
+                                    {text.text}
+                                </ListItemText>
+                            </ListItemButton>
+                        </ListItem>
+                    </Link>
                 ))}
             </List>
             <Divider />
@@ -52,7 +80,7 @@ export default function DashboardMenu() {
 
     return (
         <div>
-            {['left'].map((anchor) => (
+            {['MenuIcon'].map((anchor) => (
                 <React.Fragment key={anchor}>
                     <Button onClick={toggleDrawer(anchor, true)}>{anchor}</Button>
                     <Drawer
@@ -65,5 +93,6 @@ export default function DashboardMenu() {
                 </React.Fragment>
             ))}
         </div>
+
     );
 }
