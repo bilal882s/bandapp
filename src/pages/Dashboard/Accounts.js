@@ -6,9 +6,9 @@ import { Link } from "react-router-dom";
 import DashboardMenu from './DashboardMenu';
 export default function Accounts() {
     return (
-        <div>
+        <div className='d-flex'>
             <DashboardMenu />
-            <div className='center w-100' style={{ height: "60vh" }}>
+            <div className='center w-100' style={{ height: "80vh" }}>
                 <h1 className="text-center">Add / View Accounts</h1>
                 <div className="container mt-3 text-center">
                     <div className="row">
@@ -21,7 +21,7 @@ export default function Accounts() {
                                         <Link className='nav-link' to="/adduser" >Add New Account</Link>
                                     </Button>
                                     <Button className='m-1' size="sm" variant={'contained'} color="warning">
-                                        <Link className='nav-link' to="/adduser" color='success'>View All Accounts</Link>
+                                        <Link className='nav-link' to="/dashboard/allaccounts" color='success'>View All Accounts</Link>
                                     </Button>
                                     <hr />
                                     <br />
@@ -32,7 +32,7 @@ export default function Accounts() {
                         </Card>
                     </div>
                 </div>
-            </div >
-        </div >
+            </div>
+        </div>
     )
 }
