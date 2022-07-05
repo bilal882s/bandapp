@@ -25,13 +25,37 @@
     background-color: rgb(0, 0, 155);
 }
 
-@media (min-width:0px) and (max-width: 530px) {
+@media (max-width: 530px) {
     .card {
-        margin-top: 2rem;
+        margin-top: 3rem;
         width: 100%;
         margin: 0%;
     }
+
+    .sm {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
 }
+
+
+// @media (max-width: 10px) {
+//     .card {
+//         margin-top: 3rem;
+//         width: 100%;
+//         margin: 0%;
+//     }
+
+//     .sm {
+//         display: flex;
+//         flex-direction: column;
+//         justify-content: center;
+//         align-items: center;
+//     }
+// }
+
 
 .Link {
     height: 1.7rem;
@@ -54,12 +78,6 @@
     margin-right: 3px;
 }
 
-// .container {
-//     display: flex;
-//     flex-direction: column;
-//     justify-content: center;
-//     align-items: center;
-// }
 .center {
     height: 100vh;
     display: flex;
