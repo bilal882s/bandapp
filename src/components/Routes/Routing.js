@@ -17,6 +17,8 @@ export default function Routing() {
         <Route path='/*' element={<LandingPage />} />
         {/* <Route path='/dashboard/*' element={<DashboardRoute />} /> */}
         <Route path='/transactions' element={<Transactions />} />
+        <Route path='/dashboard/transactions' element={<Transactions />} />
+        <Route path="/dashboard/allaccounts" element={<AllAccounts />} />
         <Route path='/dashboard' element={<DashboardMenu />} />
         <Route path='/adduser' element={<AddAccount />} />
         <Route path="/login" element={<Login />} />
