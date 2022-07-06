@@ -8,6 +8,7 @@ export default function PrivateRoute({ Component }) {
 
     console.log(Component)
     console.log(isAuthenticated)
+    console.log(isAuthenticated) 
 
     if (!isAuthenticated)
         return <Login />
