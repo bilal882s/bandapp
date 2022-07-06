@@ -1,8 +1,9 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { getAuth, onAuthStateChanged, signOut, signInWithEmailAndPassword, sendPasswordResetEmail } from "firebase/auth";
+import { onAuthStateChanged, signOut, signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from '../../config/firebase';
 import { Link } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
+// import { AuthContext } from '../../context/Authcontext'
 
 export default function Register() {
     const initialEmail = { verifyEmail: "" }
@@ -11,6 +12,8 @@ export default function Register() {
     const [email, setEmail] = useState(initialEmail);
     const [isPasswordShow, setIsPasswordShow] = useState(false);
     const [user, setUser] = useState({});
+    // const { setIsAuthenticated } = useContext(AuthContext);
+
 
     const handleChange = (e) => {
         setState({ ...state, [e.target.name]: e.target.value })
@@ -44,6 +47,8 @@ export default function Register() {
                     draggable: true,
                     progress: undefined,
                 });
+                // setIsAuthenticated(true);
+
             })
             .catch((error) => {
                 toast.error('You are not Sign up.', {
@@ -68,6 +73,7 @@ export default function Register() {
                 draggable: true,
                 progress: undefined,
             });
+            // setIsAuthenticated(false)
             setUser({});
         }).catch((error) => {
             toast.error('Something else here.', {
