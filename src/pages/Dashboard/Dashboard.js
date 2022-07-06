@@ -1,7 +1,18 @@
-import React from 'react';
-import DashboardMenu from "../Dashboard/DashboardMenu"
+import React, { useContext } from 'react';
+import DashboardMenu from "../Dashboard/DashboardMenu";
+// import { useNavigate } from 'react-router-dom';
+// import { AuthContext } from "../../context/Authcontext";
+import Login from "../signupPage/Login"
 
 export default function Dashboard() {
+  // const [isAuthenticated, setIsAuthenticated] = useContext(AuthContext);
+  // const navigate = useNavigate();
+
+  // const handleLogout = () => {
+    // setIsAuthenticated(false);
+
+    // navigate("/")
+  // }
   return (
     <div className='d-flex'>
       <DashboardMenu />
@@ -51,6 +62,12 @@ export default function Dashboard() {
           </div>
         </div>
       </div>
+      {/* {
+        !isAuthenticated ?
+          <><Login /></>
+          :
+          <button onClick={handleLogout} className="btn btn-danger">Logout</button>
+      } */}
     </div>
   )
 }
