@@ -56,7 +56,6 @@ export default function DashboardMenu() {
             <List>
                 <ListItem>
                     <ListItemButton>
-                        <h1 className='text-center text-dark'>My Bank</h1>
                     </ListItemButton>
                 </ListItem>
                 {links.map((text, index) => (
@@ -79,10 +78,10 @@ export default function DashboardMenu() {
     );
 
     return (
-        <div>
+        <div className=''>
             {['MenuIcon'].map((anchor) => (
                 <React.Fragment key={anchor}>
-                    <Button onClick={toggleDrawer(anchor, true)}>{anchor}</Button>
+                    <Button variant='outlined' onClick={toggleDrawer(anchor, true)}>{anchor}</Button>
                     <Drawer
                         anchor={anchor}
                         open={state[anchor]}
