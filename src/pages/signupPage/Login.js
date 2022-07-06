@@ -3,7 +3,7 @@ import { onAuthStateChanged, signOut, signInWithEmailAndPassword } from "firebas
 import { auth } from '../../config/firebase';
 import { Link } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
-// import { AuthContext } from '../../context/Authcontext'
+import { AuthContext } from '../../context/Authcontext'
 
 export default function Register() {
     const initialEmail = { verifyEmail: "" }
