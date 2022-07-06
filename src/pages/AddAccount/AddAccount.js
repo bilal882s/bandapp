@@ -10,6 +10,9 @@ import { db } from "../../config/firebase";
 export default function AddAccount() {
   const initialState = {
     name: "",
+    account: "",
+    cnic: "",
+    price: "",
     branch: "",
   const [currency, setCurrency] = useState("")
   const [loading, setLoading] = useState(false)
