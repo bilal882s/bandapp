@@ -30,15 +30,15 @@ export default function Routing() {
         <Route path='/dashboard' element={<DashboardMenu />} />
 
         <Route path='/adduser' element={<AddAccount />} />
-
-        <Route path="/login" element={<Login />} />
+        
+        {/* <Route path="/login" element={<Login />} /> */}
 
         <Route path='/signup' element={<Signup />} />
 
-        {/* <Route path='/dashboard/*' element={<PrivateRoute Component={DashboardMenu} />} />
+        <Route path='/dashboard' element={<PrivateRoute Component={DashboardMenu} />} />
 
         <Route path='/login' element={!isAuthenticated ? <Login /> : <Navigate to="/dashboard"
-          element={<DashboardMenu />} />} /> */}
+          element={<DashboardMenu />} />} />
 
         <Route path="/forget" element={<Forget />} />
 
