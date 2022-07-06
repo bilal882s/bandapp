@@ -1,73 +1,111 @@
 import React, { useContext } from 'react';
 import DashboardMenu from "../Dashboard/DashboardMenu";
-// import { useNavigate } from 'react-router-dom';
-// import { AuthContext } from "../../context/Authcontext";
-import Login from "../signupPage/Login"
+import { useNavigate } from 'react-router-dom';
+import { AuthContext } from "../../context/Authcontext";
+import Login from "../signupPage/Login";
+import CardContent from '@mui/material/CardContent';
 
 export default function Dashboard() {
-  // const [isAuthenticated, setIsAuthenticated] = useContext(AuthContext);
-  // const navigate = useNavigate();
+  const { isAuthenticated, setIsAuthenticated } = useContext(AuthContext);
+  const navigate = useNavigate();
 
-  // const handleLogout = () => {
-    // setIsAuthenticated(false);
+  const handleLogout = () => {
+    setIsAuthenticated(false);
 
-    // navigate("/")
-  // }
+    navigate("/")
+  }
   return (
     <div className='d-flex'>
       <DashboardMenu />
-      <div className='m-5' style={{ height: "60vh", width: "60rem" }}>
+      {/* <div className='m-5' style={{ height: "100vh", width: "100%" }}>
         <h1 className="text-center">Dashboard Page</h1>
         <div className="container mt-3 text-center">
-          <div className="row">
-            <div className="col">
-              <table class="table w-100">
-                <thead className='table-dark'>
-                  <tr>
-                    <th scope="col">Name</th>
-                    <th scope="col">Accounts</th>
-                    <th scope="col">Transaction</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <th scope="row">Bilal</th>
-                    <td>0</td>
-                    <td>0</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">Awais</th>
-                    <td>4</td>
-                    <td>898</td>
-                  </tr>
-                  <tr>
-                    <th scope="row">Ali</th>
-                    <td>1</td>
-                    <td>300</td>
-                  </tr>
-                  {/* <tr>
-                    <th scope="row">2</th>
-                    <td>Jacob</td>
-                    <td>Thornton</td>
-                    <td>@fat</td>
-                    </tr>
-                    <tr>
-                    <th scope="row">3</th>
-                    <td colspan="2">Larry the Bird</td>
-                    <td>@twitter</td>
-                  </tr> */}
-                </tbody>
-              </table>
+          <div className="row ">
+            <div className="col-12 col-md-12 col-lg-5 shadow ">
+              <div class="ftext-center">
+                <CardContent>
+                  <h5 class="card-title"><i class="fa-solid fa-user mb-1 m-2"></i>Accounts</h5>
+                  <hr />
+                  <Button className='m-1' size="sm" variant={'contained'} color="success">
+                    <Link className='nav-link' to="/adduser" >Add New Account</Link>
+                  </Button>
+                  <Button className='m-1' size="sm" variant={'contained'} color="warning">
+                    <Link className='nav-link' to="/dashboard/allaccounts" color='success'>View All Accounts</Link>
+                  </Button>
+                  <hr />
+                  <br />
+                  <h1>0</h1>
+                  <h4>Accounts</h4>
+                </CardContent>
+              </div>
+            </div>
+          </div>
+          <div className="col-12 col-md-12 col-lg-5 shadow">
+            <Card>
+              <div class="ftext-center">
+                <CardContent>
+                  <h5 class="card-title"><i class="fa-solid fa-user mb-1 m-2"></i>Accounts</h5>
+                  <hr />
+                  <Button className='m-1' size="sm" variant={'contained'} color="success">
+                    <Link className='nav-link' to="/adduser" >Add New Account</Link>
+                  </Button>
+                  <Button className='m-1' size="sm" variant={'contained'} color="warning">
+                    <Link className='nav-link' to="/adduser" color='success'>View All Accounts</Link>
+                  </Button>
+                  <hr />
+                  <br />
+                  <h1>0</h1>
+                  <h4>Accounts</h4>
+                </CardContent>
+              </div>
+            </Card>
+          </div>
+        </div>
+      </div> */}
+      <div className='center w-100' style={{ height: "100vh" }}>
+        <h1 className="text-center">Add / View Accounts</h1>
+        <div className="container mt-3 text-center">
+          <div className="row d-flex m-4">
+            <div className="col-12 col-md-6 col-lg-6  ">
+              <Card className='shadow-lg'>
+                <div class="text-center">
+                  <CardContent>
+                    <h5 class="card-title"><i class="fa-solid fa-user mb-1 m-2"></i>Accounts</h5>
+                    <hr />
+                    <Button className='m-1' size="sm" variant={'contained'} color="success">
+                      <Link className='nav-link' to="/adduser" >Add New Account</Link>
+                    </Button>
+                    <Button className='m-1' size="sm" variant={'contained'} color="warning">
+                      <Link className='nav-link' to="/dashboard/allaccounts" color='success'>View All Accounts</Link>
+                    </Button>
+                    <hr />
+                    <br />
+                    <h1>0</h1>
+                    <h4>Accounts</h4>
+                  </CardContent>
+                </div>
+              </Card>
+            </div>
+            <div className='col-12 col-md-6 col-lg-6'>
+              <Card className="shadow-lg">
+                <div class="text-center">
+                  <CardContent>
+                    <h5 class="card-title"><i class="fa-solid fa-user mb-1 m-2"></i>Transactions</h5>
+                    <hr />
+                    <Button className='m-1' size="sm" variant={'contained'} color="warning">
+                      <Link className='nav-link' to="" color='success'>View All Accounts</Link>
+                    </Button>
+                    <hr />
+                    <br />
+                    <h1>0</h1>
+                    <h4>Transactions</h4>
+                  </CardContent>
+                </div>
+              </Card>
             </div>
           </div>
         </div>
       </div>
-      {/* {
-        !isAuthenticated ?
-          <><Login /></>
-          :
-          <button onClick={handleLogout} className="btn btn-danger">Logout</button>
-      } */}
     </div>
   )
 }
