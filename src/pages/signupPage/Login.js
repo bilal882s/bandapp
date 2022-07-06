@@ -13,6 +13,7 @@ export default function Register() {
     const [isPasswordShow, setIsPasswordShow] = useState(false);
     const [user, setUser] = useState({});
     // const { setIsAuthenticated } = useContext(AuthContext);
+    const { setIsAuthenticated } = useContext(AuthContext);
 
 
     const handleChange = (e) => {
@@ -47,7 +48,7 @@ export default function Register() {
                     draggable: true,
                     progress: undefined,
                 });
-                // setIsAuthenticated(true);
+                setIsAuthenticated(true);
 
             })
             .catch((error) => {
@@ -73,7 +74,7 @@ export default function Register() {
                 draggable: true,
                 progress: undefined,
             });
-            // setIsAuthenticated(false)
+            setIsAuthenticated(false)
             setUser({});
         }).catch((error) => {
             toast.error('Something else here.', {
