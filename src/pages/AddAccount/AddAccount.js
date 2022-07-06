@@ -4,6 +4,8 @@ import DashboardMenu from '../Dashboard/DashboardMenu';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
+import { collection, addDoc, getDocs } from "firebase/firestore";
+import { db } from "../../config/firebase";
 
 export default function AddAccount() {
   const [currency, setCurrency] = useState("")
