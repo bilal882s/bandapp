@@ -8,10 +8,10 @@ import DashboardMenu from '../../pages/Dashboard/Dashboard';
 import AddAccount from '../../pages/AddAccount/AddAccount';
 import Forget from '../../pages/signupPage/Forget';
 import Accounts from "../../pages/Dashboard/Accounts"
-import DashboardRoute from './DashboardRoute';
 import AllAccounts from '../../pages/Dashboard/AllAccounts';
 // import { AuthContext } from '../../context/Authcontext';
 // import PrivateRoute from '../../important/PrivateRoute';
+import { AuthContext } from '../../context/Authcontext';
 
 export default function Routing() {
   // const { isAuthenticated } = useContext(AuthContext)
