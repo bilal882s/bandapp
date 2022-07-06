@@ -56,6 +56,7 @@ export default function DashboardMenu() {
             <List>
                 <ListItem>
                     <ListItemButton>
+                        <h1 className='text-center text-dark'><Link className='nav-link' to="/">My Bank</Link></h1>
                     </ListItemButton>
                 </ListItem>
                 {links.map((text, index) => (
