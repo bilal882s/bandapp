@@ -8,12 +8,12 @@ import { auth } from "../../config/firebase";
 import { toast } from 'react-toastify';
 
 export default function Navbar() {
-    // const { isAuthenticated, setIsAuthenticated } = useContext(AuthContext)
+    const { isAuthenticated, setIsAuthenticated } = useContext(AuthContext)
 
     const navigate = useNavigate();
 
     const handleSignOut = (e) => {
-        // setIsAuthenticated(false);
+        setIsAuthenticated(false);
         signOut(auth).then(() => {
             toast.success('You Have Successfully Logged Out', {
                 position: "top-right",
@@ -35,7 +35,7 @@ export default function Navbar() {
                 progress: undefined,
             });
         });
-        // navigate('/');
+        navigate('/');
     }
     return (
         <>
@@ -51,18 +51,14 @@ export default function Navbar() {
                             <li className="nav-item">
                                 <Link className="nav-link active" to="/">Home</Link>
                             </li>
-                            <li className="nav-item">
-                                <Link to="/dashboard" className="nav-link active">DashBoard</Link>
-                            </li>
-                            {/* {!isAuthenticated ? <>
+                            {!isAuthenticated ? <>
                                 <li className="nav-item">
-                                    <Link to="/login" className="btn btn-dark">Login
+                                    <Link to="/login" className="nav-link">Login
 
                                     </Link>
                                 </li>
-                                <li className="nav-item">
-                                    <Link to="/signup" className="btn btn-dark">Sign Up
-
+                                <li className="nav-item" >
+                                    <Link to="/signup" className="nav-link">Sign Up
                                     </Link>
                                 </li>
                             </>
@@ -71,13 +67,11 @@ export default function Navbar() {
                                     <li className="nav-item">
                                         <Link to="/dashboard" className="nav-link active">DashBoard</Link>
                                     </li>
-                                    <li className="nav-item">
-                                        <button type='button' className="mx-2 btn btn-dark" onClick={handleSignOut}>Logout
-                                        </button>
-                                    </li>
+                                    <span style={{ height: "2.5rem" }} className="mx-2 btn btn-danger" onClick={handleSignOut}>Logout
+                                    </span>
                                 </>
 
-                            } */}
+                            }
                         </ul>
                     </div>
                 </div>
