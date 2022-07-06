@@ -20,10 +20,9 @@ export default function AddAccount() {
     setCurrency(event.target.value);
   }
   return (
-    <>
+    <div className='d-flex'>
       <DashboardMenu />
-
-      <div className="container text-center mt-3">
+      <div className="container text-center mt-4">
         <div className="row w-100">
           <div className="col-12 col-md-10 offset-md-1 col-lg-8 offset-lg-2">
             <div className="card p-4">
@@ -64,6 +63,6 @@ export default function AddAccount() {
           </div>
         </div>
       </div >
-    </>
+    </div>
   )
 }
