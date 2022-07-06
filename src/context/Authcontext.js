@@ -6,6 +6,7 @@ export const AuthContext = createContext()
 export default function AuthContextProvider({ children }) {
 
     const [isAuthenticated, setIsAuthenticated] = useState(false)
+
     useEffect(() => {
         onAuthStateChanged(auth, user => {
             if (user) {
