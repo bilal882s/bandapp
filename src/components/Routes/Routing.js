@@ -9,25 +9,23 @@ import AddAccount from '../../pages/AddAccount/AddAccount';
 import Forget from '../../pages/signupPage/Forget';
 import Accounts from "../../pages/Dashboard/Accounts"
 import AllAccounts from '../../pages/Dashboard/AllAccounts';
-// import { AuthContext } from '../../context/Authcontext';
-// import PrivateRoute from '../../important/PrivateRoute';
 import { AuthContext } from '../../context/Authcontext';
+import PrivateRoute from '../../important/PrivateRoute';
 
 export default function Routing() {
-  // const { isAuthenticated } = useContext(AuthContext)
+  const { isAuthenticated } = useContext(AuthContext)
+  // const Navigate = useNavigate();
 
   return (
     <BrowserRouter>
       <Routes>
         <Route path='/*' element={<LandingPage />} />
 
-        {/* <Route path='/dashboard/*' element={<DashboardRoute />} /> */}
-
         <Route path='/dashboard/transactions' element={<Transactions />} />
 
         <Route path="/dashboard/allaccounts" element={<AllAccounts />} />
 
-        <Route path='/dashboard' element={<DashboardMenu />} />
+        {/* <Route path='/dashboard' element={<DashboardMenu />} /> */}
 
         <Route path='/adduser' element={<AddAccount />} />
         
