@@ -8,6 +8,9 @@ import { collection, addDoc, getDocs } from "firebase/firestore";
 import { db } from "../../config/firebase";
 
 export default function AddAccount() {
+  const initialState = {
+    name: "",
+    branch: "",
   const [currency, setCurrency] = useState("")
   const [loading, setLoading] = useState(false)
   const currencies = [{
