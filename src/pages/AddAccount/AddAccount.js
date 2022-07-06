@@ -14,6 +14,8 @@ export default function AddAccount() {
     cnic: "",
     price: "",
     branch: "",
+    currency: "",
+  }
   const [state, setState] = useState(initialState)
   const [documents, setDocuments] = useState([]);
   const [currency, setCurrency] = useState("")
