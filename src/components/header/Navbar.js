@@ -8,12 +8,13 @@ import { auth } from "../../config/firebase";
 import { toast } from 'react-toastify';
 
 export default function Navbar() {
-    const { isAuthenticated, setIsAuthenticated } = useContext(AuthContext)
+    const { isAuthenticated, setIsAuthenticated, table, setTable } = useContext(AuthContext)
 
     const navigate = useNavigate();
 
     const handleSignOut = (e) => {
         setIsAuthenticated(false);
+        setTable([])
         signOut(auth).then(() => {
             toast.success('You Have Successfully Logged Out', {
                 position: "top-right",
