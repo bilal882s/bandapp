@@ -7,10 +7,12 @@ import Button from "@mui/material/Button";
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import AuthContextProvider from './context/Authcontext';
+import { ToastContainer } from "react-toastify";
 
 function App() {
   return (
     <div className='text-center'>
+      <ToastContainer />
       <AuthContextProvider>
         <Routing />
       </AuthContextProvider>
