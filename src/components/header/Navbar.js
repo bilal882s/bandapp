@@ -53,12 +53,12 @@ export default function Navbar() {
                             </li>
                             {!isAuthenticated ? <>
                                 <li className="nav-item">
-                                    <Link to="/login" className="nav-link">Login
+                                    <Link to="/login" className="nav-link active">Login
 
                                     </Link>
                                 </li>
                                 <li className="nav-item" >
-                                    <Link to="/signup" className="nav-link">Sign Up
+                                    <Link to="/signup" className="nav-link active">Sign Up
                                     </Link>
                                 </li>
                             </>
