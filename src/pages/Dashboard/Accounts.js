@@ -1,10 +1,12 @@
-import React from 'react'
+import React, { useContext } from 'react'
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import { Link } from "react-router-dom";
 import DashboardMenu from './DashboardMenu';
+import { AuthContext } from '../../context/Authcontext';
 export default function Accounts() {
+    const { index, setIndex } = useContext(AuthContext);
     return (
         <div className='d-flex'>
             <DashboardMenu />
@@ -18,14 +20,14 @@ export default function Accounts() {
                                     <h5 class="card-title"><i class="fa-solid fa-user mb-1 m-2"></i>Accounts</h5>
                                     <hr />
                                     <Button className='m-1' size="sm" variant={'contained'} color="success">
-                                        <Link className='nav-link' to="/adduser" >Add New Account</Link>
+                                        <Link className='nav-link' to="/dashboard/adduser" >Add New Account</Link>
                                     </Button>
                                     <Button className='m-1' size="sm" variant={'contained'} color="warning">
                                         <Link className='nav-link' to="/dashboard/allaccounts" color='success'>View All Accounts</Link>
                                     </Button>
                                     <hr />
                                     <br />
-                                    <h1>0</h1>
+                                    <h1>{index}</h1>
                                     <h4>Accounts</h4>
                                 </CardContent>
                             </div>
