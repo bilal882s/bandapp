@@ -6,12 +6,19 @@ export const AuthContext = createContext()
 export default function AuthContextProvider({ children }) {
 
     const [isAuthenticated, setIsAuthenticated] = useState(false)
+    const [uid, setUid] = useState("")
+    const [table, setTable] = useState([])
+    const [index, setIndex] = useState(0)
+    const [transactions, setTransactions] = useState(0);
+    const [user, setUser] = useState("")
 
     useEffect(() => {
         onAuthStateChanged(auth, user => {
             if (user) {
                 setIsAuthenticated(true)
-
+                setUid(user.uid);
+                setUser(user)
+                console.log("user logged in")
             } else {
                 setIsAuthenticated(false)
                 // console.log("user is not logged in ");
@@ -22,7 +29,7 @@ export default function AuthContextProvider({ children }) {
     }, [])
 
     return (
-        <AuthContext.Provider value={{ isAuthenticated, setIsAuthenticated }}>
+        <AuthContext.Provider value={{ isAuthenticated, transactions, setTransactions, setIsAuthenticated, uid, user, setUser, setUid, table, setTable, index, setIndex }}>
             {children}
         </AuthContext.Provider>
     )
