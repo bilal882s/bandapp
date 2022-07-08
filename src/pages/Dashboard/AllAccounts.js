@@ -5,7 +5,7 @@ import { collection, addDoc, getDocs } from "firebase/firestore";
 import { db } from "../../config/firebase";
 
 export default function AllAccounts() {
-    const { table, setTable, index, setIndex, user, setTransactions } = useContext(AuthContext);
+    const { setIndex, user, setTransactions } = useContext(AuthContext);
 
     const [documents, setDocuments] = useState([])
     const [loading, setLoading] = useState(false)
