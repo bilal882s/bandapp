@@ -11,7 +11,7 @@ export default function LandingPage() {
                             <div className="card-body">
                                 <h2>Get a $400 bouns then make it better.</h2>
                                 <p>Create an account on <b><i>My Bank</i></b></p>
-                                <Link to="/dashboard" className="btn btn-danger">Go to Dashboard</Link>
+                                <Link to="/" className="btn btn-danger">Home</Link>
                             </div>
                         </div>
                     </div>
