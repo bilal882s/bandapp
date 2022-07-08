@@ -4,6 +4,7 @@ import { auth } from '../../config/firebase';
 import { Link } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
 import { AuthContext } from '../../context/Authcontext'
+import { setUserId } from 'firebase/analytics';
 
 export default function Register() {
     const initialEmail = { verifyEmail: "" }
@@ -12,7 +13,7 @@ export default function Register() {
     const [email, setEmail] = useState(initialEmail);
     const [isPasswordShow, setIsPasswordShow] = useState(false);
     const [user, setUser] = useState({});
-    const { setIsAuthenticated } = useContext(AuthContext);
+    const { setIsAuthenticated, uid, setUid, table, setTable } = useContext(AuthContext);
 
 
     const handleChange = (e) => {
@@ -22,6 +23,7 @@ export default function Register() {
         onAuthStateChanged(auth, (user) => {
             if (user) {
                 setUser(user)
+                setUid(user.uid)
             } else {
             }
         });
@@ -64,6 +66,7 @@ export default function Register() {
     }
     const handleLogout = () => {
         signOut(auth).then(() => {
+            setTable([]);
             toast.success('You are Logged out.', {
                 position: "bottom-left",
                 autoClose: 5000,
@@ -91,7 +94,6 @@ export default function Register() {
         <>
             <div className="container center">
                 <Link to="/" className="btn btn-success m-2">Back To Home</Link>
-                <ToastContainer />
                 {
                     user.email ?
                         <div className="card border border-1 border-black">
