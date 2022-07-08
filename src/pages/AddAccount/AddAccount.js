@@ -203,7 +203,7 @@ export default function AddAccount() {
           </div >
         </>
         :
-        <div className="d-flex w-100 align-items-center text-center justify-content-center" style={{ height: "100vh" }}>
+        <div className="d-flex align-items-center text-center justify-content-center" style={{ height: "100vh" }}>
           <iframe src="https://embed.lottiefiles.com/animation/96439"></iframe>
         </div>
       }
