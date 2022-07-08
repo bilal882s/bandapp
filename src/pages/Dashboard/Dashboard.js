@@ -31,10 +31,10 @@ export default function Dashboard() {
                     <h5 class="card-title"><i class="fa-solid fa-user mb-1 m-2"></i>Accounts</h5>
                     <hr />
                     <Button className='m-1' size="sm" variant={'contained'} color="success">
-                      <Link className='nav-link' to="/dashboard/adduser" >Add New Account</Link>
+                      <Link className='nav-link' to="/dashboard/adduser" >Add</Link>
                     </Button>
                     <Button className='m-1' size="sm" variant={'contained'} color="warning">
-                      <Link className='nav-link' to="/dashboard/allaccounts" color='success'>View All Accounts</Link>
+                      <Link className='nav-link' to="/dashboard/allaccounts" color='success'>View</Link>
                     </Button>
                     <hr />
                     <br />
@@ -51,7 +51,7 @@ export default function Dashboard() {
                     <h5 class="card-title"><i class="fa-solid fa-user mb-1 m-2"></i>Transactions</h5>
                     <hr />
                     <Button className='m-1' size="sm" variant={'contained'} color="warning">
-                      <Link className='nav-link' to="/dashboard/transactions/view" color='success'>View All Accounts</Link>
+                      <Link className='nav-link' to="/dashboard/transactions/view" color='success'>View</Link>
                     </Button>
                     <hr />
                     <br />
