@@ -1,13 +1,18 @@
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Button from '@mui/material/Button';
 import DashboardMenu from '../Dashboard/DashboardMenu';
 import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
-import { collection, addDoc, getDocs } from "firebase/firestore";
+import { collection, addDoc, getDocs, where } from "firebase/firestore";
 import { db } from "../../config/firebase";
+import { toast, ToastContainer } from 'react-toastify';
+import { AuthContext } from '../../context/Authcontext';
+import { useNavigate } from 'react-router-dom';
 
 export default function AddAccount() {
+  const navigate = useNavigate();
+  const { uid, setTable, index, setIndex, setTransactions } = useContext(AuthContext);
   const initialState = {
     name: "",
     account: "",
@@ -15,6 +20,7 @@ export default function AddAccount() {
     price: "",
     branch: "",
     currency: "",
+    uid: "",
   }
   const [state, setState] = useState(initialState)
   const [documents, setDocuments] = useState([]);
@@ -31,141 +37,176 @@ export default function AddAccount() {
   ]
   const handleChange = (e) => {
     setCurrency(e.target.value);
+    state.uid = uid;
     setState({ ...state, [e.target.name]: e.target.value });
   }
 
 
   const handleSubmit = async (e) => {
-
+    // setIndex(index);
     e.preventDefault();
-
-    const { name, account, price, cnic, branch, currency } = state;
-
-    if (name == "" || account == "" || price == "" || cnic == "" || branch == "" || currency == "") {
-      console.log("Something else");
+    const { name, account, price, cnic, branch, currency, transactions } = state;
+    if (name == "") {
+      toast.error('Your Name feild is empty that is not acceptable.', {
+        position: "bottom-left",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
       return;
     }
-    setLoading(true);
-
-
+    if (account.length !== 9) {
+      toast.error('Your Account number is not a account number.', {
+        position: "bottom-left",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      return;
+    }
+    if (cnic.length !== 13) {
+      toast.error('Your CNIC number is not a CNIC Number .', {
+        position: "bottom-left",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      return;
+    }
+    if (branch > 99) {
+      toast.error('You can use only 99 branches.', {
+        position: "bottom-left",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      return;
+    }
+    if (currency == "") {
+      toast.error('Your have not chose any currency .', {
+        position: "bottom-left",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      return;
+    }
+    if (price < 500) {
+      toast.error('Your transactions is less than 500 .', {
+        position: "bottom-left",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      return;
+    }
     try {
-
+      setLoading(true)
       const docRef = await addDoc(collection(db, "Accounts"), state);
-
       console.log("Document written with ID: ", docRef.id);
-      setState(initialState)
+
       let array = [];
-      array.push(state, ...documents);
-
-      setDocuments(array)
+      let price = 0;
+      const querySnapshot = await getDocs(collection(db, "Accounts"));
+      querySnapshot.forEach((doc) => {
+        if (state.uid === doc.data().uid) {
+          setState(initialState)
+          navigate("/dashboard/allaccounts")
+          array.push(doc.data());
+          // price = price + doc.data().price;
+          // console.log(price);
+        };
+        // setTransactions(price)
+        setDocuments(array)
+        setTable(array)
+      }
+      )
       setLoading(false)
-
-
-    } catch (e) {
+    }
+    catch (e) {
 
       console.error("Error adding document: ", e);
 
       setLoading(false)
 
     }
-    const querySnapshot = await getDocs(collection(db, "Accounts"));
-    querySnapshot.forEach((doc) => {
-
-      const oldData = doc.data();
-      console.log(doc.id, " => ", oldData);
-
-      setLoading(false)
-    })
-
-
   }
   return (
 
     <div className='d-flex'>
-      <DashboardMenu />
-      <div className="container text-center mt-4">
-        <div className="row w-100">
-          <div className="col-12 col-md-10 offset-md-1 col-lg-8 offset-lg-2">
-            <div className="card p-4">
-              <h2 className='text-center bg-dark text-white p-1 rounded'>Fill this form to add an account</h2>
+      {!loading
+        ?
+        <>
+          <ToastContainer />
+          <DashboardMenu />
+          <div className="container text-center mt-4">
+            <div className="row w-100">
+              <div className="col-12 col-md-10 offset-md-1 col-lg-8 offset-lg-2">
+                <div className="card p-4">
+                  <h2 className='text-center bg-dark text-white p-1 rounded'>Fill this form to add an account</h2>
 
-              <form onSubmit={handleSubmit} className='text-start'>
-                <div className="d-flex">
-                  <TextField className='w-75 mx-2' name='name' value={state.name} label="Full Name" variant="standard" required onChange={handleChange} />
-                  <TextField type="number" name='cnic' value={state.cnic} className='w-75 mx-2' label="CNIC Number" variant="standard" required onChange={handleChange} />
-                </div>
-                <div className="d-flex">
-                  <TextField type='number' value={state.branch} name='branch' className='w-75 m-2' label="Branch (1 - 99)" variant="standard" required onChange={handleChange} />
-                  <TextField type="number" name='account' value={state.account} className='w-75 m-2' label="Account Number (Length should be 9)" variant="standard" required onChange={handleChange} />
-                </div>
-                <div className="d-flex">
-                  <TextField
-                    id="standard-select-currency"
-                    select
-                    className='w-75 m-2'
-                    name='currency'
-                    label="Select"
-                    value={state.currency}
-                    onChange={handleChange}
-                    variant="standard"
-                    required
-                  >
-                    {currencies.map((option) => (
-                      <MenuItem key={option.value} value={option.value}>
-                        {option.label}
-                      </MenuItem>
-                    ))}
-                  </TextField>
-                  <TextField type="number" value={state.price} onChange={handleChange} name='price' className='w-75 m-2' label="Initial Deposit (Minimum 500 Rs.)" variant="standard" required />
-                </div>
+                  <form onSubmit={handleSubmit} className='text-start'>
+                    <div className="d-flex">
+                      <TextField className='w-75 mx-2' name='name' value={state.name} label="Full Name" variant="standard" onChange={handleChange} />
+                      <TextField type="number" name='cnic' value={state.cnic} className='w-75 mx-2' label="CNIC Number" variant="standard" onChange={handleChange} />
+                    </div>
+                    <div className="d-flex">
+                      <TextField type='number' value={state.branch} name='branch' className='w-75 m-2' label="Branch (1 - 99)" variant="standard" onChange={handleChange} />
+                      <TextField type="number" name='account' value={state.account} className='w-75 m-2' label="Account Number (Length should be 9)" variant="standard" onChange={handleChange} />
+                    </div>
+                    <div className="d-flex">
+                      <TextField
+                        id="standard-select-currency"
+                        select
+                        className='w-75 m-2'
+                        name='currency'
+                        label="Select"
+                        value={state.currency}
+                        onChange={handleChange}
+                        variant="standard"
 
-                <Button disabled={loading} type='submit' className='float-end m-3' variant={'contained'} color="secondary">
-                  {!loading
-                    ? "Submit"
-                    : <div className="spinner-border spinner-border-sm"></div>
-                  }
-                </Button>
-              </form>
+                      >
+                        {currencies.map((option) => (
+                          <MenuItem key={option.value} value={option.value}>
+                            {option.label}
+                          </MenuItem>
+                        ))}
+                      </TextField>
+                      <TextField type="number" value={state.price} onChange={handleChange} name='price' className='w-75 m-2' label="Initial Deposit (Minimum 500 Rs.)" variant="standard" />
+                    </div>
+                    < Button disabled={loading} type='submit' className='float-end m-3' variant={'contained'} color="secondary">Submit
+                    </Button>
+                  </form>
+                </div>
+              </div>
             </div>
-          </div>
+            <table class="table">
+            </table>
+          </div >
+        </>
+        :
+        <div className="d-flex w-100 align-items-center text-center justify-content-center" style={{ height: "100vh" }}>
+          <iframe src="https://embed.lottiefiles.com/animation/96439"></iframe>
         </div>
-        <table class="table">
-          {
-            !loading
-              ?
-              <>
-                <thead>
-                  <tr>
-                    <th scope="col">Name</th>
-                    <th scope="col">Account No</th>
-                    <th scope="col">CNIC No</th>
-                    <th scope="col">Price</th>
-                    <th scope="col">Branch No</th>
-                    <th scope="col">Currency</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {
-                    documents.map((item, index) => (
-                      <tr>
-                        <td>{item.name}</td>
-                        <td>{item.account}</td>
-                        <td>{item.cnic}</td>
-                        <td>{item.price}</td>
-                        <td>{item.branch}</td>
-                        <td>{item.currency}</td>
-                      </tr>
-                    ))
-                  }
-                </tbody>
-              </>
-              :
-              <div className='text-center text-success mt-4'><div class="spinner-grow" style={{ width: '3rem', height: "3rem" }} role="status">
-                <span class="visually-hidden">Loading...</span>
-              </div></div>
-          }
-        </table>
-      </div >
+      }
     </div >
   )
 }
