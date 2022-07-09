@@ -1,11 +1,12 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { AuthContext } from '../../context/Authcontext'
 import DashboardMenu from './DashboardMenu'
-import { collection, addDoc, getDocs } from "firebase/firestore";
+import { collection, getDocs } from "firebase/firestore";
 import { db } from "../../config/firebase";
+import { Table, Thead, Tbody, Tr, Th, Td } from 'react-super-responsive-table';
 
 export default function AllAccounts() {
-    const { setIndex, user, setTransactions } = useContext(AuthContext);
+    const { setIndex, user } = useContext(AuthContext);
 
     const [documents, setDocuments] = useState([])
     const [loading, setLoading] = useState(false)
@@ -15,7 +16,6 @@ export default function AllAccounts() {
         console.log(user)
         let array = [];
         let num = 0;
-        // let price = 0;
         const querySnapshot = await getDocs(collection(db, "Accounts"));
         querySnapshot.forEach((doc) => {
             if (user.uid === doc.data().uid) {
@@ -33,7 +33,7 @@ export default function AllAccounts() {
     }, [user])
 
     return (
-        <>
+        <div className='bg'>
             {!loading ?
                 <>
                     <DashboardMenu />
@@ -42,34 +42,34 @@ export default function AllAccounts() {
                         <div className="container mt-1 text-center">
                             <div className="row">
                                 <div className="col">
-                                    <table class="table">
-                                        <thead className='table-dark'>
-                                            <tr>
-                                                <th scope="col">Number</th>
-                                                <th scope="col">Name</th>
-                                                <th scope="col">Account No</th>
-                                                <th scope="col">CNIC No</th>
-                                                <th scope="col">Price</th>
-                                                <th scope="col">Branch No</th>
-                                                <th scope="col">Currency</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
+                                    <Table class="Table">
+                                        <Thead className='Table-dark bg'>
+                                            <Tr>
+                                                <Th scope="col">Number</Th>
+                                                <Th scope="col">Name</Th>
+                                                <Th scope="col">AccounT No</Th>
+                                                <Th scope="col">CNIC No</Th>
+                                                <Th scope="col">Price</Th>
+                                                <Th scope="col">Branch No</Th>
+                                                <Th scope="col">Currency</Th>
+                                            </Tr>
+                                        </Thead>
+                                        <Tbody className="bg">
                                             {
                                                 documents.map((item, index) => (
-                                                    <tr>
-                                                        <th>{index + 1}</th>
-                                                        <td>{item.name}</td>
-                                                        <td>{item.account}</td>
-                                                        <td>{item.cnic}</td>
-                                                        <td>{item.price}</td>
-                                                        <td>{item.branch}</td>
-                                                        <td>{item.currency}</td>
-                                                    </tr>
+                                                    <Tr>
+                                                        <Th>{index + 1}</Th>
+                                                        <Td>{item.name}</Td>
+                                                        <Td>{item.account}</Td>
+                                                        <Td>{item.cnic}</Td>
+                                                        <Td>{item.price}</Td>
+                                                        <Td>{item.branch}</Td>
+                                                        <Td>{item.currency}</Td>
+                                                    </Tr>
                                                 ))
                                             }
-                                        </tbody>
-                                    </table>
+                                        </Tbody>
+                                    </Table>
                                 </div>
                             </div>
                         </div>
@@ -79,6 +79,6 @@ export default function AllAccounts() {
                     <iframe src="https://embed.lottiefiles.com/animation/96439"></iframe>
                 </div>
             }
-        </>
+        </div>
     )
 }
