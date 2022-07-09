@@ -36,33 +36,38 @@ export default function View() {
             {!loading ?
                 <>
                     <DashboardMenu />
-                    <div className='center bg' style={{ height: "70vh" }}>
-                        <h1>All Transactions </h1>
-                        <div className="container mt-1 text-center">
-                            <div className="row">
-                                <div className="col">
-                                    <Table class="table table-hover m-2 me-5">
-                                        <Thead className='table-light bg'>
-                                            <Tr>
-                                                <Th scope="col">Number</Th>
-                                                <Th scope="col">Name</Th>
-                                                <Th scope="col">CNIC No</Th>
-                                                <Th scope="col">Price</Th>
-                                            </Tr>
-                                        </Thead>
-                                        <Tbody className="bg">
-                                            {
-                                                documents.map((item, index) => (
-                                                    <Tr>
-                                                        <Th>{index + 1}</Th>
-                                                        <Td>{item.name}</Td>
-                                                        <Td>{item.cnic}</Td>
-                                                        <Td>{item.price}</Td>
-                                                    </Tr>
-                                                ))
-                                            }
-                                        </Tbody>
-                                    </Table>
+                    <div className="container" style={{ marginTop: "15rem" }}>
+                        <div className="row">
+                            <div className="col">
+                                <div className='center'>
+                                    <h1>All Transactions </h1>
+                                    <div className="container mt-1 text-center">
+                                        <div className="table-responsive">
+
+                                            <table class="table table-hover m-2 me-5">
+                                                <thead className='table-light bg'>
+                                                    <tr>
+                                                        <th scope="col">Number</th>
+                                                        <th scope="col">Name</th>
+                                                        <th scope="col">CNIC No</th>
+                                                        <th scope="col">Price</th>
+                                                    </tr>
+                                                </thead>
+                                                <tbody className="bg">
+                                                    {
+                                                        documents.map((item, index) => (
+                                                            <tr>
+                                                                <th>{index + 1}</th>
+                                                                <td>{item.name}</td>
+                                                                <td>{item.cnic}</td>
+                                                                <td>{item.price}</td>
+                                                            </tr>
+                                                        ))
+                                                    }
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
