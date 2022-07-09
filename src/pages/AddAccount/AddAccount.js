@@ -125,7 +125,7 @@ export default function AddAccount() {
       querySnapshot.forEach((doc) => {
         if (state.uid === doc.data().uid) {
           setState(initialState)
-          navigate("/dashboard/allaccounts")
+          // navigate("/dashboard/allaccounts")
           array.push(doc.data());
         };
         setDocuments(array)
@@ -140,13 +140,13 @@ export default function AddAccount() {
   }
   return (
 
-    <div className='bg'>
+    <div className='bg' style={{ height: "100vh" }}>
       {!loading
         ?
         <>
           <ToastContainer />
           <DashboardMenu />
-          <div className="container text-center mt-4 bg">
+          <div className="container text-center mt-4 d-flex">
             <div className="row w-100">
               <div className="col-12 col-md-10 offset-md-1 col-lg-8 offset-lg-2">
                 <div className="card p-4">
@@ -187,8 +187,6 @@ export default function AddAccount() {
                 </div>
               </div>
             </div>
-            <table class="table">
-            </table>
           </div >
         </>
         :
