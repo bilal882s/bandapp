@@ -19,7 +19,7 @@ export default function Header() {
                 <div className="row mx-3">
                     <div className="col">
                         <div className="topbar text-dark">{time}
-                            <div className="icons float-end mx-5">
+                            <div className="float-end mx-5">
                                 <BsFacebook style={{ color: "#1877f2", marginLeft: "2rem", cursor: "pointer" }} />
                                 <BsWhatsapp style={{ color: "#25d366", marginLeft: "2rem", cursor: "pointer" }} />
                                 <BsInstagram style={{ color: "#405de6", marginLeft: "2rem", cursor: "pointer" }} />
