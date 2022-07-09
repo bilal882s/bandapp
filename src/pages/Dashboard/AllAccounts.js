@@ -33,39 +33,44 @@ export default function AllAccounts() {
     }, [user])
 
     return (
-        <div>
+        <>
             {!loading ?
                 <>
                     <DashboardMenu />
-                    <div className='center mt-5' style={{ height: "100vh" }}>
-                        <h1>All Accounts </h1>
-                        <div className="container mt-1 text-center">
-                            <div className="row">
-                                <div className="col">
-                                    <table class="table table-bordered shadow-lg">
-                                        <thead className='table-light'>
-                                            <tr>
-                                                <th scope="col">Number</th>
-                                                <th scope="col">Name</th>
-                                                <th scope="col">Account No</th>
-                                                <th scope="col">CNIC No</th>
-                                                <th scope="col">Branch No</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody className='bg'>
-                                            {
-                                                documents.map((item, index) => (
+                    <div className="container" style={{ marginTop: "15rem" }}>
+                        <div className="row">
+                            <div className="col">
+                                <div className='center mt-5' style={{ height: "100vh" }}>
+                                    <h1>All Accounts </h1>
+                                    <div className="container mt-1 text-center">
+                                        <div className="table-responsive">
+
+                                            <table class="table table-hover m-2 me-5">
+                                                <thead className='table-light'>
                                                     <tr>
-                                                        <th>{index + 1}</th>
-                                                        <td>{item.name}</td>
-                                                        <td>{item.account}</td>
-                                                        <td>{item.cnic}</td>
-                                                        <td>{item.branch}</td>
+                                                        <th scope="col">Number</th>
+                                                        <th scope="col">Name</th>
+                                                        <th scope="col">Account No</th>
+                                                        <th scope="col">CNIC No</th>
+                                                        <th scope="col">Branch No</th>
                                                     </tr>
-                                                ))
-                                            }
-                                        </tbody>
-                                    </table>
+                                                </thead>
+                                                <tbody className='bg'>
+                                                    {
+                                                        documents.map((item, index) => (
+                                                            <tr>
+                                                                <th>{index + 1}</th>
+                                                                <td>{item.name}</td>
+                                                                <td>{item.account}</td>
+                                                                <td>{item.cnic}</td>
+                                                                <td>{item.branch}</td>
+                                                            </tr>
+                                                        ))
+                                                    }
+                                                </tbody>
+                                            </table>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -75,6 +80,6 @@ export default function AllAccounts() {
                     <iframe src="https://embed.lottiefiles.com/animation/96439"></iframe>
                 </div>
             }
-        </div>
+        </>
     )
 }
