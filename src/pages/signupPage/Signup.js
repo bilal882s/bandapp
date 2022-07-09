@@ -91,7 +91,7 @@ export default function Signup() {
         });
     }
     return (
-        <div className='center'>
+        <div className='center bg'>
             <Link to="/" className="btn btn-success m-2">Back To Home</Link>
             <ToastContainer />
             <div className="container">
