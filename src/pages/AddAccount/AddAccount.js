@@ -12,7 +12,7 @@ import { useNavigate } from 'react-router-dom';
 
 export default function AddAccount() {
   const navigate = useNavigate();
-  const { uid, setTable, index, setIndex, setTransactions } = useContext(AuthContext);
+  const { uid, setTable } = useContext(AuthContext);
   const initialState = {
     name: "",
     account: "",
@@ -43,9 +43,8 @@ export default function AddAccount() {
 
 
   const handleSubmit = async (e) => {
-    // setIndex(index);
     e.preventDefault();
-    const { name, account, price, cnic, branch, currency, transactions } = state;
+    const { name, account, price, cnic, branch, currency } = state;
     if (name == "") {
       toast.error('Your Name feild is empty that is not acceptable.', {
         position: "bottom-left",
@@ -121,20 +120,14 @@ export default function AddAccount() {
     try {
       setLoading(true)
       const docRef = await addDoc(collection(db, "Accounts"), state);
-      console.log("Document written with ID: ", docRef.id);
-
       let array = [];
-      let price = 0;
       const querySnapshot = await getDocs(collection(db, "Accounts"));
       querySnapshot.forEach((doc) => {
         if (state.uid === doc.data().uid) {
           setState(initialState)
           navigate("/dashboard/allaccounts")
           array.push(doc.data());
-          // price = price + doc.data().price;
-          // console.log(price);
         };
-        // setTransactions(price)
         setDocuments(array)
         setTable(array)
       }
@@ -142,22 +135,18 @@ export default function AddAccount() {
       setLoading(false)
     }
     catch (e) {
-
       console.error("Error adding document: ", e);
-
-      setLoading(false)
-
     }
   }
   return (
 
-    <div className='d-flex'>
+    <div className='bg'>
       {!loading
         ?
         <>
           <ToastContainer />
           <DashboardMenu />
-          <div className="container text-center mt-4">
+          <div className="container text-center mt-4 bg">
             <div className="row w-100">
               <div className="col-12 col-md-10 offset-md-1 col-lg-8 offset-lg-2">
                 <div className="card p-4">
@@ -207,6 +196,6 @@ export default function AddAccount() {
           <iframe src="https://embed.lottiefiles.com/animation/96439"></iframe>
         </div>
       }
-    </div >
+    </div>
   )
 }
