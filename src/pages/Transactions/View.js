@@ -35,16 +35,14 @@ export default function View() {
         <>
             {!loading ?
                 <>
-                    <div className="float-start">
-                        <DashboardMenu />
-                    </div>
-                    <div className='center' style={{ height: "70vh" }}>
+                    <DashboardMenu />
+                    <div className='center bg' style={{ height: "70vh" }}>
                         <h1>All Transactions </h1>
                         <div className="container mt-1 text-center">
                             <div className="row">
                                 <div className="col">
-                                    <Table class="table table-hover m-2 me-5" style={{ backgroundColor: "blue", color: "white" }}>
-                                        <Thead className='table-light'>
+                                    <Table class="table table-hover m-2 me-5">
+                                        <Thead className='table-light bg'>
                                             <Tr>
                                                 <Th scope="col">Number</Th>
                                                 <Th scope="col">Name</Th>
@@ -52,7 +50,7 @@ export default function View() {
                                                 <Th scope="col">Price</Th>
                                             </Tr>
                                         </Thead>
-                                        <Tbody>
+                                        <Tbody className="bg">
                                             {
                                                 documents.map((item, index) => (
                                                     <Tr>
