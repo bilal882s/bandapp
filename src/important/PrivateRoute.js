@@ -6,9 +6,6 @@ export default function PrivateRoute({ Component }) {
 
     const { isAuthenticated } = useContext(AuthContext)
 
-    console.log(Component)
-    console.log(isAuthenticated) 
-
     if (!isAuthenticated)
         return <Login />
 
