@@ -12,6 +12,7 @@ export default function Register() {
     const [state, setState] = useState(initialData);
     const [email, setEmail] = useState(initialEmail);
     const [isPasswordShow, setIsPasswordShow] = useState(false);
+    const [loading, setLoading] = useState(false);
     const [user, setUser] = useState({});
     const { setIsAuthenticated, uid, setUid, table, setTable } = useContext(AuthContext);
 
@@ -36,6 +37,7 @@ export default function Register() {
 
     const submitHandler = (e) => {
         e.preventDefault();
+        setLoading(true);
         const { email, password } = state;
         signInWithEmailAndPassword(auth, email, password)
             .then((userCredential) => {
@@ -63,6 +65,7 @@ export default function Register() {
                     progress: undefined,
                 });
             });
+        setLoading(false)
     }
     const handleLogout = () => {
         signOut(auth).then(() => {
@@ -91,7 +94,7 @@ export default function Register() {
         });
     }
     return (
-        <>
+        <div className='bg'>
             <div className="container center">
                 <Link to="/" className="btn btn-success m-2">Back To Home</Link>
                 {
@@ -116,20 +119,28 @@ export default function Register() {
                                                 <span class="input-group-text eye" onClick={() => { setIsPasswordShow(!isPasswordShow) }} id="basic-addon2"><i class={`fa-solid fa-eye${isPasswordShow ? "" : "-slash"}`}></i></span>
                                             </div>
 
-                                            <button className="btn btn-success w-50">Login</button>
+                                            <button className="btn btn-success w-50" disabled={loading}>
+                                                {!loading ?
+                                                    "Login"
+                                                    :
+                                                    <div className='spinner-border spinner-border-sm'></div>
+                                                }
+                                            </button>
                                             <Link to="/forget" className='nav-link'>Forget Password</Link>
                                         </div>
                                     </form>
                                     <hr />
                                     <h3 className='or'>OR</h3>
                                     <div className="text-center">
-                                        <Link to="/signup">Sign Up</Link>
+                                        <Link to="/signup">
+                                            Sign Up
+                                        </Link>
                                     </div>
                                 </div>
                             </div>
                         </div>
                 }
             </div >
-        </>
+        </div>
     )
 }
