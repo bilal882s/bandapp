@@ -17,12 +17,9 @@ export default function AuthContextProvider({ children }) {
             if (user) {
                 setIsAuthenticated(true)
                 setUid(user.uid);
-                setUser(user)
-                console.log("user logged in")
+                setUser(user);
             } else {
                 setIsAuthenticated(false)
-                // console.log("user is not logged in ");
-
             }
         })
 
