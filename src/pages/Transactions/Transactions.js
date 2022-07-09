@@ -12,9 +12,9 @@ export default function Transactions() {
   console.log(transactions)
   return (
 
-    <div className='d-flex'>
+    <>
       <DashboardMenu />
-      <div className='center w-100' style={{ height: "60vh" }}>
+      <div className='center w-100  bg' style={{ height: "60vh" }}>
         <h1 className="text-center">View Transactions</h1>
         <div className="container mt-3 text-center">
           <div className="row">
@@ -36,6 +36,6 @@ export default function Transactions() {
           </div>
         </div>
       </div>
-    </div>
+    </>
   )
 }
