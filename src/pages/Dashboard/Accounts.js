@@ -8,7 +8,7 @@ import { AuthContext } from '../../context/Authcontext';
 export default function Accounts() {
     const { index, setIndex } = useContext(AuthContext);
     return (
-        <div className='bg'>
+        <div className='bg' style={{ height: "100vh" }}>
             <DashboardMenu />
             <div className='center w-100' style={{ height: "80vh" }}>
                 <h1 className="text-center">Add / View Accounts</h1>
