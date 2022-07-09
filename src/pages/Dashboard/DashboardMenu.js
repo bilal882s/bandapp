@@ -18,17 +18,17 @@ export default function DashboardMenu() {
         {
             text: "Home",
             url: "/dashboard",
-            icon: <i className="fa-solid fa-house"></i>
+            icon: <i class="fa-solid fa-house"></i>
         },
         {
             text: "Accounts",
             url: "/dashboard/accounts",
-            icon: <i className='fa-solid fa-user'></i>,
+            icon: <i class='fa-solid fa-user'></i>,
         },
         {
             text: "Transactions",
             url: "/dashboard/transactions",
-            icon: <i className="fa-solid fa-money-bill-1-wave"></i>
+            icon: <i class="fa-solid fa-money-bill-1-wave"></i>
         }
     ]
     const [state, setState] = React.useState({
@@ -46,38 +46,45 @@ export default function DashboardMenu() {
         setState({ ...state, [anchor]: open });
     };
 
+    const list = (anchor) => (
+        <List>
+            <ListItem>
+                <ListItemButton>
+                    <h1 className='text-center text-dark'><Link className='nav-link' to="/">My Bank</Link></h1>
+                </ListItemButton>
+            </ListItem>
+            {links.map((text, index) => (
+                <Link className="nav-link" to={text.url}>
+                    <ListItem key={text.text} disablePadding>
+                        <ListItemButton>
+                            <ListItemIcon>
+                                {text.icon}
+                            </ListItemIcon>
+                            <ListItemText>
+                                {text.text}
+                            </ListItemText>
+                        </ListItemButton>
+                    </ListItem>
+                </Link>
+            ))}
+        </List>
+    );
+
     return (
-        <>
-            <div className=''>
-                <button className="btn btn-light m-3" type="button" data-bs-toggle="offcanvas" data-bs-target="#staticBackdrop" aria-controls="staticBackdrop">
-                    <i class="fa-solid fa-bars"></i>
-                </button>
-            </div>
-            <div className="offcanvas offcanvas-start" data-bs-backdrop="static" tabindex="-1" id="staticBackdrop" aria-labelledby="staticBackdropLabel">
-                <div className="offcanvas-header">
-                    <h5 className="offcanvas-title" id="staticBackdropLabel">Offcanvas</h5>
-                    <button type="button" className="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
-                </div>
-                <div className="offcanvas-body">
-                    <div>
-                        <ListItem>
-                            <h1 className='text-center text-dark'><Link className='nav-link' to="/">My Bank</Link></h1>
-                        </ListItem>
-                        {
-                            links.map((text, index) => (
-                                <Link className="btn btn-success color-white w-100 my-2 text-center" to={text.url}>
-                                    <div className="d-flex" data-bs-toggle="offcanvas" data-bs-target="#staticBackdrop" aria-controls="staticBackdrop">
-                                        <ListItemText>
-                                            {text.text}
-                                        </ListItemText>
-                                    </div>
-                                </Link>
-                            ))
-                        }
-                    </div>
-                </div>
-            </div>
-        </>
+        <div className=''>
+            {['Menu'].map((anchor) => (
+                <React.Fragment key={anchor}>
+                    <Button variant='outlined' onClick={toggleDrawer(anchor, true)}>{anchor}</Button>
+                    <Drawer
+                        anchor={anchor}
+                        open={state[anchor]}
+                        onClose={toggleDrawer(anchor, false)}
+                    >
+                        {list(anchor)}
+                    </Drawer>
+                </React.Fragment>
+            ))}
+        </div>
 
     );
 }
