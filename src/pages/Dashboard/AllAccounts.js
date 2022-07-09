@@ -33,7 +33,7 @@ export default function AllAccounts() {
     }, [user])
 
     return (
-        <div className='bg'>
+        <div>
             {!loading ?
                 <>
                     <DashboardMenu />
@@ -42,34 +42,30 @@ export default function AllAccounts() {
                         <div className="container mt-1 text-center">
                             <div className="row">
                                 <div className="col">
-                                    <Table class="table shadow-lg">
-                                        <Thead className='table-light'>
-                                            <Tr>
-                                                <Th scope="col">Number</Th>
-                                                <Th scope="col">Name</Th>
-                                                <Th scope="col">AccounT No</Th>
-                                                <Th scope="col">CNIC No</Th>
-                                                <Th scope="col">Price</Th>
-                                                <Th scope="col">Branch No</Th>
-                                                <Th scope="col">Currency</Th>
-                                            </Tr>
-                                        </Thead>
-                                        <Tbody>
+                                    <table class="table table-bordered shadow-lg">
+                                        <thead className='table-light'>
+                                            <tr>
+                                                <th scope="col">Number</th>
+                                                <th scope="col">Name</th>
+                                                <th scope="col">Account No</th>
+                                                <th scope="col">CNIC No</th>
+                                                <th scope="col">Branch No</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody className='bg'>
                                             {
                                                 documents.map((item, index) => (
-                                                    <Tr>
-                                                        <Th>{index + 1}</Th>
-                                                        <Td>{item.name}</Td>
-                                                        <Td>{item.account}</Td>
-                                                        <Td>{item.cnic}</Td>
-                                                        <Td>{item.price}</Td>
-                                                        <Td>{item.branch}</Td>
-                                                        <Td>{item.currency}</Td>
-                                                    </Tr>
+                                                    <tr>
+                                                        <th>{index + 1}</th>
+                                                        <td>{item.name}</td>
+                                                        <td>{item.account}</td>
+                                                        <td>{item.cnic}</td>
+                                                        <td>{item.branch}</td>
+                                                    </tr>
                                                 ))
                                             }
-                                        </Tbody>
-                                    </Table>
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
                         </div>
