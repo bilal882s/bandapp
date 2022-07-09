@@ -18,7 +18,7 @@ export default function Dashboard() {
     navigate("/")
   }
   return (
-    <div className='d-flex'>
+    <div>
       <DashboardMenu />
       <div className='center w-100' style={{ height: "100vh" }}>
         <h1 className="text-center">Add / View Accounts</h1>
