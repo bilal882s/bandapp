@@ -37,13 +37,13 @@ export default function AllAccounts() {
             {!loading ?
                 <>
                     <DashboardMenu />
-                    <div className='center' style={{ height: "60vh" }}>
+                    <div className='center mt-5' style={{ height: "100vh" }}>
                         <h1>All Accounts </h1>
                         <div className="container mt-1 text-center">
                             <div className="row">
                                 <div className="col">
-                                    <Table class="Table">
-                                        <Thead className='Table-dark bg'>
+                                    <Table class="table shadow-lg">
+                                        <Thead className='table-light'>
                                             <Tr>
                                                 <Th scope="col">Number</Th>
                                                 <Th scope="col">Name</Th>
@@ -54,7 +54,7 @@ export default function AllAccounts() {
                                                 <Th scope="col">Currency</Th>
                                             </Tr>
                                         </Thead>
-                                        <Tbody className="bg">
+                                        <Tbody>
                                             {
                                                 documents.map((item, index) => (
                                                     <Tr>
