@@ -125,7 +125,7 @@ export default function AddAccount() {
       querySnapshot.forEach((doc) => {
         if (state.uid === doc.data().uid) {
           setState(initialState)
-          // navigate("/dashboard/allaccounts")
+          navigate("/dashboard/allaccounts")
           array.push(doc.data());
         };
         setDocuments(array)
