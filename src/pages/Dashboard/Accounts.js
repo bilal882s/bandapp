@@ -8,7 +8,7 @@ import { AuthContext } from '../../context/Authcontext';
 export default function Accounts() {
     const { index, setIndex } = useContext(AuthContext);
     return (
-        <div className='d-flex'>
+        <div className='bg'>
             <DashboardMenu />
             <div className='center w-100' style={{ height: "80vh" }}>
                 <h1 className="text-center">Add / View Accounts</h1>
@@ -20,10 +20,10 @@ export default function Accounts() {
                                     <h5 class="card-title"><i class="fa-solid fa-user mb-1 m-2"></i>Accounts</h5>
                                     <hr />
                                     <Button className='m-1' size="sm" variant={'contained'} color="success">
-                                        <Link className='nav-link' to="/dashboard/adduser" >Add New Account</Link>
+                                        <Link className='nav-link' to="/dashboard/adduser" >Add </Link>
                                     </Button>
                                     <Button className='m-1' size="sm" variant={'contained'} color="warning">
-                                        <Link className='nav-link' to="/dashboard/allaccounts" color='success'>View All Accounts</Link>
+                                        <Link className='nav-link' to="/dashboard/allaccounts" color='success'>View</Link>
                                     </Button>
                                     <hr />
                                     <br />
