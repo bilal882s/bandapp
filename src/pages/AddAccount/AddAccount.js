@@ -9,6 +9,7 @@ import { db } from "../../config/firebase";
 import { toast, ToastContainer } from 'react-toastify';
 import { AuthContext } from '../../context/Authcontext';
 import { useNavigate } from 'react-router-dom';
+import dayjs from 'dayjs';
 
 export default function AddAccount() {
   const navigate = useNavigate();
@@ -21,6 +22,7 @@ export default function AddAccount() {
     branch: "",
     currency: "",
     uid: "",
+    date: ""
   }
   const [state, setState] = useState(initialState)
   const [documents, setDocuments] = useState([]);
@@ -38,6 +40,7 @@ export default function AddAccount() {
   const handleChange = (e) => {
     setCurrency(e.target.value);
     state.uid = uid;
+    state.date = dayjs().format("DD MMM YYYY /  hh:mm a ");
     setState({ ...state, [e.target.name]: e.target.value });
   }
 
