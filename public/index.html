@@ -10,30 +10,6 @@
   <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
   <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
   <style>
-    #loading {
-      display: flex;
-      flex-direction: column;
-      border: 1px solid white;
-      height: 100vh;
-      width: 100%;
-      justify-content: center;
-      align-items: center;
-      border: none;
-      border: 0;
-    }
-
-    #loading:hover {
-      display: flex;
-      flex-direction: column;
-      border: 1px solid white;
-      height: 100vh;
-      width: 100%;
-      justify-content: center;
-      align-items: center;
-      border: none;
-      border: 0;
-    }
-
     #root {
       display: none;
       border: 0;
@@ -44,8 +20,8 @@
 
 <body onload='myFunc()'>
   <noscript>You need to enable JavaScript to run this app.</noscript>
-  <div id="loading">
-    <iframe style="border: 0 ;" src="https://embed.lottiefiles.com/animation/96439"></iframe>
+  <div className="d-flex align-items-center text-center justify-content-center" style="height: 100vh;">
+    <div className="spinner-border spinner-border-lg"></div>
   </div>
   <div id="root"></div>
   <script>
