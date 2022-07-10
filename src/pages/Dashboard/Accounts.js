@@ -19,12 +19,19 @@ export default function Accounts() {
                                 <CardContent>
                                     <h5 class="card-title"><i class="fa-solid fa-user mb-1 m-2"></i>Accounts</h5>
                                     <hr />
-                                    <Button className='m-1' size="sm" variant={'contained'} color="success">
-                                        <Link className='nav-link' to="/dashboard/adduser" >Add </Link>
-                                    </Button>
-                                    <Button className='m-1' size="sm" variant={'contained'} color="warning">
-                                        <Link className='nav-link' to="/dashboard/allaccounts" color='success'>View</Link>
-                                    </Button>
+                                    <div className="d-flex justify-content-center">
+
+                                        <Link className='nav-link' to="/dashboard/adduser" >
+                                            <Button className='m-1' size="sm" variant={'contained'} color="success">
+                                                Add
+                                            </Button>
+                                        </Link>
+                                        <Link className='nav-link' to="/dashboard/allaccounts" color='success'>
+                                            <Button className='m-1' size="sm" variant={'contained'} color="warning">
+                                                View
+                                            </Button>
+                                        </Link>
+                                    </div>
                                     <hr />
                                     <br />
                                     <h1>{index}</h1>
