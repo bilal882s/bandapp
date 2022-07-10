@@ -3,7 +3,7 @@ import { AuthContext } from '../../context/Authcontext'
 import DashboardMenu from './DashboardMenu'
 import { collection, getDocs } from "firebase/firestore";
 import { db } from "../../config/firebase";
-import { Table, Thead, Tbody, Tr, Th, Td } from 'react-super-responsive-table';
+import Lottie from 'lottie-web';
 
 export default function AllAccounts() {
     const { setIndex, user } = useContext(AuthContext);
@@ -37,47 +37,44 @@ export default function AllAccounts() {
             {!loading ?
                 <>
                     <DashboardMenu />
-                    <div className="container" style={{ marginTop: "15rem" }}>
+                    <div className="container" style={{ marginTop: "4rem" }}>
                         <div className="row">
                             <div className="col">
-                                <div className='center mt-5' style={{ height: "100vh" }}>
-                                    <h1>All Accounts </h1>
-                                    <div className="container mt-1 text-center">
-                                        <div className="table-responsive">
-
-                                            <table class="table table-hover m-2 me-5">
-                                                <thead className='table-light'>
+                                <h1>All Accounts </h1>
+                                <div className="container mt-1 text-center">
+                                    <table class="table table-hover m-2 me-5">
+                                        <thead className='table-dark'>
+                                            <tr>
+                                                <th scope="col">Number</th>
+                                                <th scope="col">Name</th>
+                                                <th scope="col">Account No</th>
+                                                <th scope="col">CNIC No</th>
+                                                <th scope="col">Date</th>
+                                                <th scope="col">Branch No</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody className='bg'>
+                                            {
+                                                documents.map((item, index) => (
                                                     <tr>
-                                                        <th scope="col">Number</th>
-                                                        <th scope="col">Name</th>
-                                                        <th scope="col">Account No</th>
-                                                        <th scope="col">CNIC No</th>
-                                                        <th scope="col">Branch No</th>
+                                                        <th>{index + 1}</th>
+                                                        <td>{item.name}</td>
+                                                        <td>{item.account}</td>
+                                                        <td>{item.cnic}</td>
+                                                        <td>{item.date}</td>
+                                                        <td>{item.branch}</td>
                                                     </tr>
-                                                </thead>
-                                                <tbody className='bg'>
-                                                    {
-                                                        documents.map((item, index) => (
-                                                            <tr>
-                                                                <th>{index + 1}</th>
-                                                                <td>{item.name}</td>
-                                                                <td>{item.account}</td>
-                                                                <td>{item.cnic}</td>
-                                                                <td>{item.branch}</td>
-                                                            </tr>
-                                                        ))
-                                                    }
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
+                                                ))
+                                            }
+                                        </tbody>
+                                    </table>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </> :
                 <div className="d-flex align-items-center text-center justify-content-center" style={{ height: "100vh" }}>
-                    <iframe src="https://embed.lottiefiles.com/animation/96439"></iframe>
+                    <div className="spinner-border spinner-border-lg"></div>
                 </div>
             }
         </>
