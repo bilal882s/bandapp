@@ -10,27 +10,30 @@
   <link rel="apple-touch-icon" href="%PUBLIC_URL%/logo192.png" />
   <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
   <style>
+    #loader {
+      display: flex;
+    }
+
     #root {
       display: none;
       border: 0;
     }
   </style>
-  <title>React App</title>
+  <title></title>
 </head>
 
 <body onload='myFunc()'>
   <noscript>You need to enable JavaScript to run this app.</noscript>
-  <div className="d-flex align-items-center text-center justify-content-center" style="height: 100vh;">
-    <div className="spinner-border spinner-border-lg"></div>
+  <div className="d-flex align-items-center text-center justify-content-center" id="loader">
+    <div className="spinner-border" style="height: 5rem;width:5rem;"></div>
   </div>
   <div id="root"></div>
   <script>
     const myFunc = () => {
       let root = document.getElementById("root");
-      let loading = document.getElementById("loading");
+      let loader = document.getElementById("loader");
+      loader.style.display = "none";
       root.style.display = "block";
-      loading.style.display = "none";
-
     }
   </script>
   <script src="https://kit.fontawesome.com/5e13cf4c92.js" crossorigin="anonymous"></script>
