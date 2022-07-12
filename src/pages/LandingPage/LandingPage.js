@@ -19,5 +19,8 @@ export default function LandingPage() {
     )  
 }  
   import { Link } from "react-router-dom";   
+import React, { useContext } from 'react';   
+import { Link } from "react-router-dom";   
    
 export default function LandingPage() {   
+        <div className='bg-image text-white shadow-lg'>   
