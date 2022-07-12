@@ -7,6 +7,7 @@ export default function Forget() {
 
     // const initialEmail = 
     const [state, setState] = useState({ email: "" });
+    const [loading, setLoading] = useState(false);
 
     const handleChange = (e) => {
         setState({ ...state, [e.target.name]: e.target.value })
@@ -15,6 +16,7 @@ export default function Forget() {
 
     const submitHandler = (e) => {
         e.preventDefault();
+        setLoading(true);
         const { email } = state;
         // const auth = getAuth();
         sendPasswordResetEmail(auth, email)
@@ -51,7 +53,14 @@ export default function Forget() {
                             <form onSubmit={submitHandler}>
                                 <h2 className='my-2'>Login</h2>
                                 <input type="eamil" name="email" placeholder="Email" onChange={handleChange} className='form-control my-3' required />
-                                <button className="btn btn-success w-50">Sent Password Reset</button>
+                                <button className="btn btn-success w-50" disabled={loading}>
+                                    {
+                                        !loading ?
+                                            "Send"
+                                            :
+                                            <div className='spinner-border spinner-border-sm'></div>
+                                    }
+                                </button>
                                 <ToastContainer />
                             </form>
                         </div>
