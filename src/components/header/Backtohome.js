@@ -1,10 +1,13 @@
 import React from 'react';
-import {Link} from "react-router-dom";
+import { Link } from "react-router-dom";
+import { Button } from '@mui/material';
 
 export default function Backtohome() {
   return (
     <>
-        <Link to="/" className="btn btn-success">Back to home</Link>
+      <Link to="/">
+        <Button>Back to home</Button>
+      </Link>
     </>
   )
 }
