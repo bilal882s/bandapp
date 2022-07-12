@@ -1,9 +1,14 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { AuthContext } from '../../context/Authcontext'
 import DashboardMenu from '../Dashboard/DashboardMenu'
-import { collection, addDoc, getDocs } from "firebase/firestore";
+import { collection, getDocs } from "firebase/firestore/lite";
 import { db } from "../../config/firebase";
-import { Table, Thead, Tbody, Tr, Th, Td } from 'react-super-responsive-table';
+import Box from '@mui/material/Box';
+import LinearProgress from '@mui/material/LinearProgress';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import Button from '@mui/material/Button';
+import { Link } from 'react-router-dom';
 
 export default function View() {
     const { user, setTransactions } = useContext(AuthContext);
@@ -33,50 +38,74 @@ export default function View() {
 
     return (
         <>
-            {!loading ?
-                <>
-                    <DashboardMenu />
-                    <div className="container" style={{ marginTop: "15rem" }}>
+            {documents.length === 0
+                ?
+                <div className='col-12 col-md-8 offset-md-2 col-lg-6 offset-lg-3 d-flex align-items-center' style={{ height: "65vh" }}>
+                    <div className="container">
                         <div className="row">
                             <div className="col">
-                                <div className='center'>
-                                    <h1>All Transactions </h1>
-                                    <div className="container mt-1 text-center">
-                                        <div className="table-responsive">
-
-                                            <table class="table table-hover m-2 me-5">
-                                                <thead className='table-light bg'>
-                                                    <tr>
-                                                        <th scope="col">Number</th>
-                                                        <th scope="col">Name</th>
-                                                        <th scope="col">CNIC No</th>
-                                                        <th scope="col">Price</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody className="bg">
-                                                    {
-                                                        documents.map((item, index) => (
-                                                            <tr>
-                                                                <th>{index + 1}</th>
-                                                                <td>{item.name}</td>
-                                                                <td>{item.cnic}</td>
-                                                                <td>{item.price}</td>
-                                                            </tr>
-                                                        ))
-                                                    }
-                                                </tbody>
-                                            </table>
-                                        </div>
+                                <Card className='shadow-lg'>
+                                    <div class="text-center">
+                                        <CardContent>
+                                            <h5 class="card-title"><i class="fa-solid fa-user mb-1 m-2"></i>You have no any account yet now</h5>
+                                            <hr />
+                                            <div className="d-flex justify-content-center">
+                                                <Link className='nav-link' to="/dashboard/adduser" >
+                                                    <Button className='m-1' size="sm" variant={'contained'} color="success">
+                                                        Add
+                                                    </Button>
+                                                </Link>
+                                            </div>
+                                        </CardContent>
+                                        <hr />
                                     </div>
-                                </div>
+                                </Card>
                             </div>
                         </div>
                     </div>
-                </>
-                :
-                <div className="d-flex align-items-center text-center justify-content-center" style={{ height: "100vh" }}>
-                    <iframe src="https://embed.lottiefiles.com/animation/96439"></iframe>
                 </div>
+
+                :
+                <>
+                    {!loading ?
+                        <>
+                            <DashboardMenu />
+                            <div className="container" style={{ marginTop: "4rem" }}>
+                                <div className="row">
+                                    <div className="col">
+                                        <h1>All Transactions </h1>
+                                        <table class="table table-hover m-2 me-5">
+                                            <thead className='table-dark'>
+                                                <tr>
+                                                    <th scope="col">Number</th>
+                                                    <th scope="col">Name</th>
+                                                    <th scope="col">CNIC No</th>
+                                                    <th scope="col">Price</th>
+                                                </tr>
+                                            </thead>
+                                            <tbody>
+                                                {
+                                                    documents.map((item, index) => (
+                                                        <tr>
+                                                            <th>{index + 1}</th>
+                                                            <td>{item.name}</td>
+                                                            <td>{item.cnic}</td>
+                                                            <td>{item.price}</td>
+                                                        </tr>
+                                                    ))
+                                                }
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </>
+                        :
+                        <Box sx={{ width: '100%' }}>
+                            <LinearProgress />
+                        </Box>
+                    }
+                </>
             }
         </>
     )
