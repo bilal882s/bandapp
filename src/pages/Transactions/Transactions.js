@@ -22,10 +22,11 @@ export default function Transactions() {
                 <CardContent>
                   <h4 class="card-title"><i class="fa-solid fa-money-check-dollar mx-1"></i>Transactions</h4>
                   <hr />
-                    <Link className='nav-link' to="/dashboard/transactions/view" color='success'>View All Transactions</Link>
                   <Link className='nav-link m-1' to="/dashboard/transactions/view" color='success'>
+                    <Button className='' size="sm" variant={'contained'} color="warning">
                       View All Transactions
                     </Button>
+                  </Link>
                   <hr />
                   <br />
                   <h1>{transactions}</h1>
