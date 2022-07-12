@@ -48,11 +48,15 @@ export default function DashboardMenu() {
 
     const list = (anchor) => (
         <List>
-            <ListItem>
-                <ListItemButton>
-                    <h1 className='text-center text-dark'><Link className='nav-link' to="/">My Bank</Link></h1>
-                </ListItemButton>
-            </ListItem>
+            <Link className='nav-link' to="/">
+                <ListItem>
+                    <ListItemButton>
+                        <h1 className='text-center text-dark'>
+                            My Bank
+                        </h1>
+                    </ListItemButton>
+                </ListItem>
+            </Link>
             {links.map((text, index) => (
                 <Link className="nav-link" to={text.url}>
                     <ListItem key={text.text} disablePadding>
@@ -74,7 +78,7 @@ export default function DashboardMenu() {
         <div className=''>
             {['Menu'].map((anchor) => (
                 <React.Fragment key={anchor}>
-                    <Button variant='outlined' onClick={toggleDrawer(anchor, true)}>{anchor}</Button>
+                    <Button variant='contained' onClick={toggleDrawer(anchor, true)}>{anchor}</Button>
                     <Drawer
                         anchor={anchor}
                         open={state[anchor]}
