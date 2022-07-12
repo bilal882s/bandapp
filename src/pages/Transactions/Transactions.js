@@ -9,7 +9,6 @@ import { AuthContext } from '../../context/Authcontext';
 export default function Transactions() {
 
   const { transactions } = useContext(AuthContext);
-  console.log(transactions)
   return (
 
     <>
@@ -23,9 +22,10 @@ export default function Transactions() {
                 <CardContent>
                   <h4 class="card-title"><i class="fa-solid fa-money-check-dollar mx-1"></i>Transactions</h4>
                   <hr />
-                  <Button className='m-1' size="sm" variant={'contained'} color="warning">
                     <Link className='nav-link' to="/dashboard/transactions/view" color='success'>View All Transactions</Link>
-                  </Button>
+                  <Link className='nav-link m-1' to="/dashboard/transactions/view" color='success'>
+                      View All Transactions
+                    </Button>
                   <hr />
                   <br />
                   <h1>{transactions}</h1>
