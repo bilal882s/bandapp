@@ -10,6 +10,7 @@ import { toast, ToastContainer } from 'react-toastify';
 import { AuthContext } from '../../context/Authcontext';
 import { useNavigate } from 'react-router-dom';
 import dayjs from 'dayjs';
+import LinearProgress from '@mui/material/LinearProgress';
 
 export default function AddAccount() {
   const navigate = useNavigate();
@@ -22,7 +23,8 @@ export default function AddAccount() {
     branch: "",
     currency: "",
     uid: "",
-    date: ""
+    date: "",
+    time: ""
   }
   const [state, setState] = useState(initialState)
   const [documents, setDocuments] = useState([]);
@@ -40,7 +42,8 @@ export default function AddAccount() {
   const handleChange = (e) => {
     setCurrency(e.target.value);
     state.uid = uid;
-    state.date = dayjs().format("DD MMM YYYY /  hh:mm a ");
+    state.date = dayjs().format("DD MMM YYYY");
+    state.time = dayjs().format("hh:mm a ");
     setState({ ...state, [e.target.name]: e.target.value });
   }
 
@@ -121,6 +124,15 @@ export default function AddAccount() {
       return;
     }
     try {
+      toast.success(`Dear ${state.name} , Your account has been created at account No : ${state.account}`, {
+        position: "bottom-left",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
       setLoading(true)
       const docRef = await addDoc(collection(db, "Accounts"), state);
       let array = [];
@@ -130,7 +142,7 @@ export default function AddAccount() {
           setState(initialState)
           navigate("/dashboard/allaccounts")
           array.push(doc.data());
-        };
+        }
         setDocuments(array)
         setTable(array)
       }
@@ -138,7 +150,6 @@ export default function AddAccount() {
       setLoading(false)
     }
     catch (e) {
-      console.error("Error adding document: ", e);
     }
   }
   return (
@@ -193,9 +204,9 @@ export default function AddAccount() {
           </div >
         </>
         :
-        <div className="d-flex align-items-center text-center justify-content-center" style={{ height: "100vh" }}>
-          <iframe src="https://embed.lottiefiles.com/animation/96439"></iframe>
-        </div>
+        <Box sx={{ width: '100%' }}>
+          <LinearProgress />
+        </Box>
       }
     </div>
   )
