@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
 
 export default function Signup() {
+    const navigate = useNavigate();
     const initialData = { email: "", password: "", confirmpassword: "" };
     const [state, setState] = useState(initialData);
     const [users, setUsers] = useState({});
@@ -31,6 +32,7 @@ export default function Signup() {
             createUserWithEmailAndPassword(auth, email, password)
                 .then((userCredential) => {
                     const user = userCredential.user;
+                    navigate("/dashboard")
                     toast.success('You are sign up and Login also.', {
                         position: "bottom-left",
                         autoClose: 5000,
@@ -90,6 +92,39 @@ export default function Signup() {
             });
         });
     }
+    const handleGoogle = () => {
+        signInWithPopup(auth, provider)
+            .then((result) => {
+                const credential = GoogleAuthProvider.credentialFromResult(result);
+                const token = credential.accessToken;
+                const user = result.user;
+                navigate("/dashboard")
+                toast.success('You are successfully logged in with Google.', {
+                    position: "bottom-left",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                });
+            }).catch((error) => {
+                const errorCode = error.code;
+                const errorMessage = error.message;
+                const email = error.customData.email;
+                const credential = GoogleAuthProvider.credentialFromError(error);
+                toast.error('Something else here Google.', {
+                    position: "bottom-left",
+                    autoClose: 5000,
+                    hideProgressBar: false,
+                    closeOnClick: true,
+                    pauseOnHover: true,
+                    draggable: true,
+                    progress: undefined,
+                });
+            });
+
+    }
     return (
         <div className='center bg'>
             <Link to="/" className="btn btn-success m-2">Back To Home</Link>
@@ -127,7 +162,10 @@ export default function Signup() {
                                     </form>
                                     <hr />
                                     <h3 className='or'>OR</h3>
-
+                                    <div className="text-center" onClick={handleGoogle}>
+                                        <img style={{ cursor: "pointer", height: "2.5rem", width: "2.5rem" }} src="https://play-lh.googleusercontent.com/aFWiT2lTa9CYBpyPjfgfNHd0r5puwKRGj2rHpdPTNrz2N9LXgN_MbLjePd1OTc0E8Rl1=w240-h480-rw" alt="Sign uo with Google" />
+                                    </div>
+                                    {/* <hr /> */}
                                     <div className="text-center">
                                         <Link to="/login">Login</Link>
                                     </div>
