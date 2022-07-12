@@ -132,7 +132,7 @@ export default function AddAccount() {
         pauseOnHover: true,
         draggable: true,
         progress: undefined,
-      });
+      }); 
       setLoading(true)
       const docRef = await addDoc(collection(db, "Accounts"), state);
       let array = [];
