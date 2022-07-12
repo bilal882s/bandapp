@@ -42,6 +42,7 @@ export default function Forget() {
                     progress: undefined,
                 });
             });
+        setLoading(false)
     }
 
     return (
