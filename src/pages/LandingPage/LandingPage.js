@@ -1,5 +1,3 @@
-                                <p>Create an account on <b><i>My Bank</i></b></p>  
-                        </div>  
 import React, { useContext } from 'react';   
 import { Link } from "react-router-dom";   
    
