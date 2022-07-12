@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 export default function LandingPage() {
     return (
         <div className='bg-image text-white shadow-lg'>
-            <div className="container w-100">
+            <div className="container w-100"> 
                 <div className="row ">
                     <div className="col-12 col-md-12">
                         <div className="card bg-custom custom">
