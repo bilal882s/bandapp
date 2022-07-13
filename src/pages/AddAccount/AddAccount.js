@@ -11,7 +11,6 @@ import { AuthContext } from '../../context/Authcontext';
 import { useNavigate } from 'react-router-dom'; 
 import dayjs from 'dayjs'; 
 import LinearProgress from '@mui/material/LinearProgress'; 
-
 export default function AddAccount() {
   const navigate = useNavigate();
   const { uid, setTable } = useContext(AuthContext);
@@ -128,31 +127,103 @@ export default function AddAccount() {
         position: "bottom-left",
         autoClose: 5000,
         hideProgressBar: false, 
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
+        closeOnClick: true, 
+        pauseOnHover: true, 
+        draggable: true, 
+        progress: undefined, 
       }); 
-      setLoading(true)
-      const docRef = await addDoc(collection(db, "Accounts"), state);
-      let array = [];
-      const querySnapshot = await getDocs(collection(db, "Accounts"));
-      querySnapshot.forEach((doc) => {
-        if (state.uid === doc.data().uid) {
-          setState(initialState)
-          navigate("/dashboard/allaccounts")
-          array.push(doc.data());
-        }
-        setDocuments(array)
-        setTable(array)
-      }
-      )
-      setLoading(false)
-    }
-    catch (e) {
-    }
-  }
-  return (
+      return; 
+    } 
+    if (account.length !== 9) { 
+      toast.error('Your Account number is not a account number.', { 
+        position: "bottom-left", 
+        autoClose: 5000, 
+        hideProgressBar: false, 
+        closeOnClick: true, 
+        pauseOnHover: true, 
+        draggable: true, 
+        progress: undefined, 
+      }); 
+      return; 
+    } 
+    if (cnic.length !== 13) { 
+      toast.error('Your CNIC number is not a CNIC Number .', { 
+        position: "bottom-left", 
+        autoClose: 5000, 
+        hideProgressBar: false, 
+        closeOnClick: true, 
+        pauseOnHover: true, 
+        draggable: true, 
+        progress: undefined, 
+      }); 
+      return; 
+    } 
+    if (branch > 99) { 
+      toast.error('You can use only 99 branches.', { 
+        position: "bottom-left", 
+        autoClose: 5000, 
+        hideProgressBar: false, 
+        closeOnClick: true, 
+        pauseOnHover: true, 
+        draggable: true, 
+        progress: undefined, 
+      }); 
+      return; 
+    } 
+    if (currency == "") { 
+      toast.error('Your have not chose any currency .', { 
+        position: "bottom-left", 
+        autoClose: 5000, 
+        hideProgressBar: false, 
+        closeOnClick: true, 
+        pauseOnHover: true, 
+        draggable: true, 
+        progress: undefined, 
+      }); 
+      return; 
+    } 
+    if (price < 500) { 
+      toast.error('Your transactions is less than 500 .', { 
+        position: "bottom-left", 
+        autoClose: 5000, 
+        hideProgressBar: false, 
+        closeOnClick: true, 
+        pauseOnHover: true, 
+        draggable: true, 
+        progress: undefined, 
+      }); 
+      return; 
+    } 
+    try { 
+      toast.success(`Dear ${state.name} , Your account has been created at account No : ${state. account}`, {
+        position: "bottom-left", 
+        autoClose: 5000, 
+        hideProgressBar: false,  
+        closeOnClick: true, 
+        pauseOnHover: true, 
+        draggable: true, 
+        progress: undefined, 
+      });  
+      setLoading(true) 
+      const docRef = await addDoc(collection(db, "Accounts"), state); 
+      let array = []; 
+      const querySnapshot = await getDocs(collection(db, "Accounts")); 
+      querySnapshot.forEach((doc) => { 
+        if (state.uid === doc.data().uid) { 
+          setState(initialState) 
+          navigate("/dashboard/allaccounts") 
+          array.push(doc.data()); 
+        } 
+        setDocuments(array) 
+        setTable(array) 
+      } 
+      ) 
+      setLoading(false) 
+    } 
+    catch (e) { 
+    } 
+  } 
+  return ( 
 
     <div className='bg' style={{ height: "100vh" }}>
       {!loading
