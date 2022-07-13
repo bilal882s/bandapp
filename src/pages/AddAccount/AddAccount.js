@@ -15,17 +15,12 @@ import LinearProgress from '@mui/material/LinearProgress';
   const currencies = [{
   },
   {
-  }
 
     e.preventDefault();
-    const { name, account, price, cnic, branch, currency } = state;
     if (name == "") {
-      toast.error('Your Name feild is empty that is not acceptable.', {
         position: "bottom-left",
         autoClose: 5000,
         hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
         draggable: true,
         progress: undefined,
       });
