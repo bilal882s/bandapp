@@ -10,7 +10,7 @@ import { toast, ToastContainer } from 'react-toastify';
 import { AuthContext } from '../../context/Authcontext'; 
 import { useNavigate } from 'react-router-dom'; 
 import dayjs from 'dayjs'; 
-import LinearProgress from '@mui/material/LinearProgress';
+import LinearProgress from '@mui/material/LinearProgress'; 
 
 export default function AddAccount() {
   const navigate = useNavigate();
