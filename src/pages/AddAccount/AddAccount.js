@@ -14,9 +14,6 @@ import LinearProgress from '@mui/material/LinearProgress';
   const { uid, setTable } = useContext(AuthContext);
   const initialState = {
     cnic: "",
-    price: "",
-    uid: "",
-    date: "",
   const [state, setState] = useState(initialState)
   const [documents, setDocuments] = useState([]);
   const [currency, setCurrency] = useState("")
