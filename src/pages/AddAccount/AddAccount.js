@@ -15,8 +15,6 @@ import LinearProgress from '@mui/material/LinearProgress';
   const initialState = {
     cnic: "",
     price: "",
-    branch: "",
-    currency: "",
     uid: "",
     date: "",
     time: ""
