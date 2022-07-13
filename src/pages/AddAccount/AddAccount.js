@@ -44,6 +44,17 @@ export default function AddAccount() {
     state.uid = uid; 
     state.date = dayjs().format("DD MMM YYYY"); 
     state.time = dayjs().format("hh:mm a "); 
+    setState({ ...state, [e.target.name]: e.target.value }); 
+  } 
+ 
+ 
+  const handleSubmit = async (e) => { 
+    e.preventDefault(); 
+    const { name, account, price, cnic, branch, currency } = state; 
+    if (name == "") { 
+      toast.error('Your Name feild is empty that is not acceptable.', { 
+        position: "bottom-left", 
+        autoClose: 5000, 
         hideProgressBar: false, 
         closeOnClick: true, 
         pauseOnHover: true, 
