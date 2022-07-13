@@ -11,6 +11,16 @@ import { AuthContext } from '../../context/Authcontext';
 import { useNavigate } from 'react-router-dom'; 
 import dayjs from 'dayjs'; 
 import LinearProgress from '@mui/material/LinearProgress'; 
+ 
+export default function AddAccount() { 
+  const navigate = useNavigate(); 
+  const { uid, setTable } = useContext(AuthContext); 
+  const initialState = { 
+    name: "", 
+    account: "", 
+    cnic: "", 
+    price: "", 
+    branch: "", 
   }, 
   { 
     label: "Current", 
