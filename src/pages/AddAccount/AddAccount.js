@@ -11,6 +11,10 @@ import { AuthContext } from '../../context/Authcontext';
 import { useNavigate } from 'react-router-dom'; 
 import dayjs from 'dayjs'; 
 import LinearProgress from '@mui/material/LinearProgress'; 
+    value: "Current", 
+  const handleChange = (e) => { 
+    state.date = dayjs().format("DD MMM YYYY"); 
+    state.time = dayjs().format("hh:mm a "); 
         hideProgressBar: false, 
         closeOnClick: true, 
         pauseOnHover: true, 
