@@ -25,6 +25,9 @@ export default function AddAccount() {
     uid: "", 
     date: "", 
     time: "" 
+  } 
+  const [state, setState] = useState(initialState) 
+  const [documents, setDocuments] = useState([]); 
   }, 
   { 
     label: "Current", 
