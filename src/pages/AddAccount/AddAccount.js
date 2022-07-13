@@ -17,8 +17,6 @@ import LinearProgress from '@mui/material/LinearProgress';
     price: "",
     uid: "",
     date: "",
-    time: ""
-  }
   const [state, setState] = useState(initialState)
   const [documents, setDocuments] = useState([]);
   const [currency, setCurrency] = useState("")
