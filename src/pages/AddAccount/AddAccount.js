@@ -15,20 +15,8 @@ import LinearProgress from '@mui/material/LinearProgress';
   const currencies = [{
   },
   {
-    label: "Current",
-    value: "Current",
-  }
-  ]
-  const handleChange = (e) => {
-    setCurrency(e.target.value);
-    state.uid = uid;
-    state.date = dayjs().format("DD MMM YYYY");
-    state.time = dayjs().format("hh:mm a ");
-    setState({ ...state, [e.target.name]: e.target.value });
   }
 
-
-  const handleSubmit = async (e) => {
     e.preventDefault();
     const { name, account, price, cnic, branch, currency } = state;
     if (name == "") {
