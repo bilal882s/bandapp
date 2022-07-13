@@ -13,8 +13,6 @@ import dayjs from 'dayjs';
 import LinearProgress from '@mui/material/LinearProgress'; 
   const { uid, setTable } = useContext(AuthContext);
   const initialState = {
-    name: "",
-    account: "",
     cnic: "",
     price: "",
     branch: "",
