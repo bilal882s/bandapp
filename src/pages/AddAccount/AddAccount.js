@@ -5,7 +5,7 @@ import Box from '@mui/material/Box';
 import TextField from '@mui/material/TextField'; 
 import MenuItem from '@mui/material/MenuItem'; 
 import { collection, addDoc, getDocs } from "firebase/firestore/lite";
-import { db } from "../../config/firebase";
+import { db } from "../../config/firebase"; 
 import { toast, ToastContainer } from 'react-toastify';
 import { AuthContext } from '../../context/Authcontext';
 import { useNavigate } from 'react-router-dom';
