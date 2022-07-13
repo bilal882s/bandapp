@@ -12,10 +12,7 @@ import { useNavigate } from 'react-router-dom';
 import dayjs from 'dayjs'; 
 import LinearProgress from '@mui/material/LinearProgress'; 
   const [currency, setCurrency] = useState("")
-  const [loading, setLoading] = useState(false)
   const currencies = [{
-    label: "Saving",
-    value: "Saving",
   },
   {
     label: "Current",
