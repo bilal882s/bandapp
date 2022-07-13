@@ -21,6 +21,10 @@ export default function AddAccount() {
     cnic: "", 
     price: "", 
     branch: "", 
+    currency: "", 
+    uid: "", 
+    date: "", 
+    time: "" 
   }, 
   { 
     label: "Current", 
