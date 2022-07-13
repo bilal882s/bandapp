@@ -28,6 +28,11 @@ export default function AddAccount() {
   } 
   const [state, setState] = useState(initialState) 
   const [documents, setDocuments] = useState([]); 
+  const [currency, setCurrency] = useState("") 
+  const [loading, setLoading] = useState(false) 
+  const currencies = [{ 
+    label: "Saving", 
+    value: "Saving", 
   }, 
   { 
     label: "Current", 
