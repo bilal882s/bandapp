@@ -68,7 +68,9 @@ export default function AllAccounts() {
 
 
     const handleDeposit = () => {
-
+        const newAmount = parseInt(items.price) + parseInt(amount);
+        items.price = parseInt(newAmount);
+        console.log(newAmount);
     }
 
     return (
@@ -118,7 +120,7 @@ export default function AllAccounts() {
                                                         <th scope="col">Account No</th>
                                                         <th scope="col">Name</th>
                                                         <th scope="col">Date</th>
-                                                        <th scope="col">Time</th>
+                                                        <th scope="col">Amount</th>
                                                         <th scope="col">Actions</th>
                                                     </tr>
                                                 </thead>
@@ -129,7 +131,7 @@ export default function AllAccounts() {
                                                                 <td>{item.account}</td>
                                                                 <td>{item.name}</td>
                                                                 <td>{item.date}</td>
-                                                                <td>{item.time}</td>
+                                                                <td>{item.price}</td>
                                                                 <td><Button variant='contained' color="success" onClick={() => { data(item) }} data-bs-toggle="modal" data-bs-target="#exampleModal">Details</Button></td>
                                                             </tr>
                                                         ))
@@ -203,13 +205,13 @@ export default function AllAccounts() {
                                             <Button data-bs-dismiss="modal" aria-label="Close">X</Button>
                                         </div>
                                         <div class="modal-body">
-                                            <TextField type="number" name="newPrice"
-                                                label={`You can Withdraw only ${items.price} amount`}
+                                            <TextField type="number"
+                                                label={`You can Withdraw only ${items.price} amount`} onChange={(e) => { setAmount(e.target.value) }}
                                                 className='w-75 m-2' variant="standard" />
                                         </div>
                                         <div class="modal-footer">
-                                            <Button variant="contained" color="secondary" className='me-2' data-bs-dismiss="modal">Close</Button>
-                                            <Button variant="contained" color="success" >Understood</Button>
+                                            <Button variant="contained" color="secondary" className='me-2' data-bs-dismiss="modal">Back</Button>
+                                            <Button variant="contained" color="success" onClick={() => { handleDeposit() }} data-bs-dismiss="modal">Deposit</Button>
                                         </div>
                                     </div>
                                 </div>
