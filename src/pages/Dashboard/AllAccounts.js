@@ -118,10 +118,13 @@ export default function AllAccounts() {
                                 <div className="modal-dialog">
                                     <div className="modal-content">
                                         <div className="modal-header">
-                                            <h5 className="modal-title" id="exampleModalLabel">Modal title</h5>
+                                            <h5 className="modal-title" id="exampleModalLabel">Account Information</h5>
                                             <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                                         </div>
                                         <div className="modal-body">
+                                            <div className="float-end mb-2">
+                                                <button className="btn btn-danger">Delete</button>
+                                            </div>
                                             <table className="table ">
                                                 <tbody className='w-100'>
                                                     {
@@ -158,8 +161,8 @@ export default function AllAccounts() {
                                             </table>
                                         </div>
                                         <div className="modal-footer">
-                                            <button type="button" className="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                            <button type="button" className="btn btn-primary">Save changes</button>
+                                            <button type="button" className="btn btn-success" data-bs-dismiss="modal">Deposit</button>
+                                            <button type="button" className="btn btn-warning">Withdraw</button>
                                         </div>
                                     </div>
                                 </div>
