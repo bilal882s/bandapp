@@ -14,10 +14,10 @@ export default function Accounts() {
                 <h1 className="text-center">Add / View Accounts</h1>
                 <div className="container mt-3 text-center">
                     <div className="row">
-                        <Card className="col-12 col-md-6 col-lg-10 offset-lg-1 shadow ">
-                            <div class="ftext-center">
+                        <Card className="col-12 col-md-10 offset-md-1 col-lg-10 offset-lg-1 shadow ">
+                            <div className="ftext-center">
                                 <CardContent>
-                                    <h5 class="card-title"><i class="fa-solid fa-user mb-1 m-2"></i>Accounts</h5>
+                                    <h5 className="card-title"><i className="fa-solid fa-user mb-1 m-2"></i>Accounts</h5>
                                     <hr />
                                     <div className="d-flex justify-content-center">
 
