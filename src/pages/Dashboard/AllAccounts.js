@@ -9,12 +9,16 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
 import { Link } from "react-router-dom";
+import { toast } from 'react-toastify';
+import TextField from '@mui/material/TextField';
+
 
 export default function AllAccounts() {
     const { setIndex, user } = useContext(AuthContext);
 
     const [documents, setDocuments] = useState([])
     const [modal, setModal] = useState([]);
+    const [amount, setAmount] = useState("");
     const [items, setItems] = useState(null)
     const [loading, setLoading] = useState(false)
 
@@ -26,26 +30,45 @@ export default function AllAccounts() {
         querySnapshot.forEach((doc) => {
             if (user.uid === doc.data().uid) {
                 num = num + 1;
-                array.push(doc.data());
+                array.push({ id: doc.id, ...doc.data() });
             }
         })
         setIndex(num)
         setDocuments(array)
         setLoading(false);
     }
-
-    useEffect(() => {
-        fetchDocuments();
-    }, [user])
     const data = (item) => {
         setModal([item]);
         setItems(item);
     }
 
+    useEffect(() => {
+        fetchDocuments();
+    }, [user])
+
     const handleDelete = async () => {
-        console.log("Starting Delete File", items);
-        await deleteDoc(doc(db, "Accounts", '5dYdN1apfDk0HVZYVvi7'));
-        console.log("Delete File");
+        setLoading(true);
+        await deleteDoc(doc(db, "Accounts", items.id));
+        toast.success('Deleting Successfully .', {
+            position: "bottom-left",
+            autoClose: 5000,
+            hideProgressBar: false,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+        });
+        let newProducts = documents.filter((newProduct) => {
+            return items.id !== newProduct.id
+        })
+        setDocuments(newProducts)
+        setLoading(false)
+    }
+
+
+
+    const handleDeposit = () => {
+
     }
 
     return (
@@ -60,9 +83,9 @@ export default function AllAccounts() {
                                     <div className="row">
                                         <div className="col">
                                             <Card className='shadow-lg'>
-                                                <div class="text-center">
+                                                <div className="text-center">
                                                     <CardContent>
-                                                        <h5 class="card-title"><i class="fa-solid fa-user mb-1 m-2"></i>You have no any account yet now</h5>
+                                                        <h5 className="card-title"><i className="fa-solid fa-user mb-1 m-2"></i>You have no any account yet now</h5>
                                                         <hr />
                                                         <div className="d-flex justify-content-center">
                                                             <Link className='nav-link' to="/dashboard/adduser" >
@@ -96,20 +119,18 @@ export default function AllAccounts() {
                                                         <th scope="col">Name</th>
                                                         <th scope="col">Date</th>
                                                         <th scope="col">Time</th>
+                                                        <th scope="col">Actions</th>
                                                     </tr>
                                                 </thead>
                                                 <tbody className='bg'>
                                                     {
                                                         documents.map((item) => (
                                                             <tr>
-                                                                <td>
-                                                                    <div className="btn btn-link" onClick={() => { data(item) }} data-bs-toggle="modal" data-bs-target="#exampleModal">
-                                                                        {item.account}
-                                                                    </div>
-                                                                </td>
+                                                                <td>{item.account}</td>
                                                                 <td>{item.name}</td>
                                                                 <td>{item.date}</td>
                                                                 <td>{item.time}</td>
+                                                                <td><Button variant='contained' color="success" onClick={() => { data(item) }} data-bs-toggle="modal" data-bs-target="#exampleModal">Details</Button></td>
                                                             </tr>
                                                         ))
                                                     }
@@ -125,11 +146,12 @@ export default function AllAccounts() {
                                     <div className="modal-content">
                                         <div className="modal-header">
                                             <h5 className="modal-title" id="exampleModalLabel">Account Information</h5>
-                                            <button type="button" className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            <Button data-bs-dismiss="modal" aria-label="Close">X</Button>
                                         </div>
                                         <div className="modal-body">
-                                            <div className="float-end mb-2">
-                                                <button className="btn btn-danger" onClick={handleDelete}>Delete</button>
+                                            <div className="mb-2">
+                                                <Button variant="contained" className="float-start" color="primary" data-bs-dismiss="modal" aria-label="Close">Back</Button>
+                                                <Button className="float-end" variant="outlined" color="secondary" onClick={handleDelete} data-bs-toggle="modal" data-bs-target="#exampleModal"><i className="fa-solid fa-trash-can me-1"></i>Delete</Button>
                                             </div>
                                             <table className="table table-borderless">
                                                 <tbody className='w-100'>
@@ -167,8 +189,27 @@ export default function AllAccounts() {
                                             </table>
                                         </div>
                                         <div className="modal-footer">
-                                            <button type="button" className="btn btn-success" data-bs-dismiss="modal">Deposit</button>
-                                            <button type="button" className="btn btn-warning">Withdraw</button>
+                                            <Button variant="contained" color="success" className="me-2" onClick={handleDeposit} data-bs-toggle="modal" data-bs-target="#staticBackdrop">Deposit</Button>
+                                            <Button variant='contained' color="secondary" >Withdraw</Button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="staticBackdropLabel">Money you Withdraw</h5>
+                                            <Button data-bs-dismiss="modal" aria-label="Close">X</Button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <TextField type="number" name="newPrice"
+                                                label={`You can Withdraw only ${items.price} amount`}
+                                                className='w-75 m-2' variant="standard" />
+                                        </div>
+                                        <div class="modal-footer">
+                                            <Button variant="contained" color="secondary" className='me-2' data-bs-dismiss="modal">Close</Button>
+                                            <Button variant="contained" color="success" >Understood</Button>
                                         </div>
                                     </div>
                                 </div>
