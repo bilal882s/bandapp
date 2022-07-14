@@ -68,7 +68,7 @@ export default function View() {
                 :
                 <>
                     {!loading ?
-                        <>
+                        <> 
                             <DashboardMenu />
                             <div className="container" style={{ marginTop: "4rem" }}>
                                 <div className="row">
