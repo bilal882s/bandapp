@@ -19,7 +19,7 @@ export default function AllAccounts() {
     const [documents, setDocuments] = useState([])
     const [modal, setModal] = useState([]);
     const [amount, setAmount] = useState("");
-    const [items, setItems] = useState(null)
+    const [items, setItems] = useState([{ price: "0" }])
     const [loading, setLoading] = useState(false)
 
     const fetchDocuments = async () => {
