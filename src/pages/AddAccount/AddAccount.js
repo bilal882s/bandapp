@@ -1,158 +1,159 @@
-import React, { useContext, useEffect, useState } from 'react'; 
-import Button from '@mui/material/Button'; 
-import DashboardMenu from '../Dashboard/DashboardMenu'; 
-import Box from '@mui/material/Box'; 
-import TextField from '@mui/material/TextField'; 
-import MenuItem from '@mui/material/MenuItem'; 
+import React, { useContext, useEffect, useState } from 'react';
+import Button from '@mui/material/Button';
+import DashboardMenu from '../Dashboard/DashboardMenu';
+import Box from '@mui/material/Box';
+import TextField from '@mui/material/TextField';
+import MenuItem from '@mui/material/MenuItem';
 import { collection, addDoc, getDocs } from "firebase/firestore/lite";
-import { db } from "../../config/firebase"; 
-import { toast, ToastContainer } from 'react-toastify'; 
-import { AuthContext } from '../../context/Authcontext'; 
-import { useNavigate } from 'react-router-dom'; 
-import dayjs from 'dayjs'; 
-import LinearProgress from '@mui/material/LinearProgress'; 
- 
-export default function AddAccount() { 
-  const navigate = useNavigate(); 
-  const { uid, setTable } = useContext(AuthContext); 
-  const initialState = { 
-    name: "", 
-    account: "", 
-    cnic: "", 
-    price: "", 
-    branch: "", 
-    currency: "", 
-    uid: "", 
-    date: "", 
-    time: "" 
-  } 
-  const [state, setState] = useState(initialState) 
-  const [documents, setDocuments] = useState([]); 
-  const [currency, setCurrency] = useState("") 
-  const [loading, setLoading] = useState(false) 
-  const currencies = [{ 
-    label: "Saving", 
-    value: "Saving", 
-  }, 
-  { 
-    label: "Current", 
-    value: "Current", 
-  } 
-  ] 
-  const handleChange = (e) => { 
-    setCurrency(e.target.value); 
-    state.uid = uid; 
-    state.date = dayjs().format("DD MMM YYYY"); 
-    state.time = dayjs().format("hh:mm a "); 
-    setState({ ...state, [e.target.name]: e.target.value }); 
-  } 
- 
- 
-  const handleSubmit = async (e) => { 
-    e.preventDefault(); 
-    const { name, account, price, cnic, branch, currency } = state; 
-    if (name == "") { 
-      toast.error('Your Name feild is empty that is not acceptable.', { 
-        position: "bottom-left", 
-        autoClose: 5000, 
-        hideProgressBar: false, 
-        closeOnClick: true, 
-        pauseOnHover: true, 
-        draggable: true, 
-        progress: undefined, 
-      }); 
-      return; 
-    } 
-    if (account.length !== 9) { 
-      toast.error('Your Account number is not a account number.', { 
-        position: "bottom-left", 
-        autoClose: 5000, 
-        hideProgressBar: false, 
-        closeOnClick: true, 
-        pauseOnHover: true, 
-        draggable: true, 
-        progress: undefined, 
-      }); 
-      return; 
-    } 
-    if (cnic.length !== 13) { 
-      toast.error('Your CNIC number is not a CNIC Number .', { 
-        position: "bottom-left", 
-        autoClose: 5000, 
-        hideProgressBar: false, 
-        closeOnClick: true, 
-        pauseOnHover: true, 
-        draggable: true, 
-        progress: undefined, 
-      }); 
-      return; 
-    } 
-    if (branch > 99) { 
-      toast.error('You can use only 99 branches.', { 
-        position: "bottom-left", 
-        autoClose: 5000, 
-        hideProgressBar: false, 
-        closeOnClick: true, 
-        pauseOnHover: true, 
-        draggable: true, 
-        progress: undefined, 
-      }); 
-      return; 
-    } 
-    if (currency == "") { 
-      toast.error('Your have not chose any currency .', { 
-        position: "bottom-left", 
-        autoClose: 5000, 
-        hideProgressBar: false, 
-        closeOnClick: true, 
-        pauseOnHover: true, 
-        draggable: true, 
-        progress: undefined, 
-      }); 
-      return; 
-    } 
-    if (price < 500) { 
-      toast.error('Your transactions is less than 500 .', { 
-        position: "bottom-left", 
-        autoClose: 5000, 
-        hideProgressBar: false, 
-        closeOnClick: true, 
-        pauseOnHover: true, 
-        draggable: true, 
-        progress: undefined, 
-      }); 
-      return; 
-    } 
-    try { 
-      toast.success(`Dear ${state.name} , Your account has been created at account No : ${state. account}`, {
-        position: "bottom-left", 
-        autoClose: 5000, 
-        hideProgressBar: false,  
-        closeOnClick: true, 
-        pauseOnHover: true, 
-        draggable: true, 
-        progress: undefined, 
-      });  
-      setLoading(true) 
-      const docRef = await addDoc(collection(db, "Accounts"), state); 
-      let array = []; 
-      const querySnapshot = await getDocs(collection(db, "Accounts")); 
-      querySnapshot.forEach((doc) => { 
-        if (state.uid === doc.data().uid) { 
-          setState(initialState) 
-          navigate("/dashboard/allaccounts") 
-          array.push(doc.data()); 
-        } 
-        setDocuments(array) 
-        setTable(array) 
-      } 
-      ) 
-      setLoading(false) 
-    } 
-    catch (e) { 
-    } 
-  } 
-  return ( 
+import { db } from "../../config/firebase";
+import { toast, ToastContainer } from 'react-toastify';
+import { AuthContext } from '../../context/Authcontext';
+import { useNavigate } from 'react-router-dom';
+import dayjs from 'dayjs';
+import LinearProgress from '@mui/material/LinearProgress';
+
+export default function AddAccount() {
+  const navigate = useNavigate();
+  const { uid, setTable } = useContext(AuthContext);
+  const initialState = {
+    name: "",
+    account: "",
+    cnic: "",
+    price: "",
+    branch: "",
+    currency: "",
+    uid: "",
+    date: "",
+    time: "",
+  }
+  const [state, setState] = useState(initialState)
+  const [documents, setDocuments] = useState([]);
+  const [currency, setCurrency] = useState("")
+  const [loading, setLoading] = useState(false)
+  const currencies = [{
+    label: "Saving",
+    value: "Saving",
+  },
+  {
+    label: "Current",
+    value: "Current",
+  }
+  ]
+  const handleChange = (e) => {
+    setCurrency(e.target.value);
+    state.uid = uid;
+    state.date = dayjs().format("DD MMM YYYY");
+    state.time = dayjs().format("hh:mm a ");
+    setState({ ...state, [e.target.name]: e.target.value });
+  }
+
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    const { name, account, price, cnic, branch, currency } = state;
+    if (name == "") {
+      toast.error('Your Name feild is empty that is not acceptable.', {
+        position: "bottom-left",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      return;
+    }
+    if (account.length !== 9) {
+      toast.error('Your Account number is not a account number.', {
+        position: "bottom-left",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      return;
+    }
+    if (cnic.length !== 13) {
+      toast.error('Your CNIC number is not a CNIC Number .', {
+        position: "bottom-left",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      return;
+    }
+    if (branch > 99) {
+      toast.error('You can use only 99 branches.', {
+        position: "bottom-left",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      return;
+    }
+    if (currency == "") {
+      toast.error('Your have not chose any currency .', {
+        position: "bottom-left",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      return;
+    }
+    if (price < 500) {
+      toast.error('Your transactions is less than 500 .', {
+        position: "bottom-left",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      return;
+    }
+    try {
+      toast.success(`Dear ${state.name} , Your account has been created at account No : ${state.account}`, {
+        position: "bottom-left",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      setLoading(true)
+      const docRef = await addDoc(collection(db, "Accounts"), state);
+
+      let array = [];
+      const querySnapshot = await getDocs(collection(db, "Accounts"));
+      querySnapshot.forEach((doc) => {
+        if (state.uid === doc.data().uid) {
+          setState(initialState)
+          navigate("/dashboard/allaccounts")
+          array.push(doc.data());
+        }
+        setDocuments(array)
+        setTable(array)
+      }
+      )
+      setLoading(false)
+    }
+    catch (e) {
+    }
+  }
+  return (
 
     <div className='bg' style={{ height: "100vh" }}>
       {!loading
