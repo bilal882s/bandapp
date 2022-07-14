@@ -148,14 +148,14 @@ export default function Signup() {
                                             {/* <input type="password" name="password" placeholder="Password" onChange={handleChange} className='form-control my-3' required />
                                             <input type="password" name="confirmpassword" placeholder="Confirm Password" onChange={handleChange} className='form-control my-3' required /> */}
 
-                                            <div class="input-group">
+                                            <div className="input-group">
                                                 <input type={isPasswordShow ? "text" : "password"} name="password" placeholder="Password" onChange={handleChange} className='form-control my-3' required />
-                                                <span class="input-group-text eye" onClick={() => { setIsPasswordShow(!isPasswordShow) }} id="basic-addon2"><i class={`fa-solid fa-eye${isPasswordShow ? "" : "-slash"}`}></i></span>
+                                                <span className="input-group-text eye" onClick={() => { setIsPasswordShow(!isPasswordShow) }} id="basic-addon2"><i className={`fa-solid fa-eye${isPasswordShow ? "" : "-slash"}`}></i></span>
                                             </div>
 
-                                            <div class="input-group">
+                                            <div className="input-group">
                                                 <input type={isConPasswordShow ? "text" : "password"} name="confirmpassword" placeholder="Confirm Password" onChange={handleChange} className='form-control my-3' required />
-                                                <span class="input-group-text eye" onClick={() => { setIsConPasswordShow(!isConPasswordShow) }} id="basic-addon2"><i class={`fa-solid fa-eye${isConPasswordShow ? "" : "-slash"}`}></i></span>
+                                                <span className="input-group-text eye" onClick={() => { setIsConPasswordShow(!isConPasswordShow) }} id="basic-addon2"><i className={`fa-solid fa-eye${isConPasswordShow ? "" : "-slash"}`}></i></span>
                                             </div>
                                             <button className="btn btn-success w-50">Sign Up</button>
                                         </div>
