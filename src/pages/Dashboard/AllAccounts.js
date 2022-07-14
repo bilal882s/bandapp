@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { AuthContext } from '../../context/Authcontext'
 import DashboardMenu from './DashboardMenu'
-import { collection, getDocs } from "firebase/firestore/lite";
+import { collection, getDocs, doc, deleteDoc } from "firebase/firestore/lite";
 import { db } from "../../config/firebase";
 import Box from '@mui/material/Box';
 import LinearProgress from '@mui/material/LinearProgress';
@@ -15,6 +15,7 @@ export default function AllAccounts() {
 
     const [documents, setDocuments] = useState([])
     const [modal, setModal] = useState([]);
+    const [items, setItems] = useState(null)
     const [loading, setLoading] = useState(false)
 
     const fetchDocuments = async () => {
@@ -37,11 +38,16 @@ export default function AllAccounts() {
         fetchDocuments();
     }, [user])
     const data = (item) => {
-        // let array = [];
-        // array.push(item)
         setModal([item]);
-        // console.log(modal);
+        setItems(item);
     }
+
+    const handleDelete = async () => {
+        console.log("Starting Delete File", items);
+        await deleteDoc(doc(db, "Accounts", '5dYdN1apfDk0HVZYVvi7'));
+        console.log("Delete File");
+    }
+
     return (
         <>  {!loading ?
             <>
@@ -114,8 +120,8 @@ export default function AllAccounts() {
                                 </div>
                             </div>
 
-                            <div className="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div className="modal-dialog">
+                            <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div className="modal-dialog" style={{ maxWidth: "60%" }}>
                                     <div className="modal-content">
                                         <div className="modal-header">
                                             <h5 className="modal-title" id="exampleModalLabel">Account Information</h5>
@@ -123,36 +129,36 @@ export default function AllAccounts() {
                                         </div>
                                         <div className="modal-body">
                                             <div className="float-end mb-2">
-                                                <button className="btn btn-danger">Delete</button>
+                                                <button className="btn btn-danger" onClick={handleDelete}>Delete</button>
                                             </div>
-                                            <table className="table ">
+                                            <table className="table table-borderless">
                                                 <tbody className='w-100'>
                                                     {
                                                         modal.map((item) => (
                                                             <>
                                                                 <tr>
-                                                                    <th>Name : </th>
-                                                                    <td>{item.name}</td>
+                                                                    <th>Branch Code : </th>
+                                                                    <td>{item.branch}</td>
                                                                 </tr>
                                                                 <tr>
                                                                     <th>Account No : </th>
                                                                     <td>{item.account}</td>
                                                                 </tr>
                                                                 <tr>
-                                                                    <th>Amount : </th>
-                                                                    <td>{item.price}</td>
+                                                                    <th>Full Name : </th>
+                                                                    <td>{item.name}</td>
                                                                 </tr>
                                                                 <tr>
-                                                                    <th>Date : </th>
+                                                                    <th>Registered : </th>
                                                                     <td>{item.date}</td>
-                                                                </tr>
-                                                                <tr>
-                                                                    <th>Time : </th>
-                                                                    <td>{item.time}</td>
                                                                 </tr>
                                                                 <tr>
                                                                     <th>Type : </th>
                                                                     <td>{item.currency}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th>Balance : </th>
+                                                                    <td>{item.price}</td>
                                                                 </tr>
                                                             </>
                                                         ))
