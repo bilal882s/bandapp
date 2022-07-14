@@ -18,17 +18,17 @@ export default function DashboardMenu() {
         {
             text: "Home",
             url: "/dashboard",
-            icon: <i class="fa-solid fa-house"></i>
+            icon: <i className="fa-solid fa-house"></i>
         },
         {
             text: "Accounts",
             url: "/dashboard/accounts",
-            icon: <i class='fa-solid fa-user'></i>,
+            icon: <i className='fa-solid fa-user'></i>,
         },
         {
             text: "Transactions",
             url: "/dashboard/transactions",
-            icon: <i class="fa-solid fa-money-bill-1-wave"></i>
+            icon: <i className="fa-solid fa-money-bill-1-wave"></i>
         }
     ]
     const [state, setState] = React.useState({
