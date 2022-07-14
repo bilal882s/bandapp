@@ -33,14 +33,14 @@ export default function AllAccounts() {
         setLoading(false);
     }
 
-    useEffect(() => { 
+    useEffect(() => {
         fetchDocuments();
     }, [user])
     const data = (item) => {
-        let array = [];
-        array.push(item)
-        setModal(array);
-        console.log(array);
+        // let array = [];
+        // array.push(item)
+        setModal([item]);
+        // console.log(modal);
     }
     return (
         <>  {!loading ?
@@ -94,7 +94,7 @@ export default function AllAccounts() {
                                                 </thead>
                                                 <tbody className='bg'>
                                                     {
-                                                        documents.map((item, index) => (
+                                                        documents.map((item) => (
                                                             <tr>
                                                                 <td>
                                                                     <div className="btn btn-link" onClick={() => { data(item) }} data-bs-toggle="modal" data-bs-target="#exampleModal">
@@ -123,18 +123,37 @@ export default function AllAccounts() {
                                         </div>
                                         <div className="modal-body">
                                             <table className="table ">
-                                                <thead>
-                                                    <tr>
-                                                        <th scope="col">Name</th>
-                                                        <th scope="col">Time</th>
-                                                    </tr>
-                                                </thead>
-                                                <tbody>
-                                                    {modal.map((item) => {
-                                                        <tr>
-                                                            <td>{item.name}</td>
-                                                        </tr>
-                                                    })}
+                                                <tbody className='w-100'>
+                                                    {
+                                                        modal.map((item) => (
+                                                            <>
+                                                                <tr>
+                                                                    <th>Name : </th>
+                                                                    <td>{item.name}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th>Account No : </th>
+                                                                    <td>{item.account}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th>Amount : </th>
+                                                                    <td>{item.price}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th>Date : </th>
+                                                                    <td>{item.date}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th>Time : </th>
+                                                                    <td>{item.time}</td>
+                                                                </tr>
+                                                                <tr>
+                                                                    <th>Type : </th>
+                                                                    <td>{item.currency}</td>
+                                                                </tr>
+                                                            </>
+                                                        ))
+                                                    }
                                                 </tbody>
                                             </table>
                                         </div>
