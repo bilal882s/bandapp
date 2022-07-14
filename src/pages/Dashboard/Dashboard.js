@@ -47,9 +47,9 @@ export default function Dashboard() {
               <div className="row d-flex m-4">
                 <div className="col-12 col-md-6 col-lg-6  ">
                   <Card className='shadow-lg'>
-                    <div class="text-center">
+                    <div className="text-center">
                       <CardContent>
-                        <h5 class="card-title"><i class="fa-solid fa-user mb-1 m-2"></i>Accounts</h5>
+                        <h5 className="card-title"><i className="fa-solid fa-user mb-1 m-2"></i>Accounts</h5>
                         <hr />
                         <div className="d-flex justify-content-center">
                           <Link className='nav-link' to="/dashboard/adduser" >
@@ -73,9 +73,9 @@ export default function Dashboard() {
                 </div>
                 <div className='col-12 col-md-6 col-lg-6'>
                   <Card className="shadow-lg">
-                    <div class="text-center">
+                    <div className="text-center">
                       <CardContent>
-                        <h5 class="card-title"><i class="fa-solid fa-user mb-1 m-2"></i>Transactions</h5>
+                        <h5 className="card-title"><i className="fa-solid fa-user mb-1 m-2"></i>Transactions</h5>
                         <hr />
                         <Link className='nav-link' to="/dashboard/transactions/view" color='success'>
                           <Button className='m-1' size="sm" variant={'contained'} color="warning">
