@@ -18,9 +18,9 @@ export default function Transactions() {
         <div className="container mt-3 text-center">
           <div className="row">
             <Card className="col-12 col-md-12 col-lg-10 offset-lg-1 shadow ">
-              <div class="ftext-center">
+              <div className="ftext-center">
                 <CardContent>
-                  <h4 class="card-title"><i class="fa-solid fa-money-check-dollar mx-1"></i>Transactions</h4>
+                  <h4 className="card-title"><i className="fa-solid fa-money-check-dollar mx-1"></i>Transactions</h4>
                   <hr />
                   <Link className='nav-link m-1' to="/dashboard/transactions/view" color='success'>
                     <Button className='' size="sm" variant={'contained'} color="warning">
