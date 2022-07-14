@@ -113,10 +113,10 @@ export default function Register() {
                                         <h2 className='my-2'>Login</h2>
                                         <div className="card-body">
 
-                                            <input type={email} class="form-control" placeholder="Email" name='email' onChange={handleChange} />
-                                            <div class="input-group">
+                                            <input type={email} className="form-control" placeholder="Email" name='email' onChange={handleChange} />
+                                            <div className="input-group">
                                                 <input type={isPasswordShow ? "text" : "password"} name="password" placeholder="Password" onChange={handleChange} className='form-control my-3' required />
-                                                <span class="input-group-text eye" onClick={() => { setIsPasswordShow(!isPasswordShow) }} id="basic-addon2"><i class={`fa-solid fa-eye${isPasswordShow ? "" : "-slash"}`}></i></span>
+                                                <span className="input-group-text eye" onClick={() => { setIsPasswordShow(!isPasswordShow) }} id="basic-addon2"><i className={`fa-solid fa-eye${isPasswordShow ? "" : "-slash"}`}></i></span>
                                             </div>
 
                                             <button className="btn btn-success w-50" disabled={loading}>
