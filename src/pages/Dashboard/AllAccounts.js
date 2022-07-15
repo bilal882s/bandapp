@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { AuthContext } from '../../context/Authcontext'
 import DashboardMenu from './DashboardMenu'
-import { collection, getDocs, doc, deleteDoc, setDoc } from "firebase/firestore/lite";
+import { collection, getDocs, doc, deleteDoc, setDoc, addDoc } from "firebase/firestore/lite";
 import { db } from "../../config/firebase";
 import Box from '@mui/material/Box';
 import LinearProgress from '@mui/material/LinearProgress';
@@ -14,7 +14,7 @@ import TextField from '@mui/material/TextField';
 
 
 export default function AllAccounts() {
-    const { setIndex, user } = useContext(AuthContext);
+    const { setIndex, user, setTransactions } = useContext(AuthContext);
 
     const [documents, setDocuments] = useState([])
     const [modal, setModal] = useState([]);
@@ -65,22 +65,27 @@ export default function AllAccounts() {
         setLoading(false)
     }
 
-
+    let price = 0;
 
     const handleDeposit = async () => {
         let newAmount = parseInt(items.price) + parseInt(amount);
         items.price = newAmount;
         setDoc(doc(db, "Accounts", items.id), items, { merge: true });
+        price = price + 1;
         setAmount("0");
+        const docRef = addDoc(collection(db, "Amount"), items);
+        console.log("Deposit with id", docRef.id);
+        setTransactions(price);
         setLoading(false);
     }
     const handleWithdraw = async () => {
-        if (amount === items.price && amount > items.price) {
+        if (amount <= items.price) {
             let newAmount = parseInt(items.price) - parseInt(amount);
             items.price = newAmount;
             setDoc(doc(db, "Accounts", items.id), items, { merge: true });
             setAmount("0");
-            setLoading(false);
+            price = price + 1;
+            setTransactions(price);
             toast.success('Your withdraw is Successful.', {
                 position: "bottom-left",
                 autoClose: 5000,
@@ -90,7 +95,7 @@ export default function AllAccounts() {
                 draggable: true,
                 progress: undefined,
             });
-        } else {
+        } else if (amount > items.price) {
             toast.error('You have no amount you enter.', {
                 position: "bottom-left",
                 autoClose: 5000,
@@ -107,36 +112,8 @@ export default function AllAccounts() {
         <>  {!loading ?
             <>
                 {
-                    documents.length === 0
+                    documents.length !== 0
                         ? <>
-                            <DashboardMenu />
-                            <div className='col-12 col-md-8 offset-md-2 col-lg-6 offset-lg-3 d-flex align-items-center' style={{ height: "65vh" }}>
-                                <div className="container">
-                                    <div className="row">
-                                        <div className="col">
-                                            <Card className='shadow-lg'>
-                                                <div className="text-center">
-                                                    <CardContent>
-                                                        <h5 className="card-title"><i className="fa-solid fa-user mb-1 m-2"></i>You have no any account yet now</h5>
-                                                        <hr />
-                                                        <div className="d-flex justify-content-center">
-                                                            <Link className='nav-link' to="/dashboard/adduser" >
-                                                                <Button className='m-1' size="sm" variant={'contained'} color="success">
-                                                                    Add
-                                                                </Button>
-                                                            </Link>
-                                                        </div>
-                                                    </CardContent>
-                                                    <hr />
-                                                </div>
-                                            </Card>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </>
-                        :
-                        <>
 
                             <DashboardMenu />
                             <div className="container" style={{ marginTop: "4rem" }}>
@@ -172,8 +149,7 @@ export default function AllAccounts() {
                                     </div>
                                 </div>
                             </div>
-
-                            <div className="modal fade w-100" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                            <div className="modal fade w-100" id="exampleModal" data-bs-keyboard="false" tabIndex="-1" data-bs-backdrop="static" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                 <div className="modal-dialog" style={{ minWidth: "60%" }}>
                                     <div className="modal-content">
                                         <div className="modal-header">
@@ -263,6 +239,34 @@ export default function AllAccounts() {
                                         <div class="modal-footer">
                                             <Button variant="contained" color="secondary" className='me-2' data-bs-dismiss="modal">Back</Button>
                                             <Button variant="contained" color="success" onClick={() => { handleWithdraw() }} data-bs-dismiss="modal">Withdraw</Button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </>
+                        :
+                        <>
+                            <DashboardMenu />
+                            <div className='col-12 col-md-8 offset-md-2 col-lg-6 offset-lg-3 d-flex align-items-center' style={{ height: "65vh" }}>
+                                <div className="container">
+                                    <div className="row">
+                                        <div className="col">
+                                            <Card className='shadow-lg'>
+                                                <div className="text-center">
+                                                    <CardContent>
+                                                        <h5 className="card-title"><i className="fa-solid fa-user mb-1 m-2"></i>You have no any account yet now</h5>
+                                                        <hr />
+                                                        <div className="d-flex justify-content-center">
+                                                            <Link className='nav-link' to="/dashboard/adduser" >
+                                                                <Button className='m-1' size="sm" variant={'contained'} color="success">
+                                                                    Add
+                                                                </Button>
+                                                            </Link>
+                                                        </div>
+                                                    </CardContent>
+                                                    <hr />
+                                                </div>
+                                            </Card>
                                         </div>
                                     </div>
                                 </div>
