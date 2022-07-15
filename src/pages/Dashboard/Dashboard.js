@@ -20,15 +20,12 @@ export default function Dashboard() {
   const fetchDocuments = async () => {
     setLoading(true);
     let num = 0;
-    let price = 0;
     const querySnapshot = await getDocs(collection(db, "Accounts"));
     querySnapshot.forEach((doc) => {
       if (user.uid === doc.data().uid) {
         num = num + 1;
-        price = parseInt(price) + parseInt(doc.data().price);
       }
     })
-    setTransactions(price)
     setIndex(num);
     setLoading(false);
   }
