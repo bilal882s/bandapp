@@ -1,7 +1,7 @@
 import React, { useContext, useEffect, useState } from 'react'
 import { AuthContext } from '../../context/Authcontext'
 import DashboardMenu from './DashboardMenu'
-import { collection, getDocs, doc, deleteDoc } from "firebase/firestore/lite";
+import { collection, getDocs, doc, deleteDoc, setDoc } from "firebase/firestore/lite";
 import { db } from "../../config/firebase";
 import Box from '@mui/material/Box';
 import LinearProgress from '@mui/material/LinearProgress';
@@ -18,7 +18,7 @@ export default function AllAccounts() {
 
     const [documents, setDocuments] = useState([])
     const [modal, setModal] = useState([]);
-    const [amount, setAmount] = useState({ price: "0" });
+    const [amount, setAmount] = useState(0);
     const [items, setItems] = useState([{ price: "0" }])
     const [loading, setLoading] = useState(false)
 
@@ -67,10 +67,40 @@ export default function AllAccounts() {
 
 
 
-    const handleDeposit = () => {
-        const newAmount = parseInt(items.price) + parseInt(amount);
+    const handleDeposit = async () => {
+        let newAmount = parseInt(items.price) + parseInt(amount);
         items.price = newAmount;
-        console.log(newAmount);
+        setDoc(doc(db, "Accounts", items.id), items, { merge: true });
+        setAmount("0");
+        setLoading(false);
+    }
+    const handleWithdraw = async () => {
+        if (amount === items.price && amount > items.price) {
+            let newAmount = parseInt(items.price) - parseInt(amount);
+            items.price = newAmount;
+            setDoc(doc(db, "Accounts", items.id), items, { merge: true });
+            setAmount("0");
+            setLoading(false);
+            toast.success('Your withdraw is Successful.', {
+                position: "bottom-left",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
+        } else {
+            toast.error('You have no amount you enter.', {
+                position: "bottom-left",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
+        }
     }
 
     return (
@@ -143,8 +173,8 @@ export default function AllAccounts() {
                                 </div>
                             </div>
 
-                            <div className="modal fade" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                                <div className="modal-dialog" style={{ maxWidth: "60%" }}>
+                            <div className="modal fade w-100" id="exampleModal" tabIndex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div className="modal-dialog" style={{ minWidth: "60%" }}>
                                     <div className="modal-content">
                                         <div className="modal-header">
                                             <h5 className="modal-title" id="exampleModalLabel">Account Information</h5>
@@ -192,27 +222,47 @@ export default function AllAccounts() {
                                         </div>
                                         <div className="modal-footer">
                                             <Button variant="contained" color="success" className="me-2" onClick={handleDeposit} data-bs-toggle="modal" data-bs-target="#staticBackdrop">Deposit</Button>
-                                            <Button variant='contained' color="secondary" >Withdraw</Button>
+                                            <Button variant='contained' color="secondary" data-bs-toggle="modal" data-bs-target="#modalWithdraw">Withdraw</Button>
                                         </div>
                                     </div>
                                 </div>
                             </div>
-                            <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                            <div class="modal fade w-100" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                 <div class="modal-dialog">
                                     <div class="modal-content">
                                         <div class="modal-header">
-                                            <h5 class="modal-title" id="staticBackdropLabel">Money you Withdraw</h5>
-                                            <Button data-bs-dismiss="modal" aria-label="Close">X</Button>
+                                            <h5 class="modal-title" id="staticBackdropLabel">Amount you Deposit</h5>
+                                            <Button data-bs-dismiss="modal" aria-label="Close" >X</Button>
                                         </div>
                                         <div class="modal-body">
                                             <TextField type="number" name="newPrice"
                                                 label={`You have ${items.price} amount`} onChange={(e) => { setAmount(e.target.value) }}
-                                                value={amount.price}
+                                                value={amount}
                                                 className='w-75 m-2' variant="standard" />
                                         </div>
                                         <div class="modal-footer">
                                             <Button variant="contained" color="secondary" className='me-2' data-bs-dismiss="modal">Back</Button>
                                             <Button variant="contained" color="success" onClick={() => { handleDeposit() }} data-bs-dismiss="modal">Deposit</Button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal fade w-100" id="modalWithdraw" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="staticBackdropLabel">Amount you Withdraw</h5>
+                                            <Button data-bs-dismiss="modal" aria-label="Close" >X</Button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <TextField type="number" name="newPrice"
+                                                label={`You can Withdraw   ${items.price} amount`} onChange={(e) => { setAmount(e.target.value) }}
+                                                value={amount}
+                                                className='w-75 m-2' variant="standard" />
+                                        </div>
+                                        <div class="modal-footer">
+                                            <Button variant="contained" color="secondary" className='me-2' data-bs-dismiss="modal">Back</Button>
+                                            <Button variant="contained" color="success" onClick={() => { handleWithdraw() }} data-bs-dismiss="modal">Withdraw</Button>
                                         </div>
                                     </div>
                                 </div>
