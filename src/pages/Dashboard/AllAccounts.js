@@ -18,7 +18,7 @@ export default function AllAccounts() {
 
     const [documents, setDocuments] = useState([])
     const [modal, setModal] = useState([]);
-    const [amount, setAmount] = useState("");
+    const [amount, setAmount] = useState({ price: "0" });
     const [items, setItems] = useState([{ price: "0" }])
     const [loading, setLoading] = useState(false)
 
@@ -69,7 +69,7 @@ export default function AllAccounts() {
 
     const handleDeposit = () => {
         const newAmount = parseInt(items.price) + parseInt(amount);
-        items.price = parseInt(newAmount);
+        items.price = newAmount;
         console.log(newAmount);
     }
 
@@ -205,8 +205,9 @@ export default function AllAccounts() {
                                             <Button data-bs-dismiss="modal" aria-label="Close">X</Button>
                                         </div>
                                         <div class="modal-body">
-                                            <TextField type="number"
-                                                label={`You can Withdraw only ${items.price} amount`} onChange={(e) => { setAmount(e.target.value) }}
+                                            <TextField type="number" name="newPrice"
+                                                label={`You have ${items.price} amount`} onChange={(e) => { setAmount(e.target.value) }}
+                                                value={amount.price}
                                                 className='w-75 m-2' variant="standard" />
                                         </div>
                                         <div class="modal-footer">
