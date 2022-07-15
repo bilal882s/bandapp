@@ -85,7 +85,7 @@ export default function Dashboard() {
                         <hr />
                         <br />
                         <h1>{transactions}</h1>
-                        <h4>Transactions</h4>
+                        <h4>Total Amount</h4>
                       </CardContent>
                     </div>
                   </Card>
