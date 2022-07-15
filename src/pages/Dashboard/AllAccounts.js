@@ -69,13 +69,17 @@ export default function AllAccounts() {
 
     const handleDeposit = async () => {
         let newAmount = parseInt(items.price) + parseInt(amount);
+
         items.price = newAmount;
         setDoc(doc(db, "Accounts", items.id), items, { merge: true });
+
         price = price + 1;
+
         setAmount("0");
         const docRef = addDoc(collection(db, "Amount"), items);
-        console.log("Deposit with id", docRef.id);
+
         setTransactions(price);
+
         setLoading(false);
     }
     const handleWithdraw = async () => {
@@ -86,7 +90,7 @@ export default function AllAccounts() {
             setAmount("0");
             price = price + 1;
             setTransactions(price);
-            toast.success('Your withdraw is Successful.', {
+            toast.success('Your amout is Withdarwed.', {
                 position: "bottom-left",
                 autoClose: 5000,
                 hideProgressBar: false,
@@ -139,7 +143,8 @@ export default function AllAccounts() {
                                                                 <td>{item.name}</td>
                                                                 <td>{item.date}</td>
                                                                 <td>{item.price}</td>
-                                                                <td><Button variant='contained' color="success" onClick={() => { data(item) }} data-bs-toggle="modal" data-bs-target="#exampleModal">Details</Button></td>
+                                                                <td><Button variant='contained' color="success" onClick={() => { data(item) }} data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                                                    <i class="fa-solid fa-circle-info me-2"></i>Details</Button></td>
                                                             </tr>
                                                         ))
                                                     }
@@ -158,7 +163,7 @@ export default function AllAccounts() {
                                         </div>
                                         <div className="modal-body">
                                             <div className="mb-2">
-                                                <Button variant="contained" className="float-start" color="primary" data-bs-dismiss="modal" aria-label="Close">Back</Button>
+                                                <Button variant="contained" className="float-start" color="primary" data-bs-dismiss="modal" aria-label="Close"><i class="fa-solid fa-arrow-left-long me-2"></i>Back</Button>
                                                 <Button className="float-end" variant="outlined" color="secondary" onClick={handleDelete} data-bs-toggle="modal" data-bs-target="#exampleModal"><i className="fa-solid fa-trash-can me-1"></i>Delete</Button>
                                             </div>
                                             <table className="table table-borderless">
@@ -197,8 +202,8 @@ export default function AllAccounts() {
                                             </table>
                                         </div>
                                         <div className="modal-footer">
-                                            <Button variant="contained" color="success" className="me-2" onClick={handleDeposit} data-bs-toggle="modal" data-bs-target="#staticBackdrop">Deposit</Button>
-                                            <Button variant='contained' color="secondary" data-bs-toggle="modal" data-bs-target="#modalWithdraw">Withdraw</Button>
+                                            <Button variant="contained" color="success" className="me-2" onClick={handleDeposit} data-bs-toggle="modal" data-bs-target="#staticBackdrop"><i class="fa-solid fa-coins me-2"></i>Deposit</Button>
+                                            <Button variant='contained' color="secondary" data-bs-toggle="modal" data-bs-target="#modalWithdraw"><i class="fa-solid fa-angles-down me-2"></i>Withdraw</Button>
                                         </div>
                                     </div>
                                 </div>
@@ -212,13 +217,13 @@ export default function AllAccounts() {
                                         </div>
                                         <div class="modal-body">
                                             <TextField type="number" name="newPrice"
-                                                label={`You have ${items.price} amount`} onChange={(e) => { setAmount(e.target.value) }}
+                                                label="Amount you deposit" onChange={(e) => { setAmount(e.target.value) }}
                                                 value={amount}
                                                 className='w-75 m-2' variant="standard" />
                                         </div>
                                         <div class="modal-footer">
-                                            <Button variant="contained" color="secondary" className='me-2' data-bs-dismiss="modal">Back</Button>
-                                            <Button variant="contained" color="success" onClick={() => { handleDeposit() }} data-bs-dismiss="modal">Deposit</Button>
+                                            <Button variant="contained" color="secondary" className='me-2' data-bs-dismiss="modal"><i class="fa-solid fa-arrow-left-long me-2"></i>Back</Button>
+                                            <Button variant="contained" color="success" onClick={() => { handleDeposit() }} data-bs-dismiss="modal"><i class="fa-solid fa-coins me-2"></i>Deposit</Button>
                                         </div>
                                     </div>
                                 </div>
@@ -237,8 +242,8 @@ export default function AllAccounts() {
                                                 className='w-75 m-2' variant="standard" />
                                         </div>
                                         <div class="modal-footer">
-                                            <Button variant="contained" color="secondary" className='me-2' data-bs-dismiss="modal">Back</Button>
-                                            <Button variant="contained" color="success" onClick={() => { handleWithdraw() }} data-bs-dismiss="modal">Withdraw</Button>
+                                            <Button variant="contained" color="secondary" className='me-2' data-bs-dismiss="modal"><i class="fa-solid fa-arrow-left-long me-2"></i>Back</Button>
+                                            <Button variant="contained" color="success" onClick={() => { handleWithdraw() }} data-bs-dismiss="modal"><i class="fa-solid fa-angles-down me-2"></i>Withdraw</Button>
                                         </div>
                                     </div>
                                 </div>
