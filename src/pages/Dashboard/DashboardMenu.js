@@ -78,7 +78,7 @@ export default function DashboardMenu() {
         <div className=''>
             {['Menu'].map((anchor) => (
                 <React.Fragment key={anchor}>
-                    <Button variant='contained' onClick={toggleDrawer(anchor, true)}>{anchor}</Button>
+                    <Button variant='outlined border-0' onClick={toggleDrawer(anchor, true)}><i class="fa-solid fa-bars" style={{ fontSize: "1.5rem" }} ></i></Button>
                     <Drawer
                         anchor={anchor}
                         open={state[anchor]}
