@@ -9,6 +9,7 @@ export default function AuthContextProvider({ children }) {
     const [uid, setUid] = useState("")
     const [table, setTable] = useState([])
     const [index, setIndex] = useState(0)
+    const [loading, setLoading] = useState(false)
     const [transactions, setTransactions] = useState(0);
     const [user, setUser] = useState("")
 
@@ -26,7 +27,7 @@ export default function AuthContextProvider({ children }) {
     }, [])
 
     return (
-        <AuthContext.Provider value={{ isAuthenticated, transactions, setTransactions, setIsAuthenticated, uid, user, setUser, setUid, table, setTable, index, setIndex }}>
+        <AuthContext.Provider value={{ isAuthenticated, transactions, setTransactions, setIsAuthenticated, uid, user, setLoading, setUser, setUid, table, setTable, index, setIndex }}>
             {children}
         </AuthContext.Provider>
     )
