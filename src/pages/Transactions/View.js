@@ -24,6 +24,7 @@ export default function View() {
         querySnapshot.forEach((doc) => {
             if (user.uid === doc.data().uid) {
                 array.push(doc.data());
+                price = price + 1;
             }
         })
         setTransactions(price)
@@ -52,7 +53,7 @@ export default function View() {
                                                     <Card className='shadow-lg'>
                                                         <div class="text-center">
                                                             <CardContent>
-                                                                <h5 class="card-title"><i class="fa-solid fa-user mb-1 m-2"></i>You have no any account yet now</h5>
+                                                                <h5 class="card-title"><i class="fa-solid fa-user mb-1 m-2"></i>You have no any transactions yet now</h5>
                                                                 <hr />
                                                                 <div className="d-flex justify-content-center">
                                                                     <Link className='nav-link' to="/dashboard/adduser" >
@@ -83,7 +84,8 @@ export default function View() {
                                                             <th scope="col">Number</th>
                                                             <th scope="col">Name</th>
                                                             <th scope="col">CNIC No</th>
-                                                            <th scope="col">Price</th>
+                                                            <th scope="col">Amount</th>
+                                                            <th scope="col">Type</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
@@ -94,6 +96,7 @@ export default function View() {
                                                                     <td>{item.name}</td>
                                                                     <td>{item.cnic}</td>
                                                                     <td>{item.price}</td>
+                                                                    <td>{item.currency}</td>
                                                                 </tr>
                                                             ))
                                                         }
