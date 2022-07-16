@@ -14,12 +14,12 @@ import TextField from '@mui/material/TextField';
 
 
 export default function AllAccounts() {
-    const { setIndex, user, setTransactions } = useContext(AuthContext);
+    const { setIndex, user } = useContext(AuthContext);
 
     const [documents, setDocuments] = useState([])
     const [modal, setModal] = useState([]);
     const [amount, setAmount] = useState(0);
-    const [items, setItems] = useState([{ price: "0" }])
+    const [items, setItems] = useState([{ price: "0", currency: "" }])
     const [loading, setLoading] = useState(false)
 
     const fetchDocuments = async () => {
@@ -65,7 +65,6 @@ export default function AllAccounts() {
         setLoading(false)
     }
 
-    let price = 0;
 
     const handleDeposit = async () => {
         let newAmount = parseInt(items.price) + parseInt(amount);
@@ -73,12 +72,10 @@ export default function AllAccounts() {
         items.price = newAmount;
         setDoc(doc(db, "Accounts", items.id), items, { merge: true });
 
-        price = price + 1;
-
         setAmount("0");
         const docRef = addDoc(collection(db, "Amount"), items);
-
-        setTransactions(price);
+        items.currency = "Credit";
+        console.log(items);
 
         setLoading(false);
     }
@@ -87,9 +84,11 @@ export default function AllAccounts() {
             let newAmount = parseInt(items.price) - parseInt(amount);
             items.price = newAmount;
             setDoc(doc(db, "Accounts", items.id), items, { merge: true });
+
             setAmount("0");
-            price = price + 1;
-            setTransactions(price);
+            const docRef = addDoc(collection(db, "Amount"), items);
+            items.currency = "Debit";
+            console.log(items);
             toast.success('Your amout is Withdarwed.', {
                 position: "bottom-left",
                 autoClose: 5000,
