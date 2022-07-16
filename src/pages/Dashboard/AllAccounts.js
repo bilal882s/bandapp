@@ -20,7 +20,7 @@ export default function AllAccounts() {
     const [modal, setModal] = useState([]);
     const [amount, setAmount] = useState(0);
     const [items, setItems] = useState([{ price: "0", currency: "" }])
-    const [loading, setLoading] = useState(false)
+    const [loading, setLoading] = useState(false) 
 
     const fetchDocuments = async () => {
         setLoading(true);
