@@ -15,6 +15,7 @@ export default function View() {
 
     const [documents, setDocuments] = useState([])
     const [loading, setLoading] = useState(false)
+    const [item, setItem] = useState({});
 
     const fetchDocuments = async () => {
         setLoading(true);
@@ -41,11 +42,13 @@ export default function View() {
             <>
                 {!loading ?
                     <>
+                        <div className="float-start m-3">
+                            <DashboardMenu />
+                        </div>
                         {
                             documents.length === 0
                                 ?
                                 <>
-                                    <DashboardMenu />
                                     <div className='col-12 col-md-8 offset-md-2 col-lg-6 offset-lg-3 d-flex align-items-center' style={{ height: "65vh" }}>
                                         <div className="container">
                                             <div className="row">
@@ -73,10 +76,9 @@ export default function View() {
                                 </>
                                 :
                                 <>
-                                    <DashboardMenu />
-                                    <div className="container" style={{ marginTop: "4rem" }}>
+                                    <div className="container">
                                         <div className="row">
-                                            <div className="col">
+                                            <div className="col mt-4">
                                                 <h1>All Transactions </h1>
                                                 <table class="table table-hover m-2 me-5">
                                                     <thead className='table-dark'>
@@ -86,6 +88,7 @@ export default function View() {
                                                             <th scope="col">CNIC No</th>
                                                             <th scope="col">Amount</th>
                                                             <th scope="col">Type</th>
+                                                            <th scope="col">Actions</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
@@ -97,11 +100,57 @@ export default function View() {
                                                                     <td>{item.cnic}</td>
                                                                     <td>{item.price}</td>
                                                                     <td>{item.currency}</td>
+                                                                    <td><Button variant="contained" onClick={() => { setItem(item) }} data-bs-toggle="modal" data-bs-target="#staticBackdrop">Deatils</Button></td>
                                                                 </tr>
                                                             ))
                                                         }
                                                     </tbody>
                                                 </table>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="modal fade" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                            <div class="modal-content">
+                                                <div class="modal-header">
+                                                    <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+                                                    <Button data-bs-dismiss="modal" aria-label="Close">X</Button>
+                                                </div>
+                                                <div class="modal-body">
+                                                    <table className='table table-borderless'>
+                                                        <tbody className='w-100'>
+                                                            <tr>
+                                                                <th>Branch Code : </th>
+                                                                <td>{item.branch}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th>Account No : </th>
+                                                                <td>{item.account}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th>Full Name : </th>
+                                                                <td>{item.name}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th>Registered : </th>
+                                                                <td>{item.date}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th>Type : </th>
+                                                                <td>{item.currency}</td>
+                                                            </tr>
+                                                            <tr>
+                                                                <th>Balance : </th>
+                                                                <td>{item.price}</td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                    <p>Created by <b>{user.email}</b></p>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <Button variant="contained" color="secondary" data-bs-dismiss="modal">Back</Button>
+                                                </div>
                                             </div>
                                         </div>
                                     </div>
