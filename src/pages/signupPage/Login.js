@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import { onAuthStateChanged, signOut, signInWithEmailAndPassword } from "firebase/auth";
+import { onAuthStateChanged, signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from '../../config/firebase';
 import { Link } from "react-router-dom";
 import { toast } from 'react-toastify';
@@ -8,13 +8,11 @@ import { AuthContext } from '../../context/Authcontext';
 import TextField from '@mui/material/TextField';
 
 export default function Register() {
-    const initialEmail = { verifyEmail: "" }
     const initialData = { email: "", password: "" };
     const [state, setState] = useState(initialData);
-    const [email, setEmail] = useState(initialEmail);
     const [isPasswordShow, setIsPasswordShow] = useState(false);
-    const [user, setUser] = useState({});
-    const { setIsAuthenticated, uid, setUid, table, setTable, setLoading } = useContext(AuthContext);
+    const [setUser] = useState({});
+    const { setIsAuthenticated, setUid, setLoading } = useContext(AuthContext);
 
 
     const handleChange = (e) => {
@@ -23,7 +21,6 @@ export default function Register() {
     useEffect(() => {
         onAuthStateChanged(auth, (user) => {
             if (user) {
-                setUser(user)
                 setUid(user.uid)
             } else {
             }
@@ -40,8 +37,7 @@ export default function Register() {
         setLoading(true);
         const { email, password } = state;
         signInWithEmailAndPassword(auth, email, password)
-            .then((userCredential) => {
-                const user = userCredential.user;
+            .then(() => {
                 toast.success('You are Logged in.', {
                     position: "bottom-left",
                     autoClose: 5000,
@@ -54,7 +50,7 @@ export default function Register() {
                 setIsAuthenticated(true);
 
             })
-            .catch((error) => {
+            .catch(() => {
                 toast.error('You are not Sign up.', {
                     position: "bottom-left",
                     autoClose: 5000,
@@ -66,32 +62,6 @@ export default function Register() {
                 });
             });
         setLoading(false)
-    }
-    const handleLogout = () => {
-        signOut(auth).then(() => {
-            setTable([]);
-            toast.success('You are Logged out.', {
-                position: "bottom-left",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-            });
-            setIsAuthenticated(false)
-            setUser({});
-        }).catch((error) => {
-            toast.error('Something else here.', {
-                position: "bottom-left",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-            });
-        });
     }
     return (
         <div className='bg'>
