@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { createUserWithEmailAndPassword, onAuthStateChanged, signOut, signInWithPopup, GoogleAuthProvider, FacebookAuthProvider } from "firebase/auth";
-import { auth, provider, facebookprovider } from '../../config/firebase';
+import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
+import { auth, provider } from '../../config/firebase';
 import { Link, useNavigate } from "react-router-dom";
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import { Button } from '@mui/material';
 import TextField from '@mui/material/TextField';
 
@@ -10,7 +10,7 @@ export default function Signup() {
     const navigate = useNavigate();
     const initialData = { email: "", password: "", confirmpassword: "" };
     const [state, setState] = useState(initialData);
-    const [users, setUsers] = useState({});
+    const [setUsers] = useState({});
     const [isPasswordShow, setIsPasswordShow] = useState(false);
     const [isConPasswordShow, setIsConPasswordShow] = useState(false);
 
@@ -33,7 +33,6 @@ export default function Signup() {
         if (password === confirmpassword || password.length < 8) {
             createUserWithEmailAndPassword(auth, email, password)
                 .then((userCredential) => {
-                    const user = userCredential.user;
                     navigate("/dashboard")
                     toast.success('You are sign up and Login also.', {
                         position: "bottom-left",
@@ -69,32 +68,6 @@ export default function Signup() {
         }
 
     }
-
-    const handleLogout = () => {
-        signOut(auth).then(() => {
-            setUsers({});
-            toast.success('You are Logged out.', {
-                position: "bottom-left",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-            });
-        }).catch((error) => {
-            toast.error('Something Wring here.', {
-                position: "bottom-left",
-                autoClose: 5000,
-                hideProgressBar: false,
-                closeOnClick: true,
-                pauseOnHover: true,
-                draggable: true,
-                progress: undefined,
-            });
-        });
-    }
-
     // const handleFacebook = () => {
     //     signInWithPopup(auth, facebookprovider)
     //         .then((result) => {
@@ -128,6 +101,7 @@ export default function Signup() {
                 const credential = GoogleAuthProvider.credentialFromResult(result);
                 const token = credential.accessToken;
                 const user = result.user;
+                console.log(token, user);
                 navigate("/dashboard")
                 toast.success('You are successfully logged in with Google.', {
                     position: "bottom-left",
@@ -143,6 +117,7 @@ export default function Signup() {
                 const errorMessage = error.message;
                 const email = error.customData.email;
                 const credential = GoogleAuthProvider.credentialFromError(error);
+                console.log(errorCode, errorMessage, email, credential);
                 toast.error('Something else here Google.', {
                     position: "bottom-left",
                     autoClose: 5000,
@@ -158,7 +133,6 @@ export default function Signup() {
     return (
         <div className='center bg'>
             <Link to="/" className="nav-link bg-primary m-2"><Button variant='contained'>Back To Home</Button></Link>
-            <ToastContainer />
             <div className="container">
                 <div className="row text-center">
                     <div className="col-12 col-md-8 offset-md-2 col-lg-10 offset-lg-1">
