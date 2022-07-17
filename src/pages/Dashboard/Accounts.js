@@ -6,7 +6,7 @@ import { Link } from "react-router-dom";
 import DashboardMenu from './DashboardMenu';
 import { AuthContext } from '../../context/Authcontext';
 export default function Accounts() {
-    const { index, setIndex } = useContext(AuthContext);
+    const { index } = useContext(AuthContext);
     return (
         <div style={{ height: "100vh" }}>
             <div className="float-start m-3">
