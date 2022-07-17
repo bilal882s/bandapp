@@ -1,3 +1,5 @@
+import React from "react"
+
 export default function Nopage() {
   return (
     <div className='text-center text-danger bg' style={{ height: "83vh" }}>
