@@ -1,6 +1,6 @@
 import React, { useContext } from 'react';
 import { Link } from "react-router-dom";
-import Header from './Header';
+// import Header from './Header';
 import { AuthContext } from '../../context/Authcontext';
 import { useNavigate } from 'react-router-dom';
 import { signOut } from "firebase/auth";
@@ -41,7 +41,7 @@ export default function Navbar() {
     }
     return (
         <>
-            <Header />
+            {/* <Header /> */}
             <nav className="navbar navbar-expand-lg navbar-dark bg-header">
                 <div className="container">
                     <Link to="/" className="navbar-brand fs-4"><i style={{ height: "2rem" }} class="fa-solid me-2 fa-building-columns"></i>My Bank</Link>
