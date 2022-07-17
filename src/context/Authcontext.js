@@ -9,7 +9,7 @@ export default function AuthContextProvider({ children }) {
     const [uid, setUid] = useState("")
     const [table, setTable] = useState([])
     const [index, setIndex] = useState(0)
-    const [loading, setLoading] = useState(false)
+    const [loading, setLoading] = useState(true)
     const [transactions, setTransactions] = useState(0);
     const [user, setUser] = useState("")
 
