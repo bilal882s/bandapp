@@ -122,14 +122,14 @@ export default function AllAccounts() {
         <>
             {!loading ?
                 <>
+                    <div className="float-start m-3">
+                        <DashboardMenu />
+                    </div>
                     {
                         documents.length !== 0
+
                             ? <>
                                 <div>
-
-                                    <div className="float-start m-3">
-                                        <DashboardMenu />
-                                    </div>
                                     <div className="container">
                                         <div className="row">
                                             <div className="col mt-4">
@@ -164,7 +164,7 @@ export default function AllAccounts() {
                                             </div>
                                         </div>
                                     </div>
-                                    <div className="modal fade w-100" id="exampleModal" data-bs-keyboard="false" tabIndex="-1" data-bs-backdrop="static" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                    <div className="modal fade w-100 bg-light" id="exampleModal" data-bs-keyboard="false" tabIndex="-1" data-bs-backdrop="static" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                         <div className="modal-dialog" style={{ minWidth: "60%" }}>
                                             <div className="modal-content">
                                                 <div className="modal-header">
@@ -218,7 +218,7 @@ export default function AllAccounts() {
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="modal fade w-100" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                    <div class="modal fade w-100 bg-light" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                         <div class="modal-dialog">
                                             <div class="modal-content">
                                                 <div class="modal-header">
@@ -238,7 +238,7 @@ export default function AllAccounts() {
                                             </div>
                                         </div>
                                     </div>
-                                    <div class="modal fade w-100" id="modalWithdraw" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+                                    <div class="modal fade w-100 bg-light" id="modalWithdraw" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
                                         <div class="modal-dialog">
                                             <div class="modal-content">
                                                 <div class="modal-header">
@@ -262,7 +262,6 @@ export default function AllAccounts() {
                             </>
                             :
                             <>
-                                <DashboardMenu />
                                 <div className='col-12 col-md-8 offset-md-2 col-lg-6 offset-lg-3 d-flex align-items-center' style={{ height: "65vh" }}>
                                     <div className="container">
                                         <div className="row">
