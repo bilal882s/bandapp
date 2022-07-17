@@ -5,7 +5,7 @@
 
 .bg-custom {
   background-color: rgba(0, 0, 240, 0.728);
-  margin-top: 13rem;
+  margin-top: 15rem;
   width: 25rem;
 }
 
@@ -111,4 +111,8 @@
   height: 100vh;
   width: 100vw;
   font-family: Helvetica;
+}
+
+::-webkit-scrollbar {
+  display: none;
 }
