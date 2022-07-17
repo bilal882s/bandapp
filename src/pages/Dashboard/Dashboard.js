@@ -46,11 +46,11 @@ export default function Dashboard() {
     <div>
       {!loading ?
         <>
-          <div className="float-start m-3">
+          <div className="float-start">
             <DashboardMenu />
           </div>
-          <div className='center w-100' style={{ height: "80vh" }}>
-            <h1 className="text-center">Add / View Accounts</h1>
+          <div className='center w-100 mt-3' style={{ height: "100vh" }}>
+            <h1 className="text-center mt-5">Add / View Accounts</h1>
             <div className="container mt-3 text-center">
               <div className="row d-flex m-4">
                 <div className="col-12 col-md-6 col-lg-6  ">
