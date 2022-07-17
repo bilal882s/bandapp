@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { createUserWithEmailAndPassword, onAuthStateChanged, signOut, signInWithPopup, GoogleAuthProvider } from "firebase/auth";
-import { auth, provider } from '../../config/firebase';
+import { createUserWithEmailAndPassword, onAuthStateChanged, signOut, signInWithPopup, GoogleAuthProvider, FacebookAuthProvider } from "firebase/auth";
+import { auth, provider, facebookprovider } from '../../config/firebase';
 import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
 import { Button } from '@mui/material';
@@ -94,6 +94,34 @@ export default function Signup() {
             });
         });
     }
+
+    // const handleFacebook = () => {
+    //     signInWithPopup(auth, facebookprovider)
+    //         .then((result) => {
+    //             console.log("Hi");
+    //             // The signed-in user info.
+    //             const user = result.user;
+
+    //             // This gives you a Facebook Access Token. You can use it to access the Facebook API.
+    //             const credential = FacebookAuthProvider.credentialFromResult(result);
+    //             const accessToken = credential.accessToken;
+
+    //             // ...
+    //         })
+    //         .catch((error) => {
+    //             console.log("error");
+    //             // Handle Errors here.
+    //             const errorCode = error.code;
+    //             const errorMessage = error.message;
+    //             // The email of the user's account used.
+    //             const email = error.customData.email;
+    //             // The AuthCredential type that was used.
+    //             const credential = FacebookAuthProvider.credentialFromError(error);
+
+    //             // ...
+    //         });
+    // }
+
     const handleGoogle = () => {
         signInWithPopup(auth, provider)
             .then((result) => {
@@ -156,8 +184,13 @@ export default function Signup() {
                             </form>
                             <hr />
                             <h3 className='or'>OR</h3>
-                            <div className="text-center" onClick={handleGoogle}>
-                                <img style={{ cursor: "pointer", height: "2.5rem", width: "2.5rem" }} src="https://play-lh.googleusercontent.com/aFWiT2lTa9CYBpyPjfgfNHd0r5puwKRGj2rHpdPTNrz2N9LXgN_MbLjePd1OTc0E8Rl1=w240-h480-rw" alt="Sign uo with Google" />
+                            <div className="d-flex text-center justify-content-center">
+                                <div className="text-center" onClick={handleGoogle}>
+                                    <img style={{ cursor: "pointer", height: "2.5rem", width: "2.5rem" }} src="https://play-lh.googleusercontent.com/aFWiT2lTa9CYBpyPjfgfNHd0r5puwKRGj2rHpdPTNrz2N9LXgN_MbLjePd1OTc0E8Rl1=w240-h480-rw" alt="Sign uo with Google" />
+                                </div>
+                                {/* <div className="text-center mt-1" onClick={handleFacebook}>
+                                    <img style={{ cursor: "pointer", height: "2rem", width: "2rem" }} src="https://www.citypng.com/public/uploads/preview/-11595327237ulqckjabpb.png" />
+                                </div> */}
                             </div>
                             {/* <hr /> */}
                             <div className="text-center">
