@@ -67,6 +67,7 @@ export default function AllAccounts() {
 
 
     const handleDeposit = async () => {
+        setLoading(true)
         let newAmount = parseInt(items.price) + parseInt(amount);
         if (amount < 1) {
             toast.error("asd", {
@@ -96,10 +97,11 @@ export default function AllAccounts() {
         console.log(docRef);
         items.price = newAmount;
         items.currency = "Credit";
+        setLoading(false)
     }
     const handleWithdraw = async () => {
-        items.currency = "Debit";
         setLoading(true)
+        items.currency = "Debit";
         if (amount <= items.price) {
             let newAmount = parseInt(items.price) - parseInt(amount);
             console.log(items);
