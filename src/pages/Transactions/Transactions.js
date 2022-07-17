@@ -12,7 +12,9 @@ export default function Transactions() {
   return (
 
     <>
-      <DashboardMenu />
+      <div className="float-start m-3">
+        <DashboardMenu />
+      </div>
       <div className='center w-100  bg' style={{ height: "60vh" }}>
         <h1 className="text-center">View Transactions</h1>
         <div className="container mt-3 text-center">
