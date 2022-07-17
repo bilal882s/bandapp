@@ -1,7 +1,7 @@
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import { sendPasswordResetEmail } from "firebase/auth";
 import { auth } from '../../config/firebase';
-import { toast, ToastContainer } from 'react-toastify';
+import { toast } from 'react-toastify';
 import { AuthContext } from '../../context/Authcontext';
 import TextField from '@mui/material/TextField';
 
@@ -60,7 +60,6 @@ export default function Forget() {
                                 <button className="btn btn-success w-50" disabled={loading}>
                                     Send
                                 </button>
-                                <ToastContainer />
                             </form>
                         </div>
                     </div>
