@@ -20,7 +20,9 @@ export default function Header() {
                     <div className="col">
                         <div className="topbar text-dark">{time}
                             <div className="float-end mx-5 icons">
-                                <BsFacebook style={{ color: "#1877f2", marginLeft: "2rem", cursor: "pointer" }} />
+                                <a href="https://www.facebook.com/permalink.php?story_fbid=pfbid0UqYWMXNY3NBeR4ukiYUL6J7mnrF6mGNMz2YzXxBXo4DFoGALqc4gvQ7RSDyUUXhel&id=100078969657877" target="_blank">
+                                    <BsFacebook style={{ color: "#1877f2", marginLeft: "2rem", cursor: "pointer" }} />
+                                </a>
                                 <BsWhatsapp style={{ color: "#25d366", marginLeft: "2rem", cursor: "pointer" }} />
                                 <BsInstagram style={{ color: "#405de6", marginLeft: "2rem", cursor: "pointer" }} />
                                 <BsLinkedin style={{ color: "#0077b5", marginLeft: "2rem", cursor: "pointer" }} />
