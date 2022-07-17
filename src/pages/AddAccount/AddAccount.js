@@ -14,7 +14,7 @@ import LinearProgress from '@mui/material/LinearProgress';
 
 export default function AddAccount() {
   const navigate = useNavigate();
-  const { uid, setTable, setLoading } = useContext(AuthContext);
+  const { uid, setTable } = useContext(AuthContext);
   const initialState = {
     name: "",
     account: "",
@@ -26,9 +26,10 @@ export default function AddAccount() {
     date: "",
     time: "",
   }
-  const [state, setState] = useState(initialState)
+  const [state, setState] = useState(initialState);
+  const [loading, setLoading] = useState(false);
   const [documents, setDocuments] = useState([]);
-  const [currency, setCurrency] = useState("")
+  const [currency, setCurrency] = useState("");
   const currencies = [{
     label: "Saving",
     value: "Saving",
@@ -122,7 +123,11 @@ export default function AddAccount() {
       });
       return;
     }
+    setLoading(true)
     try {
+      const docRef = await addDoc(collection(db, "Accounts"), state);
+      state.currency = "Credit";
+      const amount = await addDoc(collection(db, "Amount"), state);
       toast.success(`Dear ${state.name} , Your account has been created at account No : ${state.account}`, {
         position: "bottom-left",
         autoClose: 5000,
@@ -132,8 +137,6 @@ export default function AddAccount() {
         draggable: true,
         progress: undefined,
       });
-      setLoading(true)
-      const docRef = await addDoc(collection(db, "Accounts"), state);
 
       let array = [];
       const querySnapshot = await getDocs(collection(db, "Accounts"));
@@ -153,52 +156,61 @@ export default function AddAccount() {
     }
   }
   return (
-
-    <div className='bg' style={{ height: "100vh" }}>
-      <ToastContainer />
-      <DashboardMenu />
-      <div className="container text-center mt-4 d-flex">
-        <div className="row w-100">
-          <div className="col-12 col-md-10 offset-md-1 col-lg-8 offset-lg-2">
-            <div className="card p-4">
-              <h2 className='text-center bg-dark text-white p-1 rounded'>Fill this form to add an account</h2>
-
-              <form onSubmit={handleSubmit} className='text-start'>
-                <div className="d-flex">
-                  <TextField className='w-75 mx-2' name='name' value={state.name} label="Full Name" variant="standard" onChange={handleChange} />
-                  <TextField type="number" name='cnic' value={state.cnic} className='w-75 mx-2' label="CNIC Number" variant="standard" onChange={handleChange} />
-                </div>
-                <div className="d-flex">
-                  <TextField type='number' value={state.branch} name='branch' className='w-75 m-2' label="Branch (1 - 99)" variant="standard" onChange={handleChange} />
-                  <TextField type="number" name='account' value={state.account} className='w-75 m-2' label="Account Number (Length should be 9)" variant="standard" onChange={handleChange} />
-                </div>
-                <div className="d-flex">
-                  <TextField
-                    id="standard-select-currency"
-                    select
-                    className='w-75 m-2'
-                    name='currency'
-                    label="Select"
-                    value={state.currency}
-                    onChange={handleChange}
-                    variant="standard"
-
-                  >
-                    {currencies.map((option) => (
-                      <MenuItem key={option.value} value={option.value}>
-                        {option.label}
-                      </MenuItem>
-                    ))}
-                  </TextField>
-                  <TextField type="number" value={state.price} onChange={handleChange} name='price' className='w-75 m-2' label="Initial Deposit (Minimum 500 Rs.)" variant="standard" />
-                </div>
-                <Button type='submit' className='float-end m-3' variant={'contained'} color="secondary">Submit
-                </Button>
-              </form>
-            </div>
+    <div style={{ height: "90vh" }}>
+      {!loading ?
+        <>
+          <div className="float-start m-3 d-flex flex-column">
+            <DashboardMenu />
           </div>
-        </div>
-      </div >
+          <ToastContainer />
+          <div className="container text-center d-flex">
+            <div className="row w-100">
+              <div className="col-12 mt-4 col-md-10 offset-md-1 col-lg-8 offset-lg-2">
+                <div className="card p-4">
+                  <h2 className='text-center bg-dark text-white p-1 rounded'>Fill this form to add an account</h2>
+
+                  <form onSubmit={handleSubmit} className='text-start'>
+                    <div className="d-flex">
+                      <TextField className='w-75 mx-2' name='name' value={state.name} label="Full Name" variant="standard" onChange={handleChange} />
+                      <TextField type="number" name='cnic' value={state.cnic} className='w-75 mx-2' label="CNIC Number" variant="standard" onChange={handleChange} />
+                    </div>
+                    <div className="d-flex">
+                      <TextField type='number' value={state.branch} name='branch' className='w-75 m-2' label="Branch (1 - 99)" variant="standard" onChange={handleChange} />
+                      <TextField type="number" name='account' value={state.account} className='w-75 m-2' label="Account Number (Length should be 9)" variant="standard" onChange={handleChange} />
+                    </div>
+                    <div className="d-flex">
+                      <TextField
+                        id="standard-select-currency"
+                        select
+                        className='w-75 m-2'
+                        name='currency'
+                        label="Select"
+                        value={state.currency}
+                        onChange={handleChange}
+                        variant="standard"
+
+                      >
+                        {currencies.map((option) => (
+                          <MenuItem key={option.value} value={option.value}>
+                            {option.label}
+                          </MenuItem>
+                        ))}
+                      </TextField>
+                      <TextField type="number" value={state.price} onChange={handleChange} name='price' className='w-75 m-2' label="Initial Deposit (Minimum 500 Rs.)" variant="standard" />
+                    </div>
+                    <Button type='submit' className='float-end m-3' variant={'contained'} color="secondary">Submit
+                    </Button>
+                  </form>
+                </div>
+              </div>
+            </div>
+          </div >
+        </>
+        :
+        <Box sx={{ width: '100%' }}>
+          <LinearProgress />
+        </Box>
+      }
     </div >
   )
 }
