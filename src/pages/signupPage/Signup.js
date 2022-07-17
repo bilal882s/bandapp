@@ -3,6 +3,8 @@ import { createUserWithEmailAndPassword, onAuthStateChanged, signOut, signInWith
 import { auth, provider } from '../../config/firebase';
 import { Link, useNavigate } from "react-router-dom";
 import { ToastContainer, toast } from 'react-toastify';
+import { Button } from '@mui/material';
+import TextField from '@mui/material/TextField';
 
 export default function Signup() {
     const navigate = useNavigate();
@@ -81,7 +83,7 @@ export default function Signup() {
                 progress: undefined,
             });
         }).catch((error) => {
-            toast.error('This account is Sign up before.', {
+            toast.error('Something Wring here.', {
                 position: "bottom-left",
                 autoClose: 5000,
                 hideProgressBar: false,
@@ -127,52 +129,43 @@ export default function Signup() {
     }
     return (
         <div className='center bg'>
-            <Link to="/" className="btn btn-success m-2">Back To Home</Link>
+            <Link to="/" className="nav-link bg-primary m-2"><Button variant='contained'>Back To Home</Button></Link>
             <ToastContainer />
             <div className="container">
-                {
-                    users.email ?
-                        <>
-                            <h2>You are Logged In : {users.email} </h2><br /><br />
-                            <Link to="/dashboard" className='btn btn-success'>Go To Dashboard</Link><br /><br />
-                            <button onClick={handleLogout} className="btn btn-danger w-25">Sign Out</button>
-                        </>
-                        :
-                        <div className="row text-center">
-                            <div className="col-12 col-md-8 offset-md-2 col-lg-10 offset-lg-1">
-                                <div className="card p-3">
-                                    <form onSubmit={submitHandler}>
-                                        <h2 className='text-center my-2'>Sign Up</h2>
-                                        <div className="card-body">
-                                            <input type="email" onChange={handleChange} name="email" placeholder="Email" className='form-control my-3' required />
-                                            {/* <input type="password" name="password" placeholder="Password" onChange={handleChange} className='form-control my-3' required />
-                                            <input type="password" name="confirmpassword" placeholder="Confirm Password" onChange={handleChange} className='form-control my-3' required /> */}
-
-                                            <div className="input-group">
-                                                <input type={isPasswordShow ? "text" : "password"} name="password" placeholder="Password" onChange={handleChange} className='form-control my-3' required />
-                                                <span className="input-group-text eye" onClick={() => { setIsPasswordShow(!isPasswordShow) }} id="basic-addon2"><i className={`fa-solid fa-eye${isPasswordShow ? "" : "-slash"}`}></i></span>
-                                            </div>
-
-                                            <div className="input-group">
-                                                <input type={isConPasswordShow ? "text" : "password"} name="confirmpassword" placeholder="Confirm Password" onChange={handleChange} className='form-control my-3' required />
-                                                <span className="input-group-text eye" onClick={() => { setIsConPasswordShow(!isConPasswordShow) }} id="basic-addon2"><i className={`fa-solid fa-eye${isConPasswordShow ? "" : "-slash"}`}></i></span>
-                                            </div>
-                                            <button className="btn btn-success w-50">Sign Up</button>
-                                        </div>
-                                    </form>
-                                    <hr />
-                                    <h3 className='or'>OR</h3>
-                                    <div className="text-center" onClick={handleGoogle}>
-                                        <img style={{ cursor: "pointer", height: "2.5rem", width: "2.5rem" }} src="https://play-lh.googleusercontent.com/aFWiT2lTa9CYBpyPjfgfNHd0r5puwKRGj2rHpdPTNrz2N9LXgN_MbLjePd1OTc0E8Rl1=w240-h480-rw" alt="Sign uo with Google" />
+                <div className="row text-center">
+                    <div className="col-12 col-md-8 offset-md-2 col-lg-10 offset-lg-1">
+                        <div className="card p-3">
+                            <form onSubmit={submitHandler}>
+                                <h2 className='text-center my-2'>Sign Up</h2>
+                                <div className="card-body">
+                                    <TextField type="email" onChange={handleChange} name="email" label="Email" className='w-100' required variant="standard" />
+                                    <div className="input-group">
+                                        <TextField className="w-100 my-3" label="Password" name="password" onChange={handleChange} type={isPasswordShow ? "text" : "password"} variant="standard" />
+                                        <span style={{
+                                            position: 'absolute', left: '95%',
+                                        }} onClick={() => { setIsPasswordShow(!isPasswordShow) }} id="basic-addon2"><i className={`fa-solid mt-4 fa-eye${isPasswordShow ? "" : "-slash"}`}></i></span>
                                     </div>
-                                    {/* <hr /> */}
-                                    <div className="text-center">
-                                        <Link to="/login">Login</Link>
+                                    <div className="input-group">
+                                        <TextField className="w-100 mb-3" label="Confirm Password" name="password" onChange={handleChange} type={isConPasswordShow ? "text" : "password"} variant="standard" />
+                                        <span style={{
+                                            position: 'absolute', left: '95%',
+                                        }} onClick={() => { setIsConPasswordShow(!isConPasswordShow) }} id="basic-addon2"><i className={`fa-solid mt-4 fa-eye${isConPasswordShow ? "" : "-slash"}`}></i></span>
                                     </div>
+                                    <button className="btn btn-success w-50">Sign Up</button>
                                 </div>
+                            </form>
+                            <hr />
+                            <h3 className='or'>OR</h3>
+                            <div className="text-center" onClick={handleGoogle}>
+                                <img style={{ cursor: "pointer", height: "2.5rem", width: "2.5rem" }} src="https://play-lh.googleusercontent.com/aFWiT2lTa9CYBpyPjfgfNHd0r5puwKRGj2rHpdPTNrz2N9LXgN_MbLjePd1OTc0E8Rl1=w240-h480-rw" alt="Sign uo with Google" />
+                            </div>
+                            {/* <hr /> */}
+                            <div className="text-center">
+                                <Link to="/login">Login</Link>
                             </div>
                         </div>
-                }
+                    </div>
+                </div>
             </div>
         </div>
     )
