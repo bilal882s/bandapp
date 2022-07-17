@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router-dom';
 import { signOut } from "firebase/auth";
 import { auth } from "../../config/firebase";
 import { toast } from 'react-toastify';
+import { Button } from '@mui/material';
 
 export default function Navbar() {
     const { isAuthenticated, setIsAuthenticated, table, setTable } = useContext(AuthContext)
@@ -43,7 +44,7 @@ export default function Navbar() {
             <Header />
             <nav className="navbar navbar-expand-lg navbar-dark bg-header">
                 <div className="container">
-                    <Link to="/" className="navbar-brand"><i style={{ height: "2rem" }} class="fa-solid fa-building-columns"></i></Link>
+                    <Link to="/" className="navbar-brand fs-4"><i style={{ height: "2rem" }} class="fa-solid me-2 fa-building-columns"></i>My Bank</Link>
                     <button className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                         <span className="navbar-toggler-icon"></span>
                     </button>
@@ -68,8 +69,8 @@ export default function Navbar() {
                                     <li className="nav-item">
                                         <Link to="/dashboard" className="nav-link active">DashBoard</Link>
                                     </li>
-                                    <span style={{ height: "2.5rem" }} className="mx-2 btn btn-danger" onClick={handleSignOut}>Logout
-                                    </span>
+                                    <Button style={{ height: "2.5rem", textTransform: "none" }} className="mx-2" variant='contained' color="error" onClick={handleSignOut}>Logout
+                                    </Button>
                                 </>
 
                             }
