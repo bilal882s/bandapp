@@ -1,8 +1,6 @@
 import React, { useContext, useState, useEffect } from 'react';
 import DashboardMenu from "../Dashboard/DashboardMenu";
-import { useNavigate } from 'react-router-dom';
 import { AuthContext } from "../../context/Authcontext";
-import Login from "../signupPage/Login";
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Button from '@mui/material/Button';
@@ -13,8 +11,7 @@ import Box from '@mui/material/Box';
 import LinearProgress from '@mui/material/LinearProgress';
 
 export default function Dashboard() {
-  const { isAuthenticated, user, setIndex, setIsAuthenticated, index, transactions, setTransactions } = useContext(AuthContext);
-  const navigate = useNavigate();
+  const { user, setIndex, index, transactions, setTransactions } = useContext(AuthContext);
   const [loading, setLoading] = useState(false)
 
   const fetchDocuments = async () => {
