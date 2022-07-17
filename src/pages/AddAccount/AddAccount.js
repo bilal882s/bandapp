@@ -63,18 +63,6 @@ export default function AddAccount() {
       });
       return;
     }
-    if (account.length !== 9) {
-      toast.error('Your Account number is not a account number.', {
-        position: "bottom-left",
-        autoClose: 5000,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: true,
-        draggable: true,
-        progress: undefined,
-      });
-      return;
-    }
     if (cnic.length !== 13) {
       toast.error('Your CNIC number is not a CNIC Number .', {
         position: "bottom-left",
@@ -89,6 +77,18 @@ export default function AddAccount() {
     }
     if (branch > 99) {
       toast.error('You can use only 99 branches.', {
+        position: "bottom-left",
+        autoClose: 5000,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: true,
+        draggable: true,
+        progress: undefined,
+      });
+      return;
+    }
+    if (account.length !== 9) {
+      toast.error('Your Account number is not a account number.', {
         position: "bottom-left",
         autoClose: 5000,
         hideProgressBar: false,
