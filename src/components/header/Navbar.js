@@ -9,7 +9,7 @@ import { toast } from 'react-toastify';
 import { Button } from '@mui/material';
 
 export default function Navbar() {
-    const { isAuthenticated, setIsAuthenticated, table, setTable } = useContext(AuthContext)
+    const { isAuthenticated, setIsAuthenticated,  setTable } = useContext(AuthContext)
 
     const navigate = useNavigate();
 
