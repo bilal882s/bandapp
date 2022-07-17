@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useState } from 'react';
 import Button from '@mui/material/Button';
 import DashboardMenu from '../Dashboard/DashboardMenu';
 import Box from '@mui/material/Box';
@@ -6,7 +6,7 @@ import TextField from '@mui/material/TextField';
 import MenuItem from '@mui/material/MenuItem';
 import { collection, addDoc, getDocs } from "firebase/firestore/lite";
 import { db } from "../../config/firebase";
-import { toast, ToastContainer } from 'react-toastify';
+import { toast } from 'react-toastify';
 import { AuthContext } from '../../context/Authcontext';
 import { useNavigate } from 'react-router-dom';
 import dayjs from 'dayjs';
@@ -28,8 +28,8 @@ export default function AddAccount() {
   }
   const [state, setState] = useState(initialState);
   const [loading, setLoading] = useState(false);
-  const [documents, setDocuments] = useState([]);
-  const [currency, setCurrency] = useState("");
+  const [setDocuments] = useState([]);
+  const [setCurrency] = useState("");
   const currencies = [{
     label: "Saving",
     value: "Saving",
@@ -51,7 +51,7 @@ export default function AddAccount() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const { name, account, price, cnic, branch, currency } = state;
-    if (name == "") {
+    if (name === "") {
       toast.error('Your Name feild is empty that is not acceptable.', {
         position: "bottom-left",
         autoClose: 5000,
@@ -99,7 +99,7 @@ export default function AddAccount() {
       });
       return;
     }
-    if (currency == "") {
+    if (currency === "") {
       toast.error('Your have not chose any currency .', {
         position: "bottom-left",
         autoClose: 5000,
@@ -128,6 +128,7 @@ export default function AddAccount() {
       const docRef = await addDoc(collection(db, "Accounts"), state);
       state.currency = "Credit";
       const amount = await addDoc(collection(db, "Amount"), state);
+      console.log(docRef, amount);
       toast.success(`Dear ${state.name} , Your account has been created at account No : ${state.account}`, {
         position: "bottom-left",
         autoClose: 5000,
@@ -162,7 +163,6 @@ export default function AddAccount() {
           <div className="float-start m-3 d-flex flex-column">
             <DashboardMenu />
           </div>
-          <ToastContainer />
           <div className="container text-center d-flex">
             <div className="row w-100">
               <div className="col-12 mt-4 col-md-10 offset-md-1 col-lg-8 offset-lg-2">
