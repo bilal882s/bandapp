@@ -68,6 +68,18 @@ export default function AllAccounts() {
 
     const handleDeposit = async () => {
         let newAmount = parseInt(items.price) + parseInt(amount);
+        if (amount < 1) {
+            toast.error("asd", {
+                position: "bottom-left",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
+            return;
+        }
         toast.success(`Your ${amount} amout is Deposited.`, {
             position: "bottom-left",
             autoClose: 5000,
@@ -81,6 +93,7 @@ export default function AllAccounts() {
 
         setAmount("0");
         const docRef = addDoc(collection(db, "Amount"), items);
+        console.log(docRef);
         items.price = newAmount;
         items.currency = "Credit";
     }
@@ -95,6 +108,7 @@ export default function AllAccounts() {
 
             setAmount("0");
             const docRef = addDoc(collection(db, "Amount"), items);
+            console.log(docRef);
             toast.success(`Your ${amount} amout is Withdarwed.`, {
                 position: "bottom-left",
                 autoClose: 5000,
