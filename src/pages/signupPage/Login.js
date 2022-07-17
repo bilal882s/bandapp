@@ -2,9 +2,10 @@ import React, { useState, useEffect, useContext } from 'react';
 import { onAuthStateChanged, signOut, signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from '../../config/firebase';
 import { Link } from "react-router-dom";
-import { ToastContainer, toast } from 'react-toastify';
-import { AuthContext } from '../../context/Authcontext'
-import { setUserId } from 'firebase/analytics';
+import { toast } from 'react-toastify';
+import { Button } from '@mui/material';
+import { AuthContext } from '../../context/Authcontext';
+import TextField from '@mui/material/TextField';
 
 export default function Register() {
     const initialEmail = { verifyEmail: "" }
@@ -12,9 +13,8 @@ export default function Register() {
     const [state, setState] = useState(initialData);
     const [email, setEmail] = useState(initialEmail);
     const [isPasswordShow, setIsPasswordShow] = useState(false);
-    const [loading, setLoading] = useState(false);
     const [user, setUser] = useState({});
-    const { setIsAuthenticated, uid, setUid, table, setTable } = useContext(AuthContext);
+    const { setIsAuthenticated, uid, setUid, table, setTable, setLoading } = useContext(AuthContext);
 
 
     const handleChange = (e) => {
@@ -96,50 +96,38 @@ export default function Register() {
     return (
         <div className='bg'>
             <div className="container center">
-                <Link to="/" className="btn btn-success m-2">Back To Home</Link>
-                {
-                    user.email ?
-                        <div className="card border border-1 border-black">
-                            <div className="row text-center p-3">
-                                <h2>You are Logged In : {user.email} </h2><br /><br />
-                                <button onClick={handleLogout} style={{ marginLeft: '35%' }} className="btn text-center btn-danger  w-25">Logout</button>
-                            </div>
-                        </div>
-                        :
-                        <div className="row w-100">
-                            <div className="col-12 col-md-8 offset-md-2 col-lg-10 offset-lg-1">
-                                <div className="card p-3">
-                                    <form onSubmit={submitHandler}>
-                                        <h2 className='my-2'>Login</h2>
-                                        <div className="card-body">
+                <Link to="/" className="m-2"><Button variant="contained">Back To Home</Button></Link>
+                <div className="row w-100">
+                    <div className="col-12 col-md-8 offset-md-2 col-lg-8 offset-lg-2">
+                        <div className="card p-3">
+                            <form onSubmit={submitHandler}>
+                                <h2 className='my-2'>Login</h2>
+                                <div className="card-body">
 
-                                            <input type={email} className="form-control" placeholder="Email" name='email' onChange={handleChange} />
-                                            <div className="input-group">
-                                                <input type={isPasswordShow ? "text" : "password"} name="password" placeholder="Password" onChange={handleChange} className='form-control my-3' required />
-                                                <span className="input-group-text eye" onClick={() => { setIsPasswordShow(!isPasswordShow) }} id="basic-addon2"><i className={`fa-solid fa-eye${isPasswordShow ? "" : "-slash"}`}></i></span>
-                                            </div>
-
-                                            <button className="btn btn-success w-50" disabled={loading}>
-                                                {!loading ?
-                                                    "Login"
-                                                    :
-                                                    <div className='spinner-border spinner-border-sm'></div>
-                                                }
-                                            </button>
-                                            <Link to="/forget" className='nav-link'>Forget Password</Link>
-                                        </div>
-                                    </form>
-                                    <hr />
-                                    <h3 className='or'>OR</h3>
-                                    <div className="text-center">
-                                        <Link to="/signup">
-                                            Sign Up
-                                        </Link>
+                                    <TextField label="Email" name="email" onChange={handleChange} type="email" variant="standard" className='w-100' />
+                                    <div className="input-group w-100 mt-2">
+                                        <TextField className="w-100" label="Password" name="password" onChange={handleChange} type={isPasswordShow ? "text" : "password"} variant="standard" />
+                                        <span style={{
+                                            position: 'absolute', left: '95%',
+                                        }} onClick={() => { setIsPasswordShow(!isPasswordShow) }} id="basic-addon2"><i className={`fa-solid mt-4 fa-eye${isPasswordShow ? "" : "-slash"}`}></i></span>
                                     </div>
+
+                                    <Button onClick={submitHandler} className="bg-success w-50 mt-3" variant="contained" >
+                                        Login
+                                    </Button>
+                                    <Link to="/forget" className='nav-link mt-3'>Forget Password</Link>
                                 </div>
+                            </form>
+                            <hr />
+                            <h3 className='or'>OR</h3>
+                            <div className="text-center">
+                                <Link to="/signup">
+                                    Sign Up
+                                </Link>
                             </div>
                         </div>
-                }
+                    </div>
+                </div>
             </div >
         </div>
     )
