@@ -20,6 +20,15 @@ export default function Dashboard() {
   const fetchDocuments = async () => {
     setLoading(true);
     let num = 0;
+    let price = 0;
+    const amount = await getDocs(collection(db, "Amount"));
+    amount.forEach((doc) => {
+      if (user.uid === doc.data().uid) {
+        price = price + 1;
+      }
+    })
+    setTransactions(price)
+
     const querySnapshot = await getDocs(collection(db, "Accounts"));
     querySnapshot.forEach((doc) => {
       if (user.uid === doc.data().uid) {
@@ -37,8 +46,10 @@ export default function Dashboard() {
     <div>
       {!loading ?
         <>
-          <DashboardMenu />
-          <div className='center w-100' style={{ height: "100vh" }}>
+          <div className="float-start m-3">
+            <DashboardMenu />
+          </div>
+          <div className='center w-100' style={{ height: "80vh" }}>
             <h1 className="text-center">Add / View Accounts</h1>
             <div className="container mt-3 text-center">
               <div className="row d-flex m-4">
@@ -72,7 +83,7 @@ export default function Dashboard() {
                   <Card className="shadow-lg">
                     <div className="text-center">
                       <CardContent>
-                        <h5 className="card-title"><i className="fa-solid fa-user mb-1 m-2"></i>Transactions</h5>
+                        <h5 className="card-title"><i class="fa-solid fa-money-bill-1-wave me-2"></i>Transactions</h5>
                         <hr />
                         <Link className='nav-link' to="/dashboard/transactions/view" color='success'>
                           <Button className='m-1' size="sm" variant={'contained'} color="warning">
@@ -82,7 +93,7 @@ export default function Dashboard() {
                         <hr />
                         <br />
                         <h1>{transactions}</h1>
-                        <h4>Total Amount</h4>
+                        <h4>Transactions</h4>
                       </CardContent>
                     </div>
                   </Card>
