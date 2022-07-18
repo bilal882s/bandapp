@@ -11,7 +11,6 @@ export default function Register() {
     const initialData = { email: "", password: "" };
     const [state, setState] = useState(initialData);
     const [isPasswordShow, setIsPasswordShow] = useState(false);
-    const [setUser] = useState({});
     const { setIsAuthenticated, setUid, setLoading } = useContext(AuthContext);
 
 
