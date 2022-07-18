@@ -61,16 +61,16 @@ export default function AllAccounts() {
         let newProducts = documents.filter((newProduct) => {
             return items.id !== newProduct.id
         })
-        setDocuments(newProducts)
+        setDocuments(newProducts);
         setLoading(false)
     }
 
 
     const handleDeposit = async () => {
-        setLoading(true)
+        setLoading(true);
         let newAmount = parseInt(items.price) + parseInt(amount);
         if (amount < 1) {
-            toast.error("asd", {
+            toast.error("Your enter amount is not a amount", {
                 position: "bottom-left",
                 autoClose: 5000,
                 hideProgressBar: false,
@@ -79,6 +79,7 @@ export default function AllAccounts() {
                 draggable: true,
                 progress: undefined,
             });
+            setLoading(false)
             return;
         }
         toast.success(`Your ${amount} amout is Deposited.`, {
@@ -100,7 +101,7 @@ export default function AllAccounts() {
         setLoading(false)
     }
     const handleWithdraw = async () => {
-        setLoading(true)
+        setLoading(true);
         items.currency = "Debit";
         if (amount <= items.price) {
             let newAmount = parseInt(items.price) - parseInt(amount);
@@ -130,6 +131,8 @@ export default function AllAccounts() {
                 draggable: true,
                 progress: undefined,
             });
+            setLoading(false)
+            return;
         }
         setLoading(false)
     }
