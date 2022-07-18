@@ -40,7 +40,7 @@ export default function AddAccount() {
   }
   ]
   const handleChange = (e) => {
-    setCurrency(e.target.value);
+    // setCurrency(e.target.value);
     state.uid = uid;
     state.date = dayjs().format("DD MMM YYYY");
     state.time = dayjs().format("hh:mm a ");
