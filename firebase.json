@@ -1,5 +1,6 @@
 {
   "hosting": {
+    "site": "bank-app882",
     "public": "build",
     "ignore": [
       "firebase.json",
