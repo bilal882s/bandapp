@@ -37,7 +37,7 @@ export default function Dashboard() {
   }
 
   useEffect(() => {
-    fetchDocuments();
+    // fetchDocuments();
   }, [user])
   return (
     <div>
