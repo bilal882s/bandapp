@@ -30,7 +30,7 @@ export default function Signup() {
     const submitHandler = (e) => {
         e.preventDefault();
         const { email, password, confirmpassword } = state;
-        if (password === confirmpassword || password.length < 8) {
+        if (password == confirmpassword && password.length > 8) {
             createUserWithEmailAndPassword(auth, email, password)
                 .then((userCredential) => {
                     navigate("/dashboard")
@@ -148,7 +148,7 @@ export default function Signup() {
                                         }} onClick={() => { setIsPasswordShow(!isPasswordShow) }} id="basic-addon2"><i className={`fa-solid mt-4 fa-eye${isPasswordShow ? "" : "-slash"}`}></i></span>
                                     </div>
                                     <div className="input-group">
-                                        <TextField className="w-100 mb-3" label="Confirm Password" name="password" onChange={handleChange} type={isConPasswordShow ? "text" : "password"} variant="standard" />
+                                        <TextField className="w-100 mb-3" label="Confirm Password" name="confirmpassword" onChange={handleChange} type={isConPasswordShow ? "text" : "password"} variant="standard" />
                                         <span style={{
                                             position: 'absolute', left: '95%',
                                         }} onClick={() => { setIsConPasswordShow(!isConPasswordShow) }} id="basic-addon2"><i className={`fa-solid mt-4 fa-eye${isConPasswordShow ? "" : "-slash"}`}></i></span>
