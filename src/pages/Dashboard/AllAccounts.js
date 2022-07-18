@@ -103,6 +103,19 @@ export default function AllAccounts() {
     const handleWithdraw = async () => {
         setLoading(true);
         items.currency = "Debit";
+        if (amount < 1) {
+            toast.error("Your enter amount is not a amount", {
+                position: "bottom-left",
+                autoClose: 5000,
+                hideProgressBar: false,
+                closeOnClick: true,
+                pauseOnHover: true,
+                draggable: true,
+                progress: undefined,
+            });
+            setLoading(false)
+            return;
+        }
         if (amount <= items.price) {
             let newAmount = parseInt(items.price) - parseInt(amount);
             console.log(items);
