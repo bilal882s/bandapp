@@ -54,7 +54,7 @@ export default function Forget() {
                     <div className="col-12 col-md-8 offset-md-2 col-lg-8 offset-lg-2">
                         <div className="card p-3">
                             <form onSubmit={submitHandler}>
-                                <h2 className='my-2'>Login</h2>
+                                <h2 className='my-2'>Forget Password</h2>
                                 {/* <input type="eamil" name="email" placeholder="Email" onChange={handleChange} className='form-control my-3' required /> */}
                                 <TextField variant="standard" className='w-100 my-3' type="eamil" name="email" label="Email" onChange={handleChange} required />
                                 <button className="btn btn-success w-50" disabled={loading}>
